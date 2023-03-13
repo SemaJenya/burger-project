@@ -17,9 +17,9 @@ useEffect(() => {
 }, [])
 
     return(
-    <div>
+    <div className={s.app}>
         <AppHeader />
-        <main className={s.name}>
+        <main className={s.main}>
             <BurgerIngredient ingredients={ingredients}/>
             <BurgerConstructor constructor={ingredients}/>
         </main>

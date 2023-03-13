@@ -1,0 +1,39 @@
+.header {
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: var(--background);
+}
+
+.nav {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+
+}
+
+.nav__box {
+    display: flex;
+    flex: 1;
+}
+
+.nav__box_right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.link {
+    color: var(--text-inactive-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.link__active {
+    color: var(--text-primary-color);
+}
+
+.logo {
+    justify-content: center;
+}
