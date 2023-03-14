@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 272px;
+    position: relative;
 }
 .image {
     width: 240px;
@@ -18,4 +19,10 @@
 
 .title {
     margin: 0 auto;
+}
+
+.counter {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
