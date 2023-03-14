@@ -28,7 +28,7 @@ export const BurgerIngredients = ({ ingredients }) => {
                     Начинки
                 </Tab>
             </div>
-            <div className={s.category__box}>
+            <div className={sel(s.category__box, 'custom-scroll')}>
                 <IngredientCategory 
                     title={'Булки'} 
                     ingredients={bunsList}
