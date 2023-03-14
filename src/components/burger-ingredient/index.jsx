@@ -5,7 +5,7 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 
 export const BurgerIngredient = ({ ...data}) => {
     return (
-        
+
         <div className={sel(s.ingredient__conteiner, 'mb-10')}>
             <Counter count={1} size="default" extraClass={sel(s.counter, "m-1")} />
             <img src={data.image} alt={data.name} className={s.image} />
