@@ -1,0 +1,15 @@
+.ingredients__conteiner {
+    max-width: 600px;
+    width: 100%;
+}
+
+.ingredients {
+    display: flex;
+    width: 100%;
+}
+
+.category__box {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}

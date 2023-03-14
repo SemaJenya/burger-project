@@ -1,0 +1,21 @@
+.ingredient__conteiner {
+    display: flex;
+    flex-direction: column;
+    width: 272px;
+}
+.image {
+    width: 240px;
+    margin: 0 auto;
+}
+
+.price {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    column-gap: 4px;
+}
+
+.title {
+    margin: 0 auto;
+}
