@@ -1,0 +1,37 @@
+.constructor__container {
+    max-width: 600px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid salmon;
+}
+
+.fixed__part {
+    margin-left: 32px;
+}
+
+.constructor__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    height: 100%;
+}
+
+.constructor__inside {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+}
+
+.cost_container {
+    display: flex;
+
+}
+
+.inside__item {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+}

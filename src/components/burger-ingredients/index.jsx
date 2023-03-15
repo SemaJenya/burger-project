@@ -15,9 +15,7 @@ export const BurgerIngredients = ({ ingredients }) => {
 
     const handleClickTab = (tab) => {
         setCurrent(tab);
-        console.log(tab);
         const title = document.getElementById(tab);
-        console.log(title);
         if (title) title.scrollIntoView({behavior: 'smooth'});
     }
     return (
