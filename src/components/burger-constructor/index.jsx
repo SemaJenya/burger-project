@@ -2,6 +2,7 @@ import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktiku
 import { useState } from 'react';
 import s from './style.module.css';
 import sel from 'classnames';
+import image from '../../images/icon.svg';
 
 
 
@@ -14,7 +15,7 @@ export const BurgerConstructor = ({constructor}) => {
 
     return (
         <section className={s.constructor__container}>
-             <div className={sel(s.constructor__list, 'mt-25')}>
+             <div className={sel(s.constructor__list, 'mt-25', 'mr-4', 'ml-4')}>
                 <div className={s.fixed__part}>
                     <ConstructorElement
                         type="top"
@@ -46,8 +47,12 @@ export const BurgerConstructor = ({constructor}) => {
                     />
                 </div>                      
             </div>
-            <div className={s.cost_container}>
-                <p className={s.cost_total}>610 <CurrencyIcon type="primary" /></p>
+            <div className={sel(s.cost_container, 'mt-10', 'mr-4', 'ml-4')}>
+                <p className={sel(s.cost_total, 'text text_type_digits-medium', 'mr-10')}>610 
+                    <div className={s.icon}>
+                        <img src={image} alt='иконка валюты'/>
+                    </div>
+                </p>
                 <Button htmlType="button" type="primary" size="large">
                     Оформить заказ
                 </Button>
