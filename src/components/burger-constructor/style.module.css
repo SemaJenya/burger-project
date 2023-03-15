@@ -16,3 +16,36 @@
     overflow: hidden;
     box-sizing: border-box;
 }
+
+.constructor__inside {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.inside__item {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+}
+
+.cost_container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.cost_total{
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    color: var(--text-primary-color);
+}
+
+.icon {
+    width: 36px;
+}

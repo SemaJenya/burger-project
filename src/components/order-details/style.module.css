@@ -1,17 +1,2 @@
-.cost_container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
 
-.cost_total{
-    display: flex;
-    align-items: center;
-    column-gap: 8px;
-    color: var(--text-primary-color);
-}
-
-.icon {
-    width: 36px;
-}
 
