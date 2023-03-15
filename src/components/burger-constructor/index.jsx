@@ -23,12 +23,13 @@ export const BurgerConstructor = ({constructor}) => {
                         text="Краторная булка N-200i (верх)"
                         price={200}
                         thumbnail={bunTop}
+                        key='top'
                     />
                 </div>              
                 <div className={sel(s.constructor__inside, 'custom-scroll')}>
                     {constructor?.map(data => 
-                    <div className={s.inside__item}>
-                        <DragIcon type="primary" />
+                    <div className={s.inside__item} key={`${data._id} div`}>
+                        <DragIcon type="primary" key={`${data._id} icon`}/>
                         <ConstructorElement
                             text={data.name}
                             price={data.price}
@@ -36,6 +37,7 @@ export const BurgerConstructor = ({constructor}) => {
                             key={data._id}
                         /> 
                     </div>)}
+                    
                 </div>   
                 <div className={s.fixed__part}>
                     <ConstructorElement
@@ -44,15 +46,13 @@ export const BurgerConstructor = ({constructor}) => {
                         text="Краторная булка N-200i (низ)"
                         price={200}
                         thumbnail={bunBottom}
+                        key='buttom'
                     />
                 </div>                      
             </div>
             <div className={sel(s.cost_container, 'mt-10', 'mr-4', 'ml-4')}>
-                <p className={sel(s.cost_total, 'text text_type_digits-medium', 'mr-10')}>610 
-                    <div className={s.icon}>
-                        <img src={image} alt='иконка валюты'/>
-                    </div>
-                </p>
+                <p className={sel(s.cost_total, 'text text_type_digits-medium', 'mr-2')}>610</p>
+                <img className={sel(s.icon, 'mr-10')} src={image} alt='иконка валюты'/>
                 <Button htmlType="button" type="primary" size="large">
                     Оформить заказ
                 </Button>
