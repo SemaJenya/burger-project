@@ -11,8 +11,10 @@ export const Modal = ({title, onClose, children}) => {
         createPortal(
             <>
                 <div className={sel(s.modal, 'pt-10', 'pl-10', 'pr-10', 'pb-15')}>
-                    <h2 className={sel(s.title, 'text text_type_main-medium')}>{title}</h2>
-                    <CloseIcon onClick={onClose} />
+                    <div className={s.title__box}>
+                        <h2 className={sel(s.title, 'text text_type_main-large')}>{title}</h2>
+                        <button className={s.close} type='button'><CloseIcon onClick={onClose} /></button>
+                    </div>                   
                     {children}
                 </div>
                 <ModalOverlay onClick={onClose} />

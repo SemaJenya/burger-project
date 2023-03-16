@@ -4,25 +4,25 @@ import sel from 'classnames';
 
 export const IngredientDetails = ({data}) => {
     return (
-        <div className={s.details__container}>
-            <img className={s.image} src={data.image} alt={data.name} />
-            <h2 className={s.title}>{data.name}</h2>
+        <div className={sel(s.details__container, 'pl-15', 'pr-15')}>
+            <img className={sel(s.image, 'ml-5', 'mr-5', 'mb-4')} src={data.image} alt={data.name} />
+            <h2 className={sel(s.title, 'text text_type_main-medium')}>{data.name}</h2>
             <ul className={s.calories}>
-                <li>
-                    <p>Калории, ккал</p>
-                    <p>{data.calories}</p>
+                <li className={s.nutrients}>
+                    <p className={sel( s.nutrients__type ,'text text_type_main-default text_color_inactive')}>Калории,ккал</p>
+                    <p className={sel(s.nutrients__quantity, 'text text_type_digits-default text_color_inactive')}>{data.calories}</p>
                 </li>
-                <li>
-                    <p>Белки, г</p>
-                    <p>{data.proteins}</p>
+                <li className={s.nutrients}>
+                    <p className={sel( s.nutrients__type ,'text text_type_main-default text_color_inactive')}>Белки, г</p>
+                    <p className={sel(s.nutrients__quantity, 'text text_type_digits-default text_color_inactive')}>{data.proteins}</p>
                 </li>
-                <li>
-                    <p>Жиры, г</p>
-                    <p>{data.fat}</p>
+                <li className={s.nutrients}>
+                    <p className={sel( s.nutrients__type ,'text text_type_main-default text_color_inactive')}>Жиры, г</p>
+                    <p className={sel(s.nutrients__quantity, 'text text_type_digits-default text_color_inactive')}>{data.fat}</p>
                 </li>
-                <li>
-                    <p>Углеводы, г</p>
-                    <p>{data.carbohydrates}</p>
+                <li className={s.nutrients}>
+                    <p className={sel( s.nutrients__type ,'text text_type_main-default text_color_inactive')}>Углеводы, г</p>
+                    <p className={sel(s.nutrients__quantity, 'text text_type_digits-default text_color_inactive')}>{data.carbohydrates}</p>
                 </li>
             </ul>
 
