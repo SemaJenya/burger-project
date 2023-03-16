@@ -6,6 +6,7 @@ import { IngredientCategory } from '../ ingredient-category';
 
 
 
+
 export const BurgerIngredients = ({ ingredients }) => {
 
     const [current, setCurrent] = useState('bun');
@@ -46,7 +47,6 @@ export const BurgerIngredients = ({ ingredients }) => {
                     ingredients={mainList}
                     id='main'/>
             </div>
-            
         </section>
     )
 }
