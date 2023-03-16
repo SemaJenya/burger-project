@@ -1,7 +1,7 @@
 .modal {
     position: fixed;
-    top: 20%;
-    left: 25%;
+    top: 0;
+    left: 0;
     width: 720px;
     margin: auto;
     border-radius: 40px;
@@ -12,6 +12,7 @@
     z-index: 4;
     background-color: var(--background);
     box-sizing: border-box;
+    transform: translate(50%, 50%);
 }
 
 .title__box {

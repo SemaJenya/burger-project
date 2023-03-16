@@ -5,6 +5,7 @@ import sel from 'classnames';
 import { OrderDetails } from '../order-details';
 import { IngredientDetails } from '../ingredient-details';
 import image from '../../images/icon.svg';
+import { Modal } from '../modal';
 
 
 
@@ -57,6 +58,9 @@ export const BurgerConstructor = ({constructor}) => {
                     Оформить заказ
                 </Button>
             </div>
+            {/* {ingredientInModal && <Modal onClose={closeIngredientModal}>
+                <OrderDetails data={ingredientInModal} />
+            </Modal>} */}
         </section>
     )
 }

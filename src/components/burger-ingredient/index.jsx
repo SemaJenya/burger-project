@@ -6,6 +6,7 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 
 export const BurgerIngredient = ({onClick, ...data}) => {
 
+
     function hendleClickIngredient () {
         onClick(data);
         console.log('click');

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import s from './style.module.css';
 import sel from 'classnames';
@@ -26,6 +26,19 @@ export const BurgerIngredients = ({ ingredients }) => {
     console.log(ingredientInModal);
 
     const closeIngredientModal = () => setIngredientInModal(null)
+
+    useEffect(() => {
+        console.log('dkdkdk');
+        const closeModalEsc = (e) => {
+            console.log('я внутри');
+            if (e.key === 'Escape') {
+                setIngredientInModal(null)
+            }         
+        }
+        document.addEventListener('keydown', closeModalEsc)
+
+        return () => document.addEventListener('keydown', closeModalEsc)
+    }, [])
 
     return (
         <section className={sel(s.ingredients__conteiner, 'mr-10')}>
@@ -61,7 +74,9 @@ export const BurgerIngredients = ({ ingredients }) => {
                     onClick={setIngredientInModal}
                     ingredientInModal={ingredientInModal}/>
             </div>
-            {ingredientInModal && <Modal title='Детали ингредиента' onClose={closeIngredientModal}><IngredientDetails data={ingredientInModal} /></Modal>}
+            {ingredientInModal && <Modal title='Детали ингредиента' onClose={closeIngredientModal}>
+                <IngredientDetails data={ingredientInModal} />
+            </Modal>}
         </section>
     )
 }
