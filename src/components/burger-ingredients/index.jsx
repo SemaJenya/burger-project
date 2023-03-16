@@ -19,6 +19,10 @@ export const BurgerIngredients = ({ ingredients }) => {
         const title = document.getElementById(tab);
         if (title) title.scrollIntoView({behavior: 'smooth'});
     }
+
+    const [ingredientInModal, setIngredientInModal] = useState(null);
+    console.log(ingredientInModal);
+
     return (
         <section className={sel(s.ingredients__conteiner, 'mr-10')}>
             <h1 className={sel(s.title, 'text text_type_main-large', 'mt-10', 'mb-5')}>Соберите бургер</h1>
@@ -37,15 +41,21 @@ export const BurgerIngredients = ({ ingredients }) => {
                 <IngredientCategory 
                     title={'Булки'} 
                     ingredients={bunsList}
-                    id='bun'/>
+                    id='bun'
+                    onClick={setIngredientInModal}
+                    ingredientInModal={ingredientInModal}/>
                 <IngredientCategory 
                     title={'Соусы'} 
                     ingredients={sauceList}
-                    id='sauce'/>
+                    id='sauce'
+                    onClick={setIngredientInModal}
+                    ingredientInModal={ingredientInModal}/>
                 <IngredientCategory 
                     title={'Начинки'} 
                     ingredients={mainList}
-                    id='main'/>
+                    id='main'
+                    onClick={setIngredientInModal}
+                    ingredientInModal={ingredientInModal}/>
             </div>
         </section>
     )

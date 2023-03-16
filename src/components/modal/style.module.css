@@ -1,6 +1,6 @@
 .modal {
     position: fixed;
-    top: 50%;
+    top: 20%;
     left: 25%;
     width: 720px;
     margin: auto;
@@ -10,5 +10,10 @@
         0px 4px 8px rgba(0, 0, 0, 0.04),
         0px 0px 1px rgba(0, 0, 0, 0.04);
     z-index: 4;
-    background-color: salmon;
+    background-color: var(--background);
+    box-sizing: border-box;
+}
+
+.title {
+    margin: 0;
 }

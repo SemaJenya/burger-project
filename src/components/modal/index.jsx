@@ -6,13 +6,14 @@ import { createPortal } from 'react-dom';
 
 const modalDot = document.querySelector('#modals')
 
-export const Modal = ({title, onClose}) => {
+export const Modal = ({title, onClose, children}) => {
     return (
         createPortal(
             <>
-                <div className={s.modal}>
-                    <h2 className={s.title}>{title}</h2>
+                <div className={sel(s.modal, 'pt-10', 'pl-10', 'pr-10', 'pb-15')}>
+                    <h2 className={sel(s.title, 'text text_type_main-medium')}>{title}</h2>
                     <CloseIcon onClick={onClose} />
+                    {children}
                 </div>
                 <ModalOverlay onClick={onClose} />
             </>, 
