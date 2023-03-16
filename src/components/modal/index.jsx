@@ -13,7 +13,7 @@ export const Modal = ({title, onClose, children}) => {
                 <div className={sel(s.modal, 'pt-10', 'pl-10', 'pr-10', 'pb-15')}>
                     <div className={s.title__box}>
                         <h2 className={sel(s.title, 'text text_type_main-large')}>{title}</h2>
-                        <button className={s.close} type='button'><CloseIcon onClick={onClose} /></button>
+                        <button className={s.close} type='button' onClick={onClose}><CloseIcon onClick={onClose} /></button>
                     </div>                   
                     {children}
                 </div>

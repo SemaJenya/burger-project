@@ -3,6 +3,8 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import s from './style.module.css';
 import sel from 'classnames';
 import { IngredientCategory } from '../ ingredient-category';
+import { Modal } from '../modal';
+import { IngredientDetails } from '../ingredient-details';
 
 
 
@@ -22,6 +24,8 @@ export const BurgerIngredients = ({ ingredients }) => {
 
     const [ingredientInModal, setIngredientInModal] = useState(null);
     console.log(ingredientInModal);
+
+    const closeIngredientModal = () => setIngredientInModal(null)
 
     return (
         <section className={sel(s.ingredients__conteiner, 'mr-10')}>
@@ -57,6 +61,7 @@ export const BurgerIngredients = ({ ingredients }) => {
                     onClick={setIngredientInModal}
                     ingredientInModal={ingredientInModal}/>
             </div>
+            {ingredientInModal && <Modal title='Детали ингредиента' onClose={closeIngredientModal}><IngredientDetails data={ingredientInModal} /></Modal>}
         </section>
     )
 }
