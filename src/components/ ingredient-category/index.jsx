@@ -3,7 +3,7 @@ import s from './style.module.css'
 import sel from 'classnames'
 import { BurgerIngredient } from '../burger-ingredient'
 
-export const IngredientCategory = ({title, ingredients, id, onClick, ingredientInModal}) => {
+export const IngredientCategory = ({title, ingredients, id, onClick}) => {
     
   
     return (

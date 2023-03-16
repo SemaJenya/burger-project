@@ -28,9 +28,7 @@ export const BurgerIngredients = ({ ingredients }) => {
     const closeIngredientModal = () => setIngredientInModal(null)
 
     useEffect(() => {
-        console.log('dkdkdk');
         const closeModalEsc = (e) => {
-            console.log('я внутри');
             if (e.key === 'Escape') {
                 setIngredientInModal(null)
             }         
@@ -59,20 +57,17 @@ export const BurgerIngredients = ({ ingredients }) => {
                     title={'Булки'} 
                     ingredients={bunsList}
                     id='bun'
-                    onClick={setIngredientInModal}
-                    ingredientInModal={ingredientInModal}/>
+                    onClick={setIngredientInModal}/>
                 <IngredientCategory 
                     title={'Соусы'} 
                     ingredients={sauceList}
                     id='sauce'
-                    onClick={setIngredientInModal}
-                    ingredientInModal={ingredientInModal}/>
+                    onClick={setIngredientInModal}/>
                 <IngredientCategory 
                     title={'Начинки'} 
                     ingredients={mainList}
                     id='main'
-                    onClick={setIngredientInModal}
-                    ingredientInModal={ingredientInModal}/>
+                    onClick={setIngredientInModal}/>
             </div>
             {ingredientInModal && <Modal title='Детали ингредиента' onClose={closeIngredientModal}>
                 <IngredientDetails data={ingredientInModal} />

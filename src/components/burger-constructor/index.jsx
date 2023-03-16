@@ -1,5 +1,5 @@
 import { Button, ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import s from './style.module.css';
 import sel from 'classnames';
 import { OrderDetails } from '../order-details';
@@ -14,7 +14,22 @@ export const BurgerConstructor = ({constructor}) => {
     const [bunTop, setBunTop] = useState("https://code.s3.yandex.net/react/code/bun-02.png");
     const [bunBottom, setBunBottom] = useState("https://code.s3.yandex.net/react/code/bun-02.png");
     
-  
+    const [isClick, setIsClick] = useState(false);
+
+    const hendleClickButton = () => {
+        setIsClick(!isClick)
+    }
+
+    useEffect(() => {
+        const closeModalEsc = (e) => {
+            if (e.key === 'Escape') {
+                setIsClick(false)
+            }         
+        }
+        document.addEventListener('keydown', closeModalEsc)
+
+        return () => document.addEventListener('keydown', closeModalEsc)
+    }, [])
 
     return (
         <section className={s.constructor__container}>
@@ -54,13 +69,13 @@ export const BurgerConstructor = ({constructor}) => {
             <div className={sel(s.cost_container, 'mt-10', 'mr-4', 'ml-4')}>
                 <p className={sel(s.cost_total, 'text text_type_digits-medium', 'mr-2')}>610</p>
                 <img className={sel(s.icon, 'mr-10')} src={image} alt='иконка валюты'/>
-                <Button htmlType="button" type="primary" size="large">
+                <Button htmlType="button" type="primary" size="large" onClick={hendleClickButton}>
                     Оформить заказ
                 </Button>
             </div>
-            {/* {ingredientInModal && <Modal onClose={closeIngredientModal}>
-                <OrderDetails data={ingredientInModal} />
-            </Modal>} */}
+            {isClick && <Modal onClose={hendleClickButton}>
+                <OrderDetails />
+            </Modal>}
         </section>
     )
 }
