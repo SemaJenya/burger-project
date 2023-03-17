@@ -11,6 +11,8 @@ export const getIngredients = () => {
         .then(checkResponse)
         .then((dataIng) => {
             if(dataIng.success) {
+                console.log('123')
+                console.log(typeof(dataIng.data))
                 return dataIng.data;
             }
         })
