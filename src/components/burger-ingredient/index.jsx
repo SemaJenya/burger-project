@@ -1,7 +1,9 @@
 import { useEffect } from 'react'
+import PropTypes from 'prop-types';
 import s from './style.module.css';
 import sel from 'classnames';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ingredientsPropType } from '../../utils/prop-type';
 
 
 export const BurgerIngredient = ({onClick, ...data}) => {
@@ -20,4 +22,9 @@ export const BurgerIngredient = ({onClick, ...data}) => {
             <h3 className={sel(s.title, 'text text_type_main-default')}>{data.name}</h3>
         </div>
     )
+}
+
+BurgerIngredient.propTypes = {
+    onClick: PropTypes.func.isRequired,
+    data: PropTypes.objectOf(ingredientsPropType.isRequired)
 }

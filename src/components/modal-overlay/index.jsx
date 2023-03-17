@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import s from './style.module.css';
-import sel from 'classnames';
+
 
 
 export const ModalOverlay = ({onClick}) => {
@@ -8,4 +9,8 @@ export const ModalOverlay = ({onClick}) => {
 
         </div>
     )
+}
+
+ModalOverlay.propTypes = {
+    onClick: PropTypes.func.isRequired
 }

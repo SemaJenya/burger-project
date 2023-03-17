@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import s from './style.module.css';
+import PropTypes from 'prop-types';
 import sel from 'classnames';
 import { IngredientCategory } from '../ ingredient-category';
 import { Modal } from '../modal';
 import { IngredientDetails } from '../ingredient-details';
+import { ingredientsPropType } from '../../utils/prop-type';
 
 
 
@@ -74,4 +76,8 @@ export const BurgerIngredients = ({ ingredients }) => {
             </Modal>}
         </section>
     )
+}
+
+BurgerIngredients.propTypes = {
+    ingredients: PropTypes.arrayOf(ingredientsPropType.isRequired).isRequired,
 }

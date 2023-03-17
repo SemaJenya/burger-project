@@ -1,8 +1,11 @@
+import PropTypes from 'prop-types';
 import s from './style.module.css';
 import sel from 'classnames';
+import { ingredientsPropType } from '../../utils/prop-type';
 
 
 export const IngredientDetails = ({data}) => {
+    console.log(typeof(data._id));
     return (
         <div className={sel(s.details__container, 'pl-15', 'pr-15')}>
             <img className={sel(s.image, 'ml-5', 'mr-5', 'mb-4')} src={data.image} alt={data.name} />
@@ -28,4 +31,8 @@ export const IngredientDetails = ({data}) => {
 
         </div>
     )
+}
+
+IngredientDetails.propTypes = {
+    data: PropTypes.objectOf(ingredientsPropType.isRequired).isRequired,
 }

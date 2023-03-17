@@ -1,11 +1,13 @@
 import { Button, ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import s from './style.module.css';
 import sel from 'classnames';
 import { OrderDetails } from '../order-details';
 import { IngredientDetails } from '../ingredient-details';
 import image from '../../images/icon.svg';
 import { Modal } from '../modal';
+import { ingredientsPropType } from '../../utils/prop-type';
 
 
 
@@ -78,4 +80,8 @@ export const BurgerConstructor = ({constructor}) => {
             </Modal>}
         </section>
     )
+}
+
+BurgerConstructor.propTypes = {
+    constructor: PropTypes.arrayOf(ingredientsPropType.isRequired).isRequired,
 }
