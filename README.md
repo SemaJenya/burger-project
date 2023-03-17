@@ -17,4 +17,4 @@
 
 **GitHub Pages**
 
-[https://semajenya.github.io/react-burger/]
+[https://semajenya.github.io/burger-project/]
