@@ -20,6 +20,7 @@ useEffect(() => {
     .catch((err) => console.log(err))
 }, [])
 
+
     return(
     <div className={s.app}>
         <AppHeader />
