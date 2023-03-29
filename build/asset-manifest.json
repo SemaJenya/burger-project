@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/burger-project/static/css/main.c065df9f.css",
-    "main.js": "/burger-project/static/js/main.0337912b.js",
+    "main.css": "/burger-project/static/css/main.71b030eb.css",
+    "main.js": "/burger-project/static/js/main.f43bd08d.js",
     "static/js/787.3fd68dbf.chunk.js": "/burger-project/static/js/787.3fd68dbf.chunk.js",
     "static/media/JetBrainsMono-Bold.woff": "/burger-project/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
     "static/media/JetBrainsMono-Regular.woff": "/burger-project/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
@@ -12,12 +12,12 @@
     "static/media/graphics.svg": "/burger-project/static/media/graphics.6d4020a51e6d258e72a1298282fd63a7.svg",
     "static/media/icon.svg": "/burger-project/static/media/icon.d32d4bcb31918871f2ab8c731e23d311.svg",
     "index.html": "/burger-project/index.html",
-    "main.c065df9f.css.map": "/burger-project/static/css/main.c065df9f.css.map",
-    "main.0337912b.js.map": "/burger-project/static/js/main.0337912b.js.map",
+    "main.71b030eb.css.map": "/burger-project/static/css/main.71b030eb.css.map",
+    "main.f43bd08d.js.map": "/burger-project/static/js/main.f43bd08d.js.map",
     "787.3fd68dbf.chunk.js.map": "/burger-project/static/js/787.3fd68dbf.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c065df9f.css",
-    "static/js/main.0337912b.js"
+    "static/css/main.71b030eb.css",
+    "static/js/main.f43bd08d.js"
   ]
 }

@@ -1,5 +1,5 @@
 import { Button, ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import s from './style.module.css';
 import sel from 'classnames';
@@ -22,16 +22,6 @@ export const BurgerConstructor = ({constructor}) => {
         setIsClick(!isClick)
     }
 
-    useEffect(() => {
-        const closeModalEsc = (e) => {
-            if (e.key === 'Escape') {
-                setIsClick(false)
-            }         
-        }
-        document.addEventListener('keydown', closeModalEsc)
-
-        return () => document.addEventListener('keydown', closeModalEsc)
-    }, [])
 
     return (
         <section className={s.constructor__container}>
@@ -47,9 +37,9 @@ export const BurgerConstructor = ({constructor}) => {
                     />
                 </div>              
                 <div className={sel(s.constructor__inside, 'custom-scroll')}>
-                {constructor?.map(data => 
+                {constructor?.map(data => data.type !== 'bun' &&
                     <div className={s.inside__item} key={`${data._id} div`}>
-                        <DragIcon type="primary" key={`${data._id} icon`}/>
+                        <DragIcon type="primary" key={`${data._id} icon`}/>                       
                         <ConstructorElement
                           text={data.name}
                           price={data.price}
@@ -75,7 +65,7 @@ export const BurgerConstructor = ({constructor}) => {
                     Оформить заказ
                 </Button>
             </div>
-            {isClick && <Modal onClose={hendleClickButton}>
+            {isClick && <Modal onClose={hendleClickButton} title='' setIsClick={setIsClick}>
                 <OrderDetails />
             </Modal>}
         </section>

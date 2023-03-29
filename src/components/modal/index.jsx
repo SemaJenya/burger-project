@@ -1,13 +1,27 @@
 import PropTypes from 'prop-types';
 import s from './style.module.css';
+import { useEffect } from 'react';
 import sel from 'classnames';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ModalOverlay } from '../modal-overlay';
 import { createPortal } from 'react-dom';
 
+
 const modalDot = document.querySelector('#modals')
 
-export const Modal = ({title, onClose, children}) => {
+export const Modal = ({title, onClose, children, setIsClick}) => {
+
+    useEffect(() => {
+        const closeModalEsc = (e) => {
+            if (e.key === 'Escape') {
+                setIsClick(false)
+            }         
+        }
+        document.addEventListener('keydown', closeModalEsc)
+    
+        return () => document.addEventListener('keydown', closeModalEsc)
+    }, [])
+
     return (
         createPortal(
             <>
@@ -28,5 +42,6 @@ export const Modal = ({title, onClose, children}) => {
 Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    setIsClick: PropTypes.func.isRequired
 }
