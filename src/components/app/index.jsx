@@ -23,8 +23,8 @@ useEffect(() => {
     <div className={s.app}>
         <AppHeader />
         <main className={s.main}>
-            {/* <BurgerIngredients ingredients={ingredients}/>
-            <BurgerConstructor constructor={ingredients}/> */}
+            <BurgerIngredients ingredients={ingredients}/>
+            <BurgerConstructor constructor={ingredients}/>
         </main>
     </div>
     )

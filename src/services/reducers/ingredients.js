@@ -11,15 +11,23 @@ export const fetchIngredients = createAsyncThunk(  //возвращает объ
     'ingredients/fetchIngredients', //имя экшена
     //функция формируеи пейлоад и возвращает его для редьюсера (то, что мы запишем в стор). Асинхронная ф-я peyload creater - полезная нагрузка
     async (_, {dispatch, getState, rejectWithValue, fulfillWithValue}) => {       //первый аргумент - при вызове ф-и в диспатч она передается аргументом(можно импользовать дальше в функциях)   второй аргумент - 
-      const data = await getIngredients();
-        if(!data){
-            return rejectWithValue({errorMessage: 'Ошибка на стороне сервера'});
+        try {
+            const data = await getIngredients();
+            if(!Array.isArray(data)) {
+                throw new Error({error: 'Ошибка. Данные не получены', status: '404'})
+            }
+            console.log(data);
+            return fulfillWithValue(data); //возвращает пейлоад (то, что хранится в экшене) и записывает в стор
         }
-        console.log(data);
-      return data  //возвращает пейлоад (то, что хранится в экшене)
-      
+        catch (error) {
+            if(error.status) {
+                return rejectWithValue(error);
+            }
+            return rejectWithValue({errorMessage: 'Ошибка на стороне сервера'});
+        }    
     }
-  )
+)
+//значения return сверху прилетают в экшен функции снизу
 
 //срез, описывает экшен и редьюсер
 export const ingredientsSlice = createSlice({
