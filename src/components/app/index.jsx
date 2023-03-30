@@ -6,27 +6,25 @@ import s from './style.module.css'
 import { getIngredients } from '../../utils/api'
 import sel from 'classnames'
 import { BurgerIngredients } from '../burger-ingredients'
+import { useDispatch } from 'react-redux'
+import { fetchIngredients } from '../../services/reducers/ingredients'
 
 export const App = () => {
 
-const [ingredients, setIngredients] = useState([]);
+// const [ingredients, setIngredients] = useState([]);
+const dispatch = useDispatch()
 
 useEffect(() => {
-    getIngredients()
-    .then(data => {
-        setIngredients(data);
-        console.log(data);
-    })
-    .catch((err) => console.log(err))
-}, [])
+    dispatch(fetchIngredients())
+}, [dispatch])
 
 
     return(
     <div className={s.app}>
         <AppHeader />
         <main className={s.main}>
-            <BurgerIngredients ingredients={ingredients}/>
-            <BurgerConstructor constructor={ingredients}/>
+            {/* <BurgerIngredients ingredients={ingredients}/>
+            <BurgerConstructor constructor={ingredients}/> */}
         </main>
     </div>
     )
