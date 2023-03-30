@@ -8,17 +8,21 @@ import { Modal } from '../modal';
 import { IngredientDetails } from '../ingredient-details';
 import { ingredientsPropType } from '../../utils/prop-type';
 import { IngredientCategory } from '../ingredient-category';
+import { useSelector } from 'react-redux';
+import store from '../../services/store';
 
 
 
-
-
-export const BurgerIngredients = ({ ingredients }) => {
-
+export const BurgerIngredients = () => {
+    
+    const ingredients = useSelector(state => state.ingredientsStore.data) //достаем данные из стора
     const [current, setCurrent] = useState('bun');
     const bunsList = ingredients.filter(item => item.type === 'bun');
     const mainList = ingredients.filter(item => item.type === 'main');
     const sauceList = ingredients.filter(item => item.type === 'sauce');
+
+   
+    console.log(ingredients);
 
     const handleClickTab = (tab) => {
         setCurrent(tab);
@@ -78,8 +82,4 @@ export const BurgerIngredients = ({ ingredients }) => {
             </Modal>}
         </section>
     )
-}
-
-BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientsPropType.isRequired).isRequired,
 }

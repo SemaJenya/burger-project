@@ -8,15 +8,18 @@ import { IngredientDetails } from '../ingredient-details';
 import image from '../../images/icon.svg';
 import { Modal } from '../modal';
 import { ingredientsPropType } from '../../utils/prop-type';
+import { useSelector } from 'react-redux';
 
 
 
-export const BurgerConstructor = ({constructor}) => {
+export const BurgerConstructor = () => {
 
     const [bunTop, setBunTop] = useState("https://code.s3.yandex.net/react/code/bun-02.png");
     const [bunBottom, setBunBottom] = useState("https://code.s3.yandex.net/react/code/bun-02.png");
     
     const [isClick, setIsClick] = useState(false);
+
+    const constructor = useSelector(state => state.ingredientsStore.data) //достаем данные из стора
 
     const hendleClickButton = () => {
         setIsClick(!isClick)
@@ -70,8 +73,4 @@ export const BurgerConstructor = ({constructor}) => {
             </Modal>}
         </section>
     )
-}
-
-BurgerConstructor.propTypes = {
-    constructor: PropTypes.arrayOf(ingredientsPropType.isRequired).isRequired,
 }
