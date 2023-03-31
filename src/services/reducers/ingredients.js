@@ -33,7 +33,7 @@ export const fetchIngredients = createAsyncThunk(  //возвращает объ
 export const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
-  extraReducers: (builder) => {
+  extraReducers: (builder) => {    //для запросов
     builder 
         .addCase(fetchIngredients.pending, (state) => {
             state.isLoading = true;

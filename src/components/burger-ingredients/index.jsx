@@ -14,8 +14,9 @@ import store from '../../services/store';
 
 
 export const BurgerIngredients = () => {
-    
-    const ingredients = useSelector(state => state.ingredientsStore.data) //достаем данные из стора
+
+    const {data: ingredients, isLoading, error} = useSelector(state => state.ingredientsStore) //достаем данные из стора
+
     const [current, setCurrent] = useState('bun');
     const bunsList = ingredients.filter(item => item.type === 'bun');
     const mainList = ingredients.filter(item => item.type === 'main');
@@ -46,8 +47,8 @@ export const BurgerIngredients = () => {
         return () => document.addEventListener('keydown', closeModalEsc)
     }, [])
 
-    return (
-        <section className={sel(s.ingredients__conteiner, 'mr-10')}>
+    return ( isLoading ? <div>Loading...</div> :
+        (<section className={sel(s.ingredients__conteiner, 'mr-10')}>
             <h1 className={sel(s.title, 'text text_type_main-large', 'mt-10', 'mb-5')}>Соберите бургер</h1>
             <div className={sel(s.ingredients, 'mb-10')}>
                 <Tab value="bun" active={current === 'bun'} onClick={handleClickTab}>
@@ -80,6 +81,6 @@ export const BurgerIngredients = () => {
             {ingredientInModal && <Modal title='Детали ингредиента' onClose={closeIngredientModal}>
                 <IngredientDetails data={ingredientInModal} />
             </Modal>}
-        </section>
+        </section>)
     )
 }

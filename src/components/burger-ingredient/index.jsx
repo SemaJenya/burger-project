@@ -4,14 +4,17 @@ import s from './style.module.css';
 import sel from 'classnames';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientsPropType } from '../../utils/prop-type';
+import { useDispatch } from 'react-redux';
+import { createConstructor } from '../../services/reducers/constructor';
 
 
 export const BurgerIngredient = ({onClick, ...data}) => {
 
+    const dispatch = useDispatch();
 
     function hendleClickIngredient () {
         onClick(data);
-        console.log('click');
+        dispatch(createConstructor(data));
     }
     return (
 

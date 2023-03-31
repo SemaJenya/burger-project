@@ -19,7 +19,7 @@ export const BurgerConstructor = () => {
     
     const [isClick, setIsClick] = useState(false);
 
-    const constructor = useSelector(state => state.ingredientsStore.data) //достаем данные из стора
+    const {ingredients: constructor, bun} = useSelector(state => state.constructorStore) //достаем данные из стора
 
     const hendleClickButton = () => {
         setIsClick(!isClick)
@@ -38,7 +38,8 @@ export const BurgerConstructor = () => {
                         thumbnail={bunTop}
                         key='top'
                     />
-                </div>              
+                </div>
+                {!constructor ? <div>Добавьте игредиенты</div> :     
                 <div className={sel(s.constructor__inside, 'custom-scroll')}>
                 {constructor?.map(data => data.type !== 'bun' &&
                     <div className={s.inside__item} key={`${data._id} div`}>
@@ -49,7 +50,7 @@ export const BurgerConstructor = () => {
                           thumbnail={data.image}
                           key={data._id}/> 
                     </div>)}                   
-                </div>   
+                </div> }  
                 <div className={s.fixed__part}>
                     <ConstructorElement
                         type="bottom"
@@ -59,7 +60,7 @@ export const BurgerConstructor = () => {
                         thumbnail={bunBottom}
                         key='buttom'
                     />
-                </div>                      
+                </div>                   
             </div>
             <div className={sel(s.cost_container, 'mt-10', 'mr-4', 'ml-4')}>
                 <p className={sel(s.cost_total, 'text text_type_digits-medium', 'mr-2')}>610</p>
