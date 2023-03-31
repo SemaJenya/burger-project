@@ -9,12 +9,11 @@ import { createConstructor } from '../../services/reducers/constructor';
 import { createIngredientDetails } from '../../services/reducers/ingredientDetails';
 
 
-export const BurgerIngredient = ({onClick, ...data}) => {
+export const BurgerIngredient = ({...data}) => {
 
     const dispatch = useDispatch();
 
     function hendleClickIngredient () {
-        onClick(data);
         dispatch(createConstructor(data));
         dispatch(createIngredientDetails(data));
     }
@@ -30,6 +29,5 @@ export const BurgerIngredient = ({onClick, ...data}) => {
 }
 
 BurgerIngredient.propTypes = {
-    onClick: PropTypes.func.isRequired,
     data: PropTypes.objectOf(ingredientsPropType.isRequired)
 }

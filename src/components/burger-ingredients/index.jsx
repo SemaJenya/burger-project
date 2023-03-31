@@ -8,7 +8,8 @@ import { Modal } from '../modal';
 import { IngredientDetails } from '../ingredient-details';
 import { ingredientsPropType } from '../../utils/prop-type';
 import { IngredientCategory } from '../ingredient-category';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { createIngredientDetails } from '../../services/reducers/ingredientDetails';
 
 
 
@@ -28,14 +29,17 @@ export const BurgerIngredients = () => {
         if (title) title.scrollIntoView({behavior: 'smooth'});
     }
 
-    const [ingredientInModal, setIngredientInModal] = useState(null);
+    // const [ingredientInModal, setIngredientInModal] = useState(null);
+    const ingredient = useSelector(state => state.ingredientDetailsStore.ingredient)
+    const dispatch = useDispatch();
 
-    const closeIngredientModal = () => setIngredientInModal(null)
+    // const closeIngredientModal = () => setIngredientInModal(null)
+    const closeIngredientModal = () => dispatch(createIngredientDetails(null))
 
     useEffect(() => {
         const closeModalEsc = (e) => {
             if (e.key === 'Escape') {
-                setIngredientInModal(null)
+                dispatch(createIngredientDetails(null))
             }         
         }
         document.addEventListener('keydown', closeModalEsc)
@@ -61,20 +65,17 @@ export const BurgerIngredients = () => {
                 <IngredientCategory
                     title={'Булки'} 
                     ingredients={bunsList}
-                    id='bun'
-                    onClick={setIngredientInModal}/>
+                    id='bun'/>
                 <IngredientCategory 
                     title={'Соусы'} 
                     ingredients={sauceList}
-                    id='sauce'
-                    onClick={setIngredientInModal}/>
+                    id='sauce'/>
                 <IngredientCategory 
                     title={'Начинки'} 
                     ingredients={mainList}
-                    id='main'
-                    onClick={setIngredientInModal}/>
+                    id='main'/>
             </div>
-            {ingredientInModal && <Modal title='Детали ингредиента' onClose={closeIngredientModal}>
+            {ingredient && <Modal title='Детали ингредиента' onClose={closeIngredientModal}>
                 <IngredientDetails />
             </Modal>}
         </section>)
