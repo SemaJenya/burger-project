@@ -9,6 +9,8 @@ import image from '../../images/icon.svg';
 import { Modal } from '../modal';
 import { ingredientsPropType } from '../../utils/prop-type';
 import { useSelector } from 'react-redux';
+import burger from '../../images/burger.jpg'
+
 
 
 
@@ -19,7 +21,8 @@ export const BurgerConstructor = () => {
     
     const [isClick, setIsClick] = useState(false);
 
-    const {ingredients: constructor, bun} = useSelector(state => state.constructorStore) //достаем данные из стора
+    const {ingredients, bun} = useSelector(state => state.constructorStore) //достаем данные из стора
+
 
     const hendleClickButton = () => {
         setIsClick(!isClick)
@@ -31,33 +34,35 @@ export const BurgerConstructor = () => {
              <div className={sel(s.constructor__list, 'mt-25', 'mr-4', 'ml-4')}>
                 <div className={s.fixed__part}>
                     <ConstructorElement
+                        {...bun}
                         type="top"
                         isLocked={true}
-                        text="Краторная булка N-200i (верх)"
-                        price={200}
-                        thumbnail={bunTop}
+                        text={bun? bun.name : 'Выберете булку'}
+                        price={bun?.price}
+                        thumbnail={bun ? bun.image : burger}
                         key='top'
                     />
                 </div>
-                {!constructor ? <div>Добавьте игредиенты</div> :     
-                <div className={sel(s.constructor__inside, 'custom-scroll')}>
-                {constructor?.map(data => data.type !== 'bun' &&
-                    <div className={s.inside__item} key={`${data._id} div`}>
-                        <DragIcon type="primary" key={`${data._id} icon`}/>                       
+                {!ingredients ? <div>Добавьте игредиенты aaaaaaaaa</div> :     
+                (<div className={sel(s.constructor__inside, 'custom-scroll')}>
+                {ingredients?.map(data => data.type !== 'bun' &&
+                    <div className={s.inside__item} key={`${data.randomId} div`}>
+                        <DragIcon type="primary" key={`${data.randomId} icon`}/>                       
                         <ConstructorElement
                           text={data.name}
                           price={data.price}
                           thumbnail={data.image}
-                          key={data._id}/> 
+                          key={data.randomId}/> 
                     </div>)}                   
-                </div> }  
+                </div> )}  
                 <div className={s.fixed__part}>
                     <ConstructorElement
+                        {...bun}
                         type="bottom"
                         isLocked={true}
-                        text="Краторная булка N-200i (низ)"
-                        price={200}
-                        thumbnail={bunBottom}
+                        text={bun? bun.name : 'Выберете булку'}
+                        price={bun?.price}
+                        thumbnail={bun ? bun.image : burger}
                         key='buttom'
                     />
                 </div>                   

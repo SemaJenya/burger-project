@@ -9,7 +9,7 @@ import { IngredientDetails } from '../ingredient-details';
 import { ingredientsPropType } from '../../utils/prop-type';
 import { IngredientCategory } from '../ingredient-category';
 import { useSelector } from 'react-redux';
-import store from '../../services/store';
+
 
 
 
@@ -22,9 +22,6 @@ export const BurgerIngredients = () => {
     const mainList = ingredients.filter(item => item.type === 'main');
     const sauceList = ingredients.filter(item => item.type === 'sauce');
 
-   
-    console.log(ingredients);
-
     const handleClickTab = (tab) => {
         setCurrent(tab);
         const title = document.getElementById(tab);
@@ -32,7 +29,6 @@ export const BurgerIngredients = () => {
     }
 
     const [ingredientInModal, setIngredientInModal] = useState(null);
-    console.log(ingredientInModal);
 
     const closeIngredientModal = () => setIngredientInModal(null)
 
@@ -79,7 +75,7 @@ export const BurgerIngredients = () => {
                     onClick={setIngredientInModal}/>
             </div>
             {ingredientInModal && <Modal title='Детали ингредиента' onClose={closeIngredientModal}>
-                <IngredientDetails data={ingredientInModal} />
+                <IngredientDetails />
             </Modal>}
         </section>)
     )

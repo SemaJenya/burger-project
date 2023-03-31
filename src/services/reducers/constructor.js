@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 
-const initialState = {
+export const initialState = {
   bun: null,
   ingredients: []
 }
@@ -15,7 +15,7 @@ export const constructorSlice = createSlice({
   reducers: {
     createConstructor: (state, action) => {   //это экшен
         if(action.payload.type === 'bun') {
-            return state.bun = {...action.payload, randomId: uuidv4()};
+            state.bun = {...action.payload, randomId: uuidv4()};
         }
         else {
             state.ingredients.push({...action.payload, randomId: uuidv4()});     

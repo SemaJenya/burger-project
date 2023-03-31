@@ -9,13 +9,15 @@ import { BurgerIngredients } from '../burger-ingredients'
 import { useDispatch } from 'react-redux'
 import { fetchIngredients } from '../../services/reducers/ingredients'
 
+
+
 export const App = () => {
 
 // const [ingredients, setIngredients] = useState([]);
 const dispatch = useDispatch()
 
 useEffect(() => {
-    dispatch(fetchIngredients())
+    dispatch(fetchIngredients());
 }, [dispatch])
 
 

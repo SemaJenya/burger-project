@@ -6,6 +6,7 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import { ingredientsPropType } from '../../utils/prop-type';
 import { useDispatch } from 'react-redux';
 import { createConstructor } from '../../services/reducers/constructor';
+import { createIngredientDetails } from '../../services/reducers/ingredientDetails';
 
 
 export const BurgerIngredient = ({onClick, ...data}) => {
@@ -15,6 +16,7 @@ export const BurgerIngredient = ({onClick, ...data}) => {
     function hendleClickIngredient () {
         onClick(data);
         dispatch(createConstructor(data));
+        dispatch(createIngredientDetails(data));
     }
     return (
 
