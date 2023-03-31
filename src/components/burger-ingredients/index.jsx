@@ -9,7 +9,7 @@ import { IngredientDetails } from '../ingredient-details';
 import { ingredientsPropType } from '../../utils/prop-type';
 import { IngredientCategory } from '../ingredient-category';
 import { useDispatch, useSelector } from 'react-redux';
-import { createIngredientDetails } from '../../services/reducers/ingredientDetails';
+import { createIngredientDetails, removeIngredientDetails } from '../../services/reducers/ingredientDetails';
 
 
 

@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 
 export const IngredientDetails = () => {
     const data = useSelector(state => state.ingredientDetailsStore.ingredient)
-    console.log(data);
     return (
         <div className={sel(s.details__container, 'pl-15', 'pr-15')}>
             <img className={sel(s.image, 'ml-5', 'mr-5', 'mb-4')} src={data.image} alt={data.name} />

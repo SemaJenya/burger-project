@@ -12,11 +12,14 @@ export const ingredientDetailsSlice = createSlice({
   initialState,
   reducers: {
     createIngredientDetails: (state, action) => {   //это экшен
-            state.ingredient = action.payload;
-    }
+      state.ingredient = action.payload;
+    },
+    // removeIngredientDetails: (state, action) => {    //тут надо как-то очищать стор при закрытии модального окна, чтобы стор не засорялся
+    //   console.log(action.payload);
+    // }
   }
 })
 
-export const {createIngredientDetails} = ingredientDetailsSlice.actions;
+export const {createIngredientDetails, removeIngredientDetails} = ingredientDetailsSlice.actions;
 
 export default ingredientDetailsSlice.reducer;
