@@ -1,4 +1,5 @@
 const apiUrl = 'https://norma.nomoreparties.space/api';
+const apiOrder = 'https://norma.nomoreparties.space/api';
 
 const checkResponse = (res) => {
     return res.ok ? res.json() : res.json().then((data) => Promise.reject(data))}
@@ -11,9 +12,25 @@ export const getIngredients = () => {
         .then(checkResponse)
         .then((dataIng) => {
             if(dataIng.success) {
-                console.log('123')
-                console.log(typeof(dataIng.data))
                 return dataIng.data;
             }
         })
 };
+
+//Получим информацию о заказе
+
+export const postOrderInfo = (dataID) => {  //ID всех ингредиентов, которые находятся в конструкторе бургера
+    return fetch(`${apiOrder}/orders`, {
+        method: 'POST',
+        body: JSON.stringify({
+            'ingredients': dataID
+        })
+    })
+        .then(checkResponse)
+        .then((data) => {
+            if(data.success) {
+                console.log(data);
+                return data;
+            }
+        })
+}
