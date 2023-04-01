@@ -11,6 +11,7 @@ import burger from '../../images/burger.jpg'
 import { fetchOrder } from '../../services/reducers/orederDetails';
 import { useDrop } from 'react-dnd';
 import { createConstructor } from '../../services/reducers/constructor';
+import { counter } from '../app';
 
 
 
@@ -54,9 +55,8 @@ export const BurgerConstructor = () => {
         accept: 'ingredient',
         drop(data, monitor) {
 
-            // console.log('f123');
-            // console.log(data.data);
             dispatch(createConstructor(data.data))
+            counter[data.data._id] += 1
         },
         hover(itemID, monitor) {
             console.log('jsjsjs');
@@ -69,10 +69,6 @@ export const BurgerConstructor = () => {
     const borderColor = isHover ? 'salmon' : 'transparent'
 
 
-    // ingredients.forEach(data => {
-    //     console.log(data.data)
-    // });
-
     return (
         <section className={s.constructor__container}>
              <div className={sel(s.constructor__list, 'mt-25', 'mr-4', 'ml-4')}>
@@ -81,7 +77,7 @@ export const BurgerConstructor = () => {
                         {...bun}
                         type="top"
                         isLocked={true}
-                        text={bun? bun.name : 'Выберете булку'}
+                        text={bun? `${bun.name} верх` : 'Выберете булку'}
                         price={bun?.price}
                         thumbnail={bun ? bun.image : burger}
                         key='top'
@@ -104,7 +100,7 @@ export const BurgerConstructor = () => {
                         {...bun}
                         type="bottom"
                         isLocked={true}
-                        text={bun? bun.name : 'Выберете булку'}
+                        text={bun? `${bun.name} низ` : 'Выберете булку'}
                         price={bun?.price}
                         thumbnail={bun ? bun.image : burger}
                         key='buttom'

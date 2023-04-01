@@ -11,8 +11,10 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
 
 
+export let counter = {}
 
 export const App = () => {
+
 
 // const [ingredients, setIngredients] = useState([]);
 const dispatch = useDispatch()

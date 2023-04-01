@@ -11,13 +11,18 @@ import { IngredientCategory } from '../ingredient-category';
 import { useDispatch, useSelector } from 'react-redux';
 import { createIngredientDetails, removeIngredientDetails } from '../../services/reducers/ingredientDetails';
 import { useDrag } from 'react-dnd';
-
-
+import { counter } from '../app';
 
 
 export const BurgerIngredients = () => {
 
     const {data: ingredients, isLoading, error} = useSelector(state => state.ingredientsStore) //достаем данные из стора
+
+    ingredients.forEach(item => {
+        counter[`${item._id}`] = 0
+    });
+
+    console.log(counter);
 
     const [current, setCurrent] = useState('bun');
     const bunsList = ingredients.filter(item => item.type === 'bun');
