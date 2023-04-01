@@ -18,10 +18,12 @@ export const getIngredients = () => {
 };
 
 //Получим информацию о заказе
-
 export const postOrderInfo = (dataID) => {  //ID всех ингредиентов, которые находятся в конструкторе бургера
     return fetch(`${apiOrder}/orders`, {
         method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
             'ingredients': dataID
         })
@@ -29,7 +31,6 @@ export const postOrderInfo = (dataID) => {  //ID всех ингредиенто
         .then(checkResponse)
         .then((data) => {
             if(data.success) {
-                console.log(data);
                 return data;
             }
         })

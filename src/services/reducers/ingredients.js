@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getIngredients } from '../../utils/api.js';
 
-const initialState = {
+export const initialState = {
   data: [],
   isLoading: false,
   error: null
@@ -16,7 +16,6 @@ export const fetchIngredients = createAsyncThunk(  //возвращает объ
             if(!Array.isArray(data)) {
                 throw new Error({error: 'Ошибка. Данные не получены', status: '404'})
             }
-            console.log(data);
             return fulfillWithValue(data); //возвращает пейлоад (то, что хранится в экшене) и записывает в стор
         }
         catch (error) {

@@ -1,15 +1,14 @@
 import { Button, ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import s from './style.module.css';
 import sel from 'classnames';
 import { OrderDetails } from '../order-details';
 import { IngredientDetails } from '../ingredient-details';
 import image from '../../images/icon.svg';
 import { Modal } from '../modal';
-import { ingredientsPropType } from '../../utils/prop-type';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import burger from '../../images/burger.jpg'
+import { fetchOrder } from '../../services/reducers/orederDetails';
 
 
 
@@ -21,11 +20,19 @@ export const BurgerConstructor = () => {
     
     const [isClick, setIsClick] = useState(false);
 
-    const {ingredients, bun} = useSelector(state => state.constructorStore) //достаем данные из стора
+    const {ingredients, bun} = useSelector(state => state.constructorStore); //достаем данные из стора
+
+    const ingredientsID = ingredients?.map((item) => item._id)
+
+    const dispatch = useDispatch();
+
+    const {isLoading} = useSelector(state => state.orderStore)
+    console.log(isLoading);
 
 
     const hendleClickButton = () => {
-        setIsClick(!isClick)
+        setIsClick(!isClick);
+        dispatch(fetchOrder(ingredientsID));
     }
 
 
@@ -74,7 +81,7 @@ export const BurgerConstructor = () => {
                     Оформить заказ
                 </Button>
             </div>
-            {isClick && <Modal onClose={hendleClickButton} title='' setIsClick={setIsClick}>
+            {isClick && !isLoading && <Modal onClose={hendleClickButton} title='' setIsClick={setIsClick}>
                 <OrderDetails />
             </Modal>}
         </section>
