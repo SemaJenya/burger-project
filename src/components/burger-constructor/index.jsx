@@ -1,5 +1,5 @@
 import { Button, ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import s from './style.module.css';
 import sel from 'classnames';
 import { OrderDetails } from '../order-details';
@@ -15,8 +15,8 @@ import { fetchOrder } from '../../services/reducers/orederDetails';
 
 export const BurgerConstructor = () => {
 
-    const [bunTop, setBunTop] = useState("https://code.s3.yandex.net/react/code/bun-02.png");
-    const [bunBottom, setBunBottom] = useState("https://code.s3.yandex.net/react/code/bun-02.png");
+    // const [bunTop, setBunTop] = useState("https://code.s3.yandex.net/react/code/bun-02.png");
+    // const [bunBottom, setBunBottom] = useState("https://code.s3.yandex.net/react/code/bun-02.png");
     
     const [isClick, setIsClick] = useState(false);
 
@@ -24,13 +24,25 @@ export const BurgerConstructor = () => {
 
     const ingredientsID = ingredients?.map((item) => item._id)
 
+    const calculateSum = (ingredients, bun) => {
+        let sum = 0;
+        if(bun) {
+            sum += bun.price * 2;
+        }
+        if(ingredients.length > 0) {
+            ingredients.map((item) => sum += item.price);
+        }
+        return sum;
+    }
+    
+    const finalPrice = useMemo(() => calculateSum(ingredients, bun))
+
     const dispatch = useDispatch();
 
     const {isLoading} = useSelector(state => state.orderStore)
-    console.log(isLoading);
 
 
-    const hendleClickButton = () => {
+    const handleClickButton = () => {
         setIsClick(!isClick);
         dispatch(fetchOrder(ingredientsID));
     }
@@ -75,13 +87,13 @@ export const BurgerConstructor = () => {
                 </div>                   
             </div>
             <div className={sel(s.cost_container, 'mt-10', 'mr-4', 'ml-4')}>
-                <p className={sel(s.cost_total, 'text text_type_digits-medium', 'mr-2')}>610</p>
+                <p className={sel(s.cost_total, 'text text_type_digits-medium', 'mr-2')}>{finalPrice}</p>
                 <img className={sel(s.icon, 'mr-10')} src={image} alt='иконка валюты'/>
-                <Button htmlType="button" type="primary" size="large" onClick={hendleClickButton}>
+                <Button htmlType="button" type="primary" size="large" onClick={handleClickButton}>
                     Оформить заказ
                 </Button>
             </div>
-            {isClick && !isLoading && <Modal onClose={hendleClickButton} title='' setIsClick={setIsClick}>
+            {isClick && !isLoading && <Modal onClose={handleClickButton} title='' setIsClick={setIsClick}>
                 <OrderDetails />
             </Modal>}
         </section>
