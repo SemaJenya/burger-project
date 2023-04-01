@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AppHeader } from '../app-header'
 import { BurgerConstructor } from '../burger-constructor'
-import { BurgerIngredient } from '../burger-ingredient'
 import s from './style.module.css'
 import { getIngredients } from '../../utils/api'
 import sel from 'classnames'
@@ -20,7 +19,9 @@ const dispatch = useDispatch()
 
 useEffect(() => {
     dispatch(fetchIngredients());
-}, [dispatch])
+}, [dispatch]);
+
+
 
 
     return(

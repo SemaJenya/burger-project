@@ -15,15 +15,15 @@ export const BurgerIngredient = ({...data}) => {
     const dispatch = useDispatch();
 
     function hendleClickIngredient () {
-        dispatch(createConstructor(data));
+        // dispatch(createConstructor(data));
         dispatch(createIngredientDetails(data));
     }
-    const id = data._id;
+
 
     //  //все для DnD
      const [{isDrag}, dragRef] = useDrag({
         type: 'ingredient',
-        item: {id},
+        item: {data},
         collect: monitor => ({
             isDrag: monitor.isDragging()
         })

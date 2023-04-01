@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import burger from '../../images/burger.jpg'
 import { fetchOrder } from '../../services/reducers/orederDetails';
 import { useDrop } from 'react-dnd';
+import { createConstructor } from '../../services/reducers/constructor';
 
 
 
@@ -51,9 +52,11 @@ export const BurgerConstructor = () => {
    
      const [{isHover}, dropTargetRef] = useDrop({
         accept: 'ingredient',
-        drop(itemID, monitor) {
-            console.log(itemID);
-            console.log('vhghgjhgjgh');
+        drop(data, monitor) {
+
+            // console.log('f123');
+            // console.log(data.data);
+            dispatch(createConstructor(data.data))
         },
         hover(itemID, monitor) {
             console.log('jsjsjs');
@@ -63,7 +66,12 @@ export const BurgerConstructor = () => {
         })
     });
 
-    console.log(isHover);
+    const borderColor = isHover ? 'salmon' : 'transparent'
+
+
+    // ingredients.forEach(data => {
+    //     console.log(data.data)
+    // });
 
     return (
         <section className={s.constructor__container}>
@@ -80,7 +88,7 @@ export const BurgerConstructor = () => {
                     />
                 </div>
                 {!ingredients ? <div>Добавьте игредиенты aaaaaaaaa</div> :     
-                (<div className={sel(s.constructor__inside, 'custom-scroll')} ref={dropTargetRef}>
+                (<div className={sel(s.constructor__inside, 'custom-scroll')} ref={dropTargetRef} style={{borderColor}}>
                 {ingredients?.map(data => data.type !== 'bun' &&
                     <div className={s.inside__item} key={`${data.randomId} div`} >
                         <DragIcon type="primary" key={`${data.randomId} icon`}/>                       
