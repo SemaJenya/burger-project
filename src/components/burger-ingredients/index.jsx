@@ -10,6 +10,7 @@ import { ingredientsPropType } from '../../utils/prop-type';
 import { IngredientCategory } from '../ingredient-category';
 import { useDispatch, useSelector } from 'react-redux';
 import { createIngredientDetails, removeIngredientDetails } from '../../services/reducers/ingredientDetails';
+import { useDrag } from 'react-dnd';
 
 
 
@@ -29,11 +30,9 @@ export const BurgerIngredients = () => {
         if (title) title.scrollIntoView({behavior: 'smooth'});
     }
 
-    // const [ingredientInModal, setIngredientInModal] = useState(null);
     const ingredient = useSelector(state => state.ingredientDetailsStore.ingredient)
     const dispatch = useDispatch();
 
-    // const closeIngredientModal = () => setIngredientInModal(null)
     const closeIngredientModal = () => dispatch(createIngredientDetails(null))
 
     useEffect(() => {
@@ -46,6 +45,8 @@ export const BurgerIngredients = () => {
 
         return () => document.addEventListener('keydown', closeModalEsc)
     }, [])
+
+   
 
     return ( isLoading ? <div>Loading...</div> :
         (<section className={sel(s.ingredients__conteiner, 'mr-10')}>

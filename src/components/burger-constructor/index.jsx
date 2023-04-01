@@ -9,6 +9,7 @@ import { Modal } from '../modal';
 import { useDispatch, useSelector } from 'react-redux';
 import burger from '../../images/burger.jpg'
 import { fetchOrder } from '../../services/reducers/orederDetails';
+import { useDrop } from 'react-dnd';
 
 
 
@@ -47,6 +48,22 @@ export const BurgerConstructor = () => {
         dispatch(fetchOrder(ingredientsID));
     }
 
+   
+     const [{isHover}, dropTargetRef] = useDrop({
+        accept: 'ingredient',
+        drop(itemID, monitor) {
+            console.log(itemID);
+            console.log('vhghgjhgjgh');
+        },
+        hover(itemID, monitor) {
+            console.log('jsjsjs');
+        },
+        collect: monitor => ({
+            isHover: monitor.isOver()
+        })
+    });
+
+    console.log(isHover);
 
     return (
         <section className={s.constructor__container}>
@@ -63,9 +80,9 @@ export const BurgerConstructor = () => {
                     />
                 </div>
                 {!ingredients ? <div>Добавьте игредиенты aaaaaaaaa</div> :     
-                (<div className={sel(s.constructor__inside, 'custom-scroll')}>
+                (<div className={sel(s.constructor__inside, 'custom-scroll')} ref={dropTargetRef}>
                 {ingredients?.map(data => data.type !== 'bun' &&
-                    <div className={s.inside__item} key={`${data.randomId} div`}>
+                    <div className={s.inside__item} key={`${data.randomId} div`} >
                         <DragIcon type="primary" key={`${data.randomId} icon`}/>                       
                         <ConstructorElement
                           text={data.name}

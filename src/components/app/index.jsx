@@ -8,6 +8,8 @@ import sel from 'classnames'
 import { BurgerIngredients } from '../burger-ingredients'
 import { useDispatch } from 'react-redux'
 import { fetchIngredients } from '../../services/reducers/ingredients'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
 
 
 
@@ -24,10 +26,12 @@ useEffect(() => {
     return(
     <div className={s.app}>
         <AppHeader />
-        <main className={s.main}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-        </main>
+        <DndProvider backend={HTML5Backend}>
+            <main className={s.main}>
+                <BurgerIngredients />
+                <BurgerConstructor />
+            </main>
+        </DndProvider>    
     </div>
     )
 }
