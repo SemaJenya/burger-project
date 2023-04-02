@@ -1,27 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import s from './style.module.css';
-import PropTypes from 'prop-types';
 import sel from 'classnames';
-
 import { Modal } from '../modal';
 import { IngredientDetails } from '../ingredient-details';
-import { ingredientsPropType } from '../../utils/prop-type';
 import { IngredientCategory } from '../ingredient-category';
 import { useDispatch, useSelector } from 'react-redux';
 import { createIngredientDetails, removeIngredientDetails } from '../../services/reducers/ingredientDetails';
-import { useDrag } from 'react-dnd';
-import { counter } from '../app';
+
 
 
 export const BurgerIngredients = () => {
 
     const {data: ingredients, isLoading, error} = useSelector(state => state.ingredientsStore) //достаем данные из стора
-
-    ingredients.forEach(item => {
-        counter[`${item._id}`] = 0
-    });
-
 
     const [current, setCurrent] = useState('bun');
     const bunsList = ingredients.filter(item => item.type === 'bun');

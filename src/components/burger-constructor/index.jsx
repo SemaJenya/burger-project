@@ -10,8 +10,8 @@ import burger from '../../images/burger.jpg'
 import { fetchOrder } from '../../services/reducers/orederDetails';
 import { useDrop } from 'react-dnd';
 import { createConstructor } from '../../services/reducers/constructor';
-import { counter } from '../app';
 import { ElementInConctructor } from '../element-in-constructor';
+import { addCounter } from '../../services/reducers/counter'
 
 
 
@@ -50,29 +50,13 @@ export const BurgerConstructor = () => {
         dispatch(fetchOrder(ingredientsID));
     }
 
-    const handleCounter = (data) => {
-        if (!bun && data.type == 'bun') {
-            counter[data._id] += 2
-        }
-        if (bun && data.type == 'bun'){
-            console.log(`current bun id ${bun._id}`)
-            console.log(`updated bun id ${data._id}`)
-            counter[bun._id] = 0
-            console.log(`set 0 to ${bun._id}`)
-            counter[data._id] += 2
-        }      
-    }
 
    
      const [{isHover}, dropTargetRef] = useDrop({
         accept: 'ingredient',
         drop(data, monitor) {
-            handleCounter(data.data)
-            dispatch(createConstructor(data.data))
-            // counter[data.data._id] += 1
-            // console.log(data.data);
-            
-
+            dispatch(createConstructor(data.data));
+            dispatch(addCounter(data.data))
         },
         hover(itemID, monitor) {
         },

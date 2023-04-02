@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
+
 import s from './style.module.css';
 import sel from 'classnames';
-import { ingredientsPropType } from '../../utils/prop-type';
 import { useSelector } from 'react-redux';
 
 

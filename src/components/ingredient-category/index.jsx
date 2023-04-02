@@ -3,9 +3,7 @@ import s from './style.module.css';
 import sel from 'classnames';
 import { BurgerIngredient } from '../burger-ingredient';
 import { ingredientsPropType } from '../../utils/prop-type';
-import { useSelector } from 'react-redux';
-import { counter } from '../app';
-import { useMemo } from 'react';
+
 
 export const IngredientCategory = ({title, ingredients, id}) => {
    
