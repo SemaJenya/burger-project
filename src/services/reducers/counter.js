@@ -23,7 +23,6 @@ export const counterSlice = createSlice({
             return
           }
         });
-        console.log(bun_id)
 
         if (bun_id){
           delete state.counter[bun_id]          
