@@ -81,11 +81,7 @@ export const BurgerConstructor = () => {
         })
     });
 
-    const borderColor = isHover ? 'salmon' : 'transparent'
-
-
-    
-
+    const borderColor = isHover ? 'rgba(100, 100, 100, 0.5)' : 'transparent'
 
     return (
         <section className={s.constructor__container}>

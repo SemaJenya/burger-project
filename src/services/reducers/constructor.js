@@ -21,17 +21,15 @@ export const constructorSlice = createSlice({
             state.ingredients.push({...action.payload, randomId: uuidv4()});     
         }
     },
-    // removeConstructor: (state, action) => {
-    //   state.ingredients = state.ingredients.filter((ingredient) => ingredient.id != action.payload)
-    // },
+    removeConstructor: (state, action) => {
+      state.ingredients = state.ingredients.filter((ingredient) => ingredient.randomId != action.payload)
+    },
     reorder: (state, action) => {
       state.ingredients.splice(action.payload.to, 0, state.ingredients.splice(action.payload.from, 1)[0])
     }
   }
 })
 
-//dispatch(reorder({from: dragIndex, to: hoverIndex}))
-
-export const {createConstructor, reorder} = constructorSlice.actions;
+export const {createConstructor, reorder, removeConstructor} = constructorSlice.actions;
 
 export default constructorSlice.reducer;
