@@ -22,7 +22,6 @@ export const BurgerIngredients = () => {
         counter[`${item._id}`] = 0
     });
 
-    console.log(counter);
 
     const [current, setCurrent] = useState('bun');
     const bunsList = ingredients.filter(item => item.type === 'bun');

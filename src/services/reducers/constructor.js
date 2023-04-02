@@ -20,10 +20,18 @@ export const constructorSlice = createSlice({
         else {
             state.ingredients.push({...action.payload, randomId: uuidv4()});     
         }
+    },
+    // removeConstructor: (state, action) => {
+    //   state.ingredients = state.ingredients.filter((ingredient) => ingredient.id != action.payload)
+    // },
+    reorder: (state, action) => {
+      state.ingredients.splice(action.payload.to, 0, state.ingredients.splice(action.payload.from, 1)[0])
     }
   }
 })
 
-export const {createConstructor} = constructorSlice.actions;
+//dispatch(reorder({from: dragIndex, to: hoverIndex}))
+
+export const {createConstructor, reorder} = constructorSlice.actions;
 
 export default constructorSlice.reducer;

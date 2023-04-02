@@ -10,7 +10,7 @@ export const initialState = {
 export const fetchIngredients = createAsyncThunk(  //возвращает объект с методами pending, fulfield, reject
     'ingredients/fetchIngredients', //имя экшена
     //функция формируеи пейлоад и возвращает его для редьюсера (то, что мы запишем в стор). Асинхронная ф-я peyload creater - полезная нагрузка
-    async (_, {dispatch, getState, rejectWithValue, fulfillWithValue}) => {       //первый аргумент - при вызове ф-и в диспатч она передается аргументом(можно импользовать дальше в функциях)   второй аргумент - 
+    async (_, { rejectWithValue, fulfillWithValue}) => {       //первый аргумент - при вызове ф-и в диспатч она передается аргументом(можно импользовать дальше в функциях)   второй аргумент - 
         try {
             const data = await getIngredients();
             if(!Array.isArray(data)) {

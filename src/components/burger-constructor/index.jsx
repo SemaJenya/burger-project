@@ -3,7 +3,6 @@ import { useMemo, useState } from 'react';
 import s from './style.module.css';
 import sel from 'classnames';
 import { OrderDetails } from '../order-details';
-import { IngredientDetails } from '../ingredient-details';
 import image from '../../images/icon.svg';
 import { Modal } from '../modal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +11,7 @@ import { fetchOrder } from '../../services/reducers/orederDetails';
 import { useDrop } from 'react-dnd';
 import { createConstructor } from '../../services/reducers/constructor';
 import { counter } from '../app';
+import { ElementInConctructor } from '../element-in-constructor';
 
 
 
@@ -50,16 +50,31 @@ export const BurgerConstructor = () => {
         dispatch(fetchOrder(ingredientsID));
     }
 
+    const handleCounter = (data) => {
+        if (!bun && data.type == 'bun') {
+            counter[data._id] += 2
+        }
+        if (bun && data.type == 'bun'){
+            console.log(`current bun id ${bun._id}`)
+            console.log(`updated bun id ${data._id}`)
+            counter[bun._id] = 0
+            console.log(`set 0 to ${bun._id}`)
+            counter[data._id] += 2
+        }      
+    }
+
    
      const [{isHover}, dropTargetRef] = useDrop({
         accept: 'ingredient',
         drop(data, monitor) {
-
+            handleCounter(data.data)
             dispatch(createConstructor(data.data))
-            counter[data.data._id] += 1
+            // counter[data.data._id] += 1
+            // console.log(data.data);
+            
+
         },
         hover(itemID, monitor) {
-            console.log('jsjsjs');
         },
         collect: monitor => ({
             isHover: monitor.isOver()
@@ -67,6 +82,9 @@ export const BurgerConstructor = () => {
     });
 
     const borderColor = isHover ? 'salmon' : 'transparent'
+
+
+    
 
 
     return (
@@ -83,18 +101,14 @@ export const BurgerConstructor = () => {
                         key='top'
                     />
                 </div>
-                {!ingredients ? <div>Добавьте игредиенты aaaaaaaaa</div> :     
-                (<div className={sel(s.constructor__inside, 'custom-scroll')} ref={dropTargetRef} style={{borderColor}}>
-                {ingredients?.map(data => data.type !== 'bun' &&
-                    <div className={s.inside__item} key={`${data.randomId} div`} >
-                        <DragIcon type="primary" key={`${data.randomId} icon`}/>                       
-                        <ConstructorElement
-                          text={data.name}
-                          price={data.price}
-                          thumbnail={data.image}
-                          key={data.randomId}/> 
-                    </div>)}                   
-                </div> )}  
+                   
+                <div className={sel(s.constructor__inside, 'custom-scroll')} ref={dropTargetRef} style={{borderColor}}>
+                {ingredients?.map((data, index) => data.type !== 'bun' &&
+                        <ElementInConctructor data={data} index={index} key={data.randomId}/> 
+                    )}               
+                </div> 
+
+
                 <div className={s.fixed__part}>
                     <ConstructorElement
                         {...bun}

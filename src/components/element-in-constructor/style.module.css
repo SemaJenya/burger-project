@@ -1,0 +1,25 @@
+.ingredients__conteiner {
+    max-width: 600px;
+    width: 100%;
+    height: 100%;
+  
+}
+
+.ingredients {
+    display: flex;
+    width: 100%;
+}
+
+.category__box {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    width: 100%;
+    height: 70%;
+    
+}
+.inside__item {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+}
