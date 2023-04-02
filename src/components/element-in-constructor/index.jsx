@@ -59,13 +59,7 @@ export const ElementInConctructor = ({data, index}) => {
     })
 
     const handleRemoveIngredient = (e) => {
-        console.log(e.currentTarget);
-        const deleteElement = e.currentTarget;
-        deleteElement.addEventListener('click', function(e) {
-            console.log('мня нажали чтобы удалить');
-            console.log(data._id);
             dispatch(removeConstructor(data.randomId))
-        })
 
     }
 
@@ -79,7 +73,7 @@ export const ElementInConctructor = ({data, index}) => {
           price={data.price}
           thumbnail={data.image}
           key={data.randomId}
-          handleClose={(e) => handleRemoveIngredient(e)}/> 
+          handleClose={handleRemoveIngredient}/> 
     </div>
     )
 }

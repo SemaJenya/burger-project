@@ -97,12 +97,12 @@ export const BurgerConstructor = () => {
                         key='top'
                     />
                 </div>
-                   
+
                 <div className={sel(s.constructor__inside, 'custom-scroll')} ref={dropTargetRef} style={{borderColor}}>
                 {ingredients?.map((data, index) => data.type !== 'bun' &&
                         <ElementInConctructor data={data} index={index} key={data.randomId}/> 
                     )}               
-                </div> 
+                </div>
 
 
                 <div className={s.fixed__part}>
