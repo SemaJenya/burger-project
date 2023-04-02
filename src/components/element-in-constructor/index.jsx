@@ -4,6 +4,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import { removeConstructor, reorder } from '../../services/reducers/constructor';
 import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
+import { reduceCounter } from '../../services/reducers/counter';
 
 
 export const ElementInConctructor = ({data, index}) => {
@@ -59,7 +60,8 @@ export const ElementInConctructor = ({data, index}) => {
     })
 
     const handleRemoveIngredient = (e) => {
-            dispatch(removeConstructor(data.randomId))
+        dispatch(removeConstructor(data.randomId));
+        dispatch(reduceCounter(data));
 
     }
 

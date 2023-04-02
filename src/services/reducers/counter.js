@@ -45,11 +45,22 @@ export const counterSlice = createSlice({
     if(action.payload.type !== 'bun' && existed_ids.includes(item_id)){
       state.counter[item_id]['count'] += 1
     }
+  },
+
+  reduceCounter: (state, action) => {
+    const item_id = action.payload._id
+    if (state.counter[item_id]['count'] > 1){
+      state.counter[item_id]['count'] -= 1
+    }
+    else {
+      delete state.counter[item_id] 
+    }
+
   }
 }
 })
 
 
-export const { addCounter } = counterSlice.actions;
+export const { addCounter, reduceCounter } = counterSlice.actions;
 
 export default counterSlice.reducer;
