@@ -6,7 +6,7 @@ import { ingredientsPropType } from '../../utils/prop-type';
 import React, { forwardRef } from 'react';
 
 
-export const IngredientCategory = React.forwardRef<HTMLHeadingElement>(
+export const IngredientCategory = React.forwardRef(
     ({title, ingredients, id}, ref) => {
    
     return (
