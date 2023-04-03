@@ -7,6 +7,7 @@ import { IngredientDetails } from '../ingredient-details';
 import { IngredientCategory } from '../ingredient-category';
 import { useDispatch, useSelector } from 'react-redux';
 import { createIngredientDetails, removeIngredientDetails } from '../../services/reducers/ingredientDetails';
+import { useInView } from 'react-intersection-observer';
 
 
 
@@ -25,6 +26,37 @@ export const BurgerIngredients = () => {
         if (title) title.scrollIntoView({behavior: 'smooth'});
     }
 
+    console.log('не зашли в useEffect');
+    
+    const [ refSauce, inViewSauce ] = useInView();
+    console.log(inViewSauce);
+
+    const [ refMain, inViewMain ] = useInView();
+    console.log(inViewMain);
+
+    const [ refBun, inViewBun ] = useInView();
+    console.log(inViewBun);
+
+    console.log('не зашли в useEffect');
+
+    useEffect(() => {
+        console.log('зашли в useEffect');
+        if(inViewBun){
+            console.log('зашли в первый if');
+            setCurrent('bun')
+            console.log('меняем значение');
+
+        }
+        else if (inViewSauce) {
+            setCurrent('sauce')
+        }
+        else if(inViewMain) {
+            setCurrent('main')
+        }
+    }, [inViewSauce, inViewMain, inViewBun ])
+
+
+
     const ingredient = useSelector(state => state.ingredientDetailsStore.ingredient)
     const dispatch = useDispatch();
 
@@ -41,7 +73,7 @@ export const BurgerIngredients = () => {
         return () => document.removeEventListener('keydown', closeModalEsc)
     }, [])
 
-   
+
 
     return ( isLoading ? <div>Loading...</div> :
         (<section className={sel(s.ingredients__conteiner, 'mr-10')}>
@@ -61,19 +93,24 @@ export const BurgerIngredients = () => {
                 <IngredientCategory
                     title={'Булки'} 
                     ingredients={bunsList}
-                    id='bun'/>
+                    id='bun'
+                    ref={refBun}/>
                 <IngredientCategory 
                     title={'Соусы'} 
                     ingredients={sauceList}
-                    id='sauce'/>
+                    id='sauce'
+                    ref={refSauce}/>
                 <IngredientCategory 
                     title={'Начинки'} 
                     ingredients={mainList}
-                    id='main'/>
+                    id='main'
+                    ref={refMain}/>
             </div>
+
             {ingredient && <Modal title='Детали ингредиента' onClose={closeIngredientModal}>
                 <IngredientDetails />
             </Modal>}
-        </section>)
+        </section>)      
     )
+    
 }

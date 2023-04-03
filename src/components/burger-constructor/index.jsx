@@ -106,6 +106,7 @@ export const BurgerConstructor = () => {
             <div className={sel(s.cost_container, 'mt-10', 'mr-4', 'ml-4')} >
                 <p className={sel(s.cost_total, 'text text_type_digits-medium', 'mr-2')}>{finalPrice}</p>
                 <img className={sel(s.icon, 'mr-10')} src={image} alt='иконка валюты'/>
+                
                 <Button htmlType="button" type="primary" size="large" onClick={handleClickButton} disabled={dataAvailable}>
                     Оформить заказ
                 </Button>
