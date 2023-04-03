@@ -1,4 +1,5 @@
 import s from './style.module.css';
+import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
 import { removeConstructor, reorder } from '../../services/reducers/constructor';
@@ -78,4 +79,9 @@ export const ElementInConctructor = ({data, index}) => {
           handleClose={handleRemoveIngredient}/> 
     </div>
     )
+}
+
+ElementInConctructor.propTypes = {
+    data: PropTypes.object.isRequired,
+    index: PropTypes.string.isRequired,
 }

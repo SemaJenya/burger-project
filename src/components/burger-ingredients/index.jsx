@@ -38,7 +38,7 @@ export const BurgerIngredients = () => {
         }
         document.addEventListener('keydown', closeModalEsc)
 
-        return () => document.addEventListener('keydown', closeModalEsc)
+        return () => document.removeEventListener('keydown', closeModalEsc)
     }, [])
 
    
