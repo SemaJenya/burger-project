@@ -1,4 +1,4 @@
-import { Button, ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, ConstructorElement, CurrencyIcon, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import { useMemo, useState } from 'react';
 import s from './style.module.css';
 import sel from 'classnames';
@@ -105,7 +105,9 @@ export const BurgerConstructor = () => {
             </div>
             <div className={sel(s.cost_container, 'mt-10', 'mr-4', 'ml-4')} >
                 <p className={sel(s.cost_total, 'text text_type_digits-medium', 'mr-2')}>{finalPrice}</p>
-                <img className={sel(s.icon, 'mr-10')} src={image} alt='иконка валюты'/>
+                <div className={sel(s.icon, 'mr-10')}>
+                     <CurrencyIcon type="primary" width='36' height='36'/>  
+                </div>
                 
                 <Button htmlType="button" type="primary" size="large" onClick={handleClickButton} disabled={dataAvailable}>
                     Оформить заказ

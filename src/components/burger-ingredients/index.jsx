@@ -37,14 +37,11 @@ export const BurgerIngredients = () => {
     const [ refBun, inViewBun ] = useInView();
     console.log(inViewBun);
 
-    console.log('не зашли в useEffect');
 
     useEffect(() => {
         console.log('зашли в useEffect');
         if(inViewBun){
-            console.log('зашли в первый if');
             setCurrent('bun')
-            console.log('меняем значение');
 
         }
         else if (inViewSauce) {

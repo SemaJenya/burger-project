@@ -21,9 +21,9 @@ export const IngredientCategory = React.forwardRef(
 )
 
 
-// IngredientCategory.propTypes = {
-//     title: PropTypes.string.isRequired,
-//     ingredients: PropTypes.arrayOf(ingredientsPropType.isRequired).isRequired,
-//     id: PropTypes.string.isRequired,
+IngredientCategory.propTypes = {
+    title: PropTypes.string.isRequired,
+    ingredients: PropTypes.arrayOf(ingredientsPropType.isRequired).isRequired,
+    id: PropTypes.string.isRequired,
 
-// }
+}
