@@ -25,6 +25,8 @@ export const BurgerConstructor = () => {
 
     const {ingredients, bun} = useSelector(state => state.constructorStore); //достаем данные из стора
 
+    const dataAvailable = ingredients.length === 0 ? true : false;
+
     const ingredientsID = ingredients?.map((item) => item._id)
 
     const calculateSum = (ingredients, bun) => {
@@ -46,8 +48,8 @@ export const BurgerConstructor = () => {
 
 
     const handleClickButton = () => {
-        setIsClick(!isClick);
-        dispatch(fetchOrder(ingredientsID));
+            setIsClick(!isClick);
+            dispatch(fetchOrder(ingredientsID));
     }
 
 
@@ -101,10 +103,10 @@ export const BurgerConstructor = () => {
                     />
                 </div>                   
             </div>
-            <div className={sel(s.cost_container, 'mt-10', 'mr-4', 'ml-4')}>
+            <div className={sel(s.cost_container, 'mt-10', 'mr-4', 'ml-4')} >
                 <p className={sel(s.cost_total, 'text text_type_digits-medium', 'mr-2')}>{finalPrice}</p>
                 <img className={sel(s.icon, 'mr-10')} src={image} alt='иконка валюты'/>
-                <Button htmlType="button" type="primary" size="large" onClick={handleClickButton}>
+                <Button htmlType="button" type="primary" size="large" onClick={handleClickButton} disabled={dataAvailable}>
                     Оформить заказ
                 </Button>
             </div>
