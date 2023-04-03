@@ -108,7 +108,7 @@ export const BurgerConstructor = () => {
                     Оформить заказ
                 </Button>
             </div>
-            {isClick && !isLoading && <Modal onClose={handleClickButton} title='' setIsClick={setIsClick}>
+            {isClick && !isLoading && <Modal onClose={handleClickButton} title=''>
                 <OrderDetails />
             </Modal>}
         </section>

@@ -9,18 +9,8 @@ import { createPortal } from 'react-dom';
 
 const modalDot = document.querySelector('#modals')
 
-export const Modal = ({title, onClose, children, setIsClick}) => {
+export const Modal = ({title, onClose, children}) => {
 
-    useEffect(() => {
-        const closeModalEsc = (e) => {
-            if (e.key === 'Escape') {
-                setIsClick(false)
-            }         
-        }
-        document.addEventListener('keydown', closeModalEsc)
-    
-        return () => document.addEventListener('keydown', closeModalEsc)
-    }, [])
 
     return (
         createPortal(
