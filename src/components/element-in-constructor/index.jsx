@@ -83,5 +83,5 @@ export const ElementInConctructor = ({data, index}) => {
 
 ElementInConctructor.propTypes = {
     data: PropTypes.object.isRequired,
-    index: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
 }
