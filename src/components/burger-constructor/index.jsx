@@ -44,13 +44,13 @@ export const BurgerConstructor = () => {
 
     const dispatch = useDispatch();
 
-    const {isLoading} = useSelector(state => state.orderStore)
+    const {isLoading} = useSelector(state => state.orderStore);
 
 
     const handleClickButton = () => {
             setIsClick(!isClick);
             dispatch(fetchOrder(ingredientsID));
-    }
+    };
 
 
    

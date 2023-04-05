@@ -59,17 +59,7 @@ export const BurgerIngredients = () => {
 
     const closeIngredientModal = () => dispatch(createIngredientDetails(null))
 
-    useEffect(() => {
-        const closeModalEsc = (e) => {
-            if (e.key === 'Escape') {
-                dispatch(createIngredientDetails(null))
-            }         
-        }
-        document.addEventListener('keydown', closeModalEsc)
-
-        return () => document.removeEventListener('keydown', closeModalEsc)
-    }, [])
-
+   
 
 
     return ( isLoading ? <div>Loading...</div> :
