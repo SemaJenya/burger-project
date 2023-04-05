@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/burger-project/static/css/main.c05545e8.css",
-    "main.js": "/burger-project/static/js/main.be78a1a5.js",
+    "main.js": "/burger-project/static/js/main.f84056ab.js",
     "static/js/787.3fd68dbf.chunk.js": "/burger-project/static/js/787.3fd68dbf.chunk.js",
     "static/media/JetBrainsMono-Bold.woff": "/burger-project/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
     "static/media/JetBrainsMono-Regular.woff": "/burger-project/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
@@ -14,11 +14,11 @@
     "static/media/icon.svg": "/burger-project/static/media/icon.d32d4bcb31918871f2ab8c731e23d311.svg",
     "index.html": "/burger-project/index.html",
     "main.c05545e8.css.map": "/burger-project/static/css/main.c05545e8.css.map",
-    "main.be78a1a5.js.map": "/burger-project/static/js/main.be78a1a5.js.map",
+    "main.f84056ab.js.map": "/burger-project/static/js/main.f84056ab.js.map",
     "787.3fd68dbf.chunk.js.map": "/burger-project/static/js/787.3fd68dbf.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c05545e8.css",
-    "static/js/main.be78a1a5.js"
+    "static/js/main.f84056ab.js"
   ]
 }
