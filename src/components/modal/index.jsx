@@ -18,7 +18,6 @@ export const Modal = ({title, onClose, children}) => {
     useEffect(() => {
         const closeModalEsc = (e) => {
             if (e.key === 'Escape') {
-                dispatch(createIngredientDetails(null))
                 onClose()            
             }         
         }
