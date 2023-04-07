@@ -7,7 +7,8 @@ import { Routes, Route } from 'react-router-dom';
 import { AppHeader } from '../app-header'
 import s from './style.module.css'
 import { fetchIngredients } from '../../services/reducers/ingredients'
-import { MainPage } from '../pages/mainPage'
+import { MainPage } from '../pages/mainPage/main-page'
+import { RegistrationPage } from '../pages/registrationPage/registration-page';
 
 
 export const App = () => {
@@ -29,8 +30,8 @@ useEffect(() => {
         <DndProvider backend={HTML5Backend}>
             <Routes>
                 <Route path='/' element={<MainPage />} />
-            </Routes>
-           
+                <Route path='/register' element={<RegistrationPage />} />
+            </Routes>        
         </DndProvider>    
     </div>
     )
