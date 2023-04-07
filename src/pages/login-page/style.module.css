@@ -1,0 +1,27 @@
+.registration__page {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.registration__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 24px;
+}
+
+.registration__title {
+    margin-top: 0;
+}
+
+.subtitle__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 54px;
+    row-gap: 16px;
+}
+
