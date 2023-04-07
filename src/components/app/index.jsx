@@ -11,6 +11,7 @@ import { MainPage } from '../../pages/main-page/main-page';
 import { RegistrationPage } from '../../pages/registration-page/registration-page';
 import { LoginPage } from '../../pages/login-page/login-page';
 import { ForgotPasswordPage } from '../../pages/forgot-password-page/forgot-password-page';
+import { ResetPasswordPage } from '../../pages/reset-password-page/reset-password-page';
 
 
 
@@ -36,6 +37,7 @@ useEffect(() => {
                 <Route path='/register' element={<RegistrationPage />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+                <Route path='/reset-password' element={<ResetPasswordPage />} />
 
             </Routes>        
         </DndProvider>    
