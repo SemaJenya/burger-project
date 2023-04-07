@@ -5,21 +5,25 @@ import sel from 'classnames';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ModalOverlay } from '../modal-overlay';
 import { createPortal } from 'react-dom';
+import { createIngredientDetails } from '../../services/reducers/ingredientDetails';
+import { useDispatch } from 'react-redux';
+import { fetchOrder } from '../../services/reducers/orederDetails';
 
 
 const modalDot = document.querySelector('#modals')
 
-export const Modal = ({title, onClose, children, setIsClick}) => {
+export const Modal = ({title, onClose, children}) => {
 
+    const dispatch = useDispatch();
     useEffect(() => {
         const closeModalEsc = (e) => {
             if (e.key === 'Escape') {
-                setIsClick(false)
+                onClose()            
             }         
         }
         document.addEventListener('keydown', closeModalEsc)
-    
-        return () => document.addEventListener('keydown', closeModalEsc)
+
+        return () => document.removeEventListener('keydown', closeModalEsc)
     }, [])
 
     return (
@@ -43,5 +47,4 @@ Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
-    setIsClick: PropTypes.func.isRequired
 }

@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import s from './style.module.css';
-import PropTypes from 'prop-types';
 import sel from 'classnames';
-
 import { Modal } from '../modal';
 import { IngredientDetails } from '../ingredient-details';
-import { ingredientsPropType } from '../../utils/prop-type';
 import { IngredientCategory } from '../ingredient-category';
+import { useDispatch, useSelector } from 'react-redux';
+import { createIngredientDetails, removeIngredientDetails } from '../../services/reducers/ingredientDetails';
+import { useInView } from 'react-intersection-observer';
 
 
 
+export const BurgerIngredients = () => {
 
-
-export const BurgerIngredients = ({ ingredients }) => {
+    const {data: ingredients, isLoading, error} = useSelector(state => state.ingredientsStore) //достаем данные из стора
 
     const [current, setCurrent] = useState('bun');
     const bunsList = ingredients.filter(item => item.type === 'bun');
@@ -26,24 +26,44 @@ export const BurgerIngredients = ({ ingredients }) => {
         if (title) title.scrollIntoView({behavior: 'smooth'});
     }
 
-    const [ingredientInModal, setIngredientInModal] = useState(null);
-    console.log(ingredientInModal);
+    console.log('не зашли в useEffect');
+    
+    const [ refSauce, inViewSauce ] = useInView();
+    console.log(inViewSauce);
 
-    const closeIngredientModal = () => setIngredientInModal(null)
+    const [ refMain, inViewMain ] = useInView();
+    console.log(inViewMain);
+
+    const [ refBun, inViewBun ] = useInView();
+    console.log(inViewBun);
+
 
     useEffect(() => {
-        const closeModalEsc = (e) => {
-            if (e.key === 'Escape') {
-                setIngredientInModal(null)
-            }         
+        console.log('зашли в useEffect');
+        if(inViewBun){
+            setCurrent('bun')
+
         }
-        document.addEventListener('keydown', closeModalEsc)
+        else if (inViewSauce) {
+            setCurrent('sauce')
+        }
+        else if(inViewMain) {
+            setCurrent('main')
+        }
+    }, [inViewSauce, inViewMain, inViewBun ])
 
-        return () => document.addEventListener('keydown', closeModalEsc)
-    }, [])
 
-    return (
-        <section className={sel(s.ingredients__conteiner, 'mr-10')}>
+
+    const ingredient = useSelector(state => state.ingredientDetailsStore.ingredient)
+    const dispatch = useDispatch();
+
+    const closeIngredientModal = () => dispatch(createIngredientDetails(null))
+
+   
+
+
+    return ( isLoading ? <div>Loading...</div> :
+        (<section className={sel(s.ingredients__conteiner, 'mr-10')}>
             <h1 className={sel(s.title, 'text text_type_main-large', 'mt-10', 'mb-5')}>Соберите бургер</h1>
             <div className={sel(s.ingredients, 'mb-10')}>
                 <Tab value="bun" active={current === 'bun'} onClick={handleClickTab}>
@@ -61,25 +81,23 @@ export const BurgerIngredients = ({ ingredients }) => {
                     title={'Булки'} 
                     ingredients={bunsList}
                     id='bun'
-                    onClick={setIngredientInModal}/>
+                    ref={refBun}/>
                 <IngredientCategory 
                     title={'Соусы'} 
                     ingredients={sauceList}
                     id='sauce'
-                    onClick={setIngredientInModal}/>
+                    ref={refSauce}/>
                 <IngredientCategory 
                     title={'Начинки'} 
                     ingredients={mainList}
                     id='main'
-                    onClick={setIngredientInModal}/>
+                    ref={refMain}/>
             </div>
-            {ingredientInModal && <Modal title='Детали ингредиента' onClose={closeIngredientModal}>
-                <IngredientDetails data={ingredientInModal} />
-            </Modal>}
-        </section>
-    )
-}
 
-BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientsPropType.isRequired).isRequired,
+            {ingredient && <Modal title='Детали ингредиента' onClose={closeIngredientModal}>
+                <IngredientDetails />
+            </Modal>}
+        </section>)      
+    )
+    
 }
