@@ -9,7 +9,7 @@ export const RegistrationPage = () => {
     
         const [nameValue, setNameValue] = useState('')
         const [emailValue, setEmailValue] = useState('')
-        const [paswordValue, setPaswordValue] = useState('')
+        const [passwordValue, setPasswordValue] = useState('')
         const inputRef = useRef(null)
         const onIconClick = () => {
           setTimeout(() => inputRef.current.focus(), 0)
@@ -51,9 +51,9 @@ export const RegistrationPage = () => {
                 <Input
                 type={'text'}
                 placeholder={'Пароль'}
-                onChange={e => setPaswordValue(e.target.value)}
+                onChange={e => setPasswordValue(e.target.value)}
                 icon={'CurrencyIcon'}
-                value={paswordValue}
+                value={passwordValue}
                 name={'name'}
                 error={false}
                 ref={inputRef}
