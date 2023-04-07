@@ -5,6 +5,7 @@ import {App} from './components/app/index.jsx';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './services/store.js';
+import {BrowserRouter} from 'react-router-dom'
 
 // import { compose, createStore, applyMiddleware } from 'redux';
 // const composeEnhancers =
@@ -20,7 +21,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+     
     </Provider>
    
   // </React.StrictMode>

@@ -4,11 +4,3 @@
     height: 100vh;
     box-sizing: border-box;
 }
-
-.main {
-    width: 1240px ;
-    display: flex;
-    margin: 0 auto;
-    height: 100%;
-    object-fit: cover;
-}
