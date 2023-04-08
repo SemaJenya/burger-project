@@ -25,3 +25,8 @@
     row-gap: 16px;
 }
 
+.link{
+    text-decoration: none;
+    color: rgba(76, 76, 255, 1);
+}
+

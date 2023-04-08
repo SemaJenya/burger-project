@@ -1,56 +1,61 @@
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import sel from 'classnames';
-import s from './style.module.css'
-import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import s from './style.module.css';
+import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 export const ResetPasswordPage = () => {
+    const inputRef = useRef(null);
 
-    const [newPasswordValue, setNewPasswordValue] = useState('')
-    const [codeValue, setCodeValue] = useState('')
-    const inputRef = useRef(null)
-    const onIconClick = () => {
-      setTimeout(() => inputRef.current.focus(), 0)
-      alert('Icon Click Callback')
+    const [newPasswordValue, setNewPasswordValue] = useState('');
+    const onChangePassword = e => {
+        setNewPasswordValue(e.target.value);
     }
+
+    const [codeValue, setCodeValue] = useState('');
+    const onChangeCode = e => {
+        setCodeValue(e.target.value);
+    }
+
+   
 
     return (
         <div className={s.registration__page}>
             <div className={s.registration__container}>
-                <h2 className={sel(s.registration__title, 'text text_type_main-medium')}>Вход</h2>
+                <h2 className={sel(s.registration__title, 'text text_type_main-medium')}>Восстановление пароля</h2>
            
-                <Input
-                type={'text'}
-                placeholder={'Введите новый пароль'}
-                onChange={e => setNewPasswordValue(e.target.value)}
-                icon={'CurrencyIcon'}
-                value={newPasswordValue}
-                name={'name'}
-                error={false}
-                ref={inputRef}
-                onIconClick={onIconClick}
-                errorText={'Ошибка'}
-                size={'default'}
-                extraClass="ml-1"/>
+                <PasswordInput
+                    onChange={onChangePassword}
+                    value={newPasswordValue}
+                    placeholder={'Введите новый пароль'}
+                    name={'password'}
+                    extraClass="mb-2"
+                    icon="ShowIcon"
+                />
 
                 <Input
-                type={'text'}
-                placeholder={'Введите код из письма'}
-                onChange={e => setCodeValue(e.target.value)}
-                icon={'CurrencyIcon'}
-                value={codeValue}
-                name={'name'}
-                error={false}
-                ref={inputRef}
-                onIconClick={onIconClick}
-                errorText={'Ошибка'}
-                size={'default'}
-                extraClass="ml-1"/>
+                    type={'text'}
+                    placeholder={'Введите код из письма'}
+                    onChange={onChangeCode}
+                    value={codeValue}
+                    name={'name'}
+                    error={false}
+                    ref={inputRef}
+                    errorText={'Ошибка'}
+                    size={'default'}
+                    extraClass="ml-1"
+                />
+
 
                 <Button htmlType="button" type="primary" size="medium" >Cохранить</ Button>
                 <div className={s.subtitle__box}>
                     <p className={sel(s.registration__subtitle, "text text_type_main-small text_color_inactive")}>
-                    Вспомнили пароль? <a>Войти</a></p>
+                        Вспомнили пароль? 
+                        <Link to='/login' className={sel(s.link, "text text_type_main-small text_color_inactive, ml-2")}>
+                            Войти
+                        </Link>
+                    </p>
                 </div>
                 
             </div>        
