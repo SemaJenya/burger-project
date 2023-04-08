@@ -25,21 +25,14 @@ export const BurgerIngredients = () => {
         const title = document.getElementById(tab);
         if (title) title.scrollIntoView({behavior: 'smooth'});
     }
-
-    console.log('не зашли в useEffect');
     
     const [ refSauce, inViewSauce ] = useInView();
-    console.log(inViewSauce);
 
     const [ refMain, inViewMain ] = useInView();
-    console.log(inViewMain);
 
     const [ refBun, inViewBun ] = useInView();
-    console.log(inViewBun);
-
 
     useEffect(() => {
-        console.log('зашли в useEffect');
         if(inViewBun){
             setCurrent('bun')
 
@@ -55,6 +48,7 @@ export const BurgerIngredients = () => {
 
 
     const ingredient = useSelector(state => state.ingredientDetailsStore.ingredient)
+    console.log(ingredient);
     const dispatch = useDispatch();
 
     const closeIngredientModal = () => dispatch(createIngredientDetails(null))

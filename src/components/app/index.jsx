@@ -13,6 +13,7 @@ import { LoginPage } from '../../pages/login-page/login-page';
 import { ForgotPasswordPage } from '../../pages/forgot-password-page/forgot-password-page';
 import { ResetPasswordPage } from '../../pages/reset-password-page/reset-password-page';
 import { ProfilePage } from '../../pages/profile-page/profile-page';
+import { IngredientsID } from '../../pages/ingredients-id/ingredients-id';
 
 
 
@@ -27,7 +28,7 @@ useEffect(() => {
 }, [dispatch]);
 
 
-
+const id = '60d3b41abdacab0026a733c7'
 
     return(
     <div className={s.app}>
@@ -40,6 +41,7 @@ useEffect(() => {
                 <Route path='/forgot-password' element={<ForgotPasswordPage />} />
                 <Route path='/reset-password' element={<ResetPasswordPage />} />
                 <Route path='/profile' element={<ProfilePage />} />
+                <Route path={`/ingredients/:id`} element={<IngredientsID />} />
 
             </Routes>        
         </DndProvider>    

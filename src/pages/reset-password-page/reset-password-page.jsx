@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import sel from 'classnames';
 import s from './style.module.css';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -7,6 +7,10 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 
 export const ResetPasswordPage = () => {
     const inputRef = useRef(null);
+
+
+    const params = useParams();
+    console.log(params);
 
     const [newPasswordValue, setNewPasswordValue] = useState('');
     const onChangePassword = e => {
