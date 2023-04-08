@@ -17,7 +17,6 @@ export const ProfilePage = () => {
         setEmailValue(e.target.value);
     }
     const [passwordValue, setPasswordValue] = useState('')
-
     const onChangePassword = e => {
         setPasswordValue(e.target.value);
     }
