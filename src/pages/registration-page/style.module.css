@@ -20,3 +20,8 @@
 .registration__subtitle {
     margin-top: 54px;
 }
+
+.link{
+    text-decoration: none;
+    color: rgba(76, 76, 255, 1);
+}

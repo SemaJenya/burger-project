@@ -1,5 +1,5 @@
-
-import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Link } from 'react-router-dom';
+import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import s from './style.module.css';
 import sel from 'classnames';
 import { useRef, useState } from 'react';
@@ -8,8 +8,20 @@ import { useRef, useState } from 'react';
 export const RegistrationPage = () => {
     
         const [nameValue, setNameValue] = useState('')
+        const onChangeName = e => {
+            setNameValue(e.target.value);
+        };
+
         const [emailValue, setEmailValue] = useState('')
+        const onChangeEmail = e => {
+            setEmailValue(e.target.value);
+        };
+
         const [passwordValue, setPasswordValue] = useState('')
+        const onChangePassword = e => {
+            setPasswordValue(e.target.value);
+        }
+
         const inputRef = useRef(null)
         const onIconClick = () => {
           setTimeout(() => inputRef.current.focus(), 0)
@@ -23,8 +35,7 @@ export const RegistrationPage = () => {
                 <Input
                 type={'text'}
                 placeholder={'Имя'}
-                onChange={e => setNameValue(e.target.value)}
-                icon={'CurrencyIcon'}
+                onChange={onChangeName}
                 value={nameValue}
                 name={'name'}
                 error={false}
@@ -34,37 +45,29 @@ export const RegistrationPage = () => {
                 size={'default'}
                 extraClass="ml-1"/>
 
-                <Input
-                type={'text'}
-                placeholder={'E-mail'}
-                onChange={e => setEmailValue(e.target.value)}
-                icon={'CurrencyIcon'}
-                value={emailValue}
-                name={'name'}
-                error={false}
-                ref={inputRef}
-                onIconClick={onIconClick}
-                errorText={'Ошибка'}
-                size={'default'}
-                extraClass="ml-1"/>
+                <EmailInput
+                    onChange={onChangeEmail}
+                    value={emailValue}
+                    name={'email'}
+                    placeholder="Логин"
+                    extraClass="mb-2"
+                />
 
-                <Input
-                type={'text'}
-                placeholder={'Пароль'}
-                onChange={e => setPasswordValue(e.target.value)}
-                icon={'CurrencyIcon'}
-                value={passwordValue}
-                name={'name'}
-                error={false}
-                ref={inputRef}
-                onIconClick={onIconClick}
-                errorText={'Ошибка'}
-                size={'default'}
-                extraClass="ml-1"/>
+                <PasswordInput
+                    onChange={onChangePassword}
+                    value={passwordValue}
+                    name={'password'}
+                    extraClass="mb-2"
+                    icon="ShowIcon"
+                />
 
                 <Button htmlType="button" type="primary" size="medium" >Зарегистрироваться</ Button>
                 <p className={sel(s.registration__subtitle, "text text_type_main-small text_color_inactive")}>
-                    Уже зарегистрированы? <a>Войти</a></p>
+                    Уже зарегистрированы? 
+                    <Link to='/login' className={sel(s.link, "text text_type_main-small text_color_inactive, ml-2")}>
+                        Войти
+                    </Link>
+                </p>
             </div>        
        </div>
     )
