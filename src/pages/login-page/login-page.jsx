@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import sel from 'classnames';
-import s from './style.module.css'
-import { Link } from 'react-router-dom'
+import s from './style.module.css';
+import { Link } from 'react-router-dom';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
