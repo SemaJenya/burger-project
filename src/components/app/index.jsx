@@ -42,7 +42,6 @@ const id = '60d3b41abdacab0026a733c7'
                 <Route path='/reset-password' element={<ResetPasswordPage />} />
                 <Route path='/profile' element={<ProfilePage />} />
                 <Route path={`/ingredients/:id`} element={<IngredientsID />} />
-
             </Routes>        
         </DndProvider>    
     </div>

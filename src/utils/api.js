@@ -1,4 +1,5 @@
 const apiUrl = 'https://norma.nomoreparties.space/api';
+const resetPassword = 'https://norma.nomoreparties.space/api/password-reset'
 
 
 const checkResponse = (res) => {
@@ -34,4 +35,25 @@ export const postOrderInfo = (dataID) => {  //ID всех ингредиенто
                 return data;
             }
         })
+        
+}
+
+export const postPasswordRecovery = (email) => {
+    return fetch(`${resetPassword}`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            'email': email
+        })
+    })
+        .then(checkResponse)
+        .then((data) => {
+            if(data.success) {
+                return data;
+            }
+
+        })
+        
 }
