@@ -8,6 +8,9 @@ import { NavLink } from 'react-router-dom'
 export const ProfilePage = () => {
     const inputRef = useRef(null)
 
+    const activeLink = ({ isActive }) => isActive 
+    ? sel("text text_type_main-medium", s.active__link) : sel("text text_type_main-medium text_color_inactive", s.link);
+
     const [nameValue, setNameValue] = useState('');
     const onChangeName = e => {
         setNameValue(e.target.value);
@@ -28,20 +31,17 @@ export const ProfilePage = () => {
                     <nav id='profile-nav'>
                         <ul className={s.navigation__box}>
                             <li id='profilenav' className={sel(s.navigation__point)}>
-                                <NavLink to='/profile'  className={({ isActive }) => isActive 
-    ? sel("text text_type_main-medium", s.active__link) : sel("text text_type_main-medium text_color_inactive", s.link)}>
+                                <NavLink to='/profile'  className={activeLink}>
                                     Профиль
                                 </NavLink>
                             </li>
                             <li className={sel(s.navigation__point)}>
-                                <NavLink to='/login'  className={({ isActive }) => isActive 
-    ? sel("text text_type_main-medium", s.active__link) : sel("text text_type_main-medium text_color_inactive", s.link)}>
+                                <NavLink to='/profile/orders'  className={activeLink}>
                                     История заказов
                                 </NavLink>
                             </li>
                             <li className={s.navigation__point}>
-                                <NavLink to='/login' className={({ isActive }) => isActive 
-    ? sel("text text_type_main-medium", s.active__link) : sel("text text_type_main-medium text_color_inactive", s.link)}>
+                                <NavLink to='/login' className={activeLink}>
                                     Выход
                                 </NavLink>
                             </li>

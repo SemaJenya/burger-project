@@ -38,7 +38,7 @@ export const postOrderInfo = (dataID) => {  //ID всех ингредиенто
         })
         
 }
-
+ // Страница восстановления пароля. Вводим логин и получаем код из почты
 export const postPasswordRecovery = (email) => {
     return fetch(`${resetPassword}`, {
         method: 'POST',
@@ -57,7 +57,7 @@ export const postPasswordRecovery = (email) => {
 
         })       
 }
-
+// вводим новый пароль и код из почты
 export const postResetPassword = (newPassword, token) => {
     return fetch(`${resetPassword}/reset`, {
         method: 'POST',
@@ -80,7 +80,7 @@ export const postResetPassword = (newPassword, token) => {
 
         })   
 }
-
+// регестрируемся
 export const postRegistration = (email, password, userName) => {
     return fetch(`${registration}`, {
         method: 'POST',
