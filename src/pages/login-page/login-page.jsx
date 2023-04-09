@@ -3,6 +3,7 @@ import sel from 'classnames';
 import s from './style.module.css';
 import { Link } from 'react-router-dom';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { postRegistration } from '../../utils/api';
 
 
 export const LoginPage = () => {
@@ -17,6 +18,7 @@ export const LoginPage = () => {
     const onChangePassword = e => {
         setPasswordValue(e.target.value);
     }
+
 
 
     return (

@@ -3,6 +3,7 @@ import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-de
 import s from './style.module.css';
 import sel from 'classnames';
 import { useRef, useState } from 'react';
+import { postRegistration } from '../../utils/api';
 
 
 export const RegistrationPage = () => {
@@ -26,6 +27,11 @@ export const RegistrationPage = () => {
         const onIconClick = () => {
           setTimeout(() => inputRef.current.focus(), 0)
           alert('Icon Click Callback')
+        }
+
+        const registration = () => {
+            postRegistration(emailValue, passwordValue, nameValue)
+                .catch((error) => console.log(error))
         }
 
     return (
@@ -61,7 +67,7 @@ export const RegistrationPage = () => {
                     icon="ShowIcon"
                 />
 
-                <Button htmlType="button" type="primary" size="medium" >Зарегистрироваться</ Button>
+                <Button htmlType="button" type="primary" size="medium" onClick={registration}>Зарегистрироваться</ Button>
                 <p className={sel(s.registration__subtitle, "text text_type_main-small text_color_inactive")}>
                     Уже зарегистрированы? 
                     <Link to='/login' className={sel(s.link, "text text_type_main-small text_color_inactive, ml-2")}>

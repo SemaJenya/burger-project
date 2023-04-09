@@ -1,5 +1,6 @@
 const apiUrl = 'https://norma.nomoreparties.space/api';
-const resetPassword = 'https://norma.nomoreparties.space/api/password-reset'
+const resetPassword = 'https://norma.nomoreparties.space/api/password-reset';
+const registration = 'https://norma.nomoreparties.space/api/auth/register';
 
 
 const checkResponse = (res) => {
@@ -54,6 +55,50 @@ export const postPasswordRecovery = (email) => {
                 return data;
             }
 
-        })
-        
+        })       
 }
+
+export const postResetPassword = (newPassword, token) => {
+    return fetch(`${resetPassword}/reset`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            'password': newPassword,
+            "token": token
+        })
+    })
+        .then(checkResponse)
+        .then((data) => {
+            if(data.success) {
+                return data;
+            }
+            else {
+                return console.log(data.error); 
+            }
+
+        })   
+}
+
+export const postRegistration = (email, password, userName) => {
+    return fetch(`${registration}`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            'email': email,
+            "password": password, 
+            "name": userName
+        })
+    })
+    .then(checkResponse)
+        .then((data) => {
+            if(data.success) {
+                return data;
+            }
+
+        }) 
+}
+

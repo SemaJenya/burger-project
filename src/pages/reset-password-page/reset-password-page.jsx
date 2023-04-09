@@ -1,13 +1,15 @@
 import { useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import sel from 'classnames';
 import s from './style.module.css';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { postResetPassword } from '../../utils/api';
 
 
 export const ResetPasswordPage = () => {
     const inputRef = useRef(null);
 
+    const navigate = useNavigate();
 
     const params = useParams();
     console.log(params);
@@ -22,6 +24,13 @@ export const ResetPasswordPage = () => {
         setCodeValue(e.target.value);
     }
 
+    const saveNewPassword = () => {
+        postResetPassword(newPasswordValue, codeValue)
+            .then(() => {
+                navigate('/')
+            })
+            .catch((error) => error.massage)
+    }
    
 
     return (
@@ -52,7 +61,7 @@ export const ResetPasswordPage = () => {
                 />
 
 
-                <Button htmlType="button" type="primary" size="medium" >Cохранить</ Button>
+                <Button htmlType="button" type="primary" size="medium" onClick={saveNewPassword}>Cохранить</ Button>
                 <div className={s.subtitle__box}>
                     <p className={sel(s.registration__subtitle, "text text_type_main-small text_color_inactive")}>
                         Вспомнили пароль? 
