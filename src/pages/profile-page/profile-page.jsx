@@ -28,22 +28,19 @@ export const ProfilePage = () => {
                     <nav id='profile-nav'>
                         <ul className={s.navigation__box}>
                             <li id='profilenav' className={sel(s.navigation__point)}>
-                                <NavLink to='/profile'  className={({ isActive, isPending }) =>
-    isPending ? "text text_type_main-medium text_color_inactive" : isActive 
+                                <NavLink to='/profile'  className={({ isActive }) => isActive 
     ? sel("text text_type_main-medium", s.active__link) : sel("text text_type_main-medium text_color_inactive", s.link)}>
                                     Профиль
                                 </NavLink>
                             </li>
                             <li className={sel(s.navigation__point)}>
-                                <NavLink to='/login'  className={({ isActive, isPending }) =>
-    isPending ? sel("text text_type_main-medium text_color_inactive", s.link) : isActive 
+                                <NavLink to='/login'  className={({ isActive }) => isActive 
     ? sel("text text_type_main-medium", s.active__link) : sel("text text_type_main-medium text_color_inactive", s.link)}>
                                     История заказов
                                 </NavLink>
                             </li>
                             <li className={s.navigation__point}>
-                                <NavLink to='/login' className={({ isActive, isPending }) =>
-    isPending ? sel("text text_type_main-medium text_color_inactive", s.link) : isActive 
+                                <NavLink to='/login' className={({ isActive }) => isActive 
     ? sel("text text_type_main-medium", s.active__link) : sel("text text_type_main-medium text_color_inactive", s.link)}>
                                     Выход
                                 </NavLink>

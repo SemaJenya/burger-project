@@ -16,11 +16,13 @@
 .nav__box {
     display: flex;
     flex: 1;
+    align-items: center;
 }
 
 .nav__box_right {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .link {
@@ -31,9 +33,16 @@
 }
 
 .link__active {
-    color: var(--text-primary-color);
+    color: white;
+    text-decoration: none;
 }
 
 .logo {
     justify-content: center;
+}
+
+.active {
+    color: white;
+    display: flex;
+    text-decoration: none;
 }
