@@ -1,6 +1,6 @@
 const apiUrl = 'https://norma.nomoreparties.space/api';
 const resetPassword = 'https://norma.nomoreparties.space/api/password-reset';
-const registration = 'https://norma.nomoreparties.space/api/auth/register';
+const user = 'https://norma.nomoreparties.space/api';
 
 
 const checkResponse = (res) => {
@@ -82,7 +82,7 @@ export const postResetPassword = (newPassword, token) => {
 }
 // регестрируемся
 export const postRegistration = (email, password, userName) => {
-    return fetch(`${registration}`, {
+    return fetch(`${user}/auth/register`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -98,7 +98,43 @@ export const postRegistration = (email, password, userName) => {
             if(data.success) {
                 return data;
             }
-
+            return Promise.reject(data);
         }) 
+}
+
+//авторизируемся
+export const postLogin = () => {
+    return fetch(`${user}/auth/login`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            'email': email,
+            "password": password, 
+        })
+    })
+    .then(checkResponse)
+        .then((data) => {
+            if(data.success) {
+                return data;
+            }
+            return Promise.reject(data);
+        }) 
+}
+
+//получаем пользователя
+
+export const getUser = () => {
+    return fetch(`${user}/auth/user`, {
+        method: 'GET',
+        headers: {
+            authorization: getCookie("accessToken")
+        },
+        body: JSON.stringify({
+            'email': email,
+            "password": password, 
+        })
+    })
 }
 
