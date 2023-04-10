@@ -4,14 +4,28 @@ import s from './style.module.css';
 import sel from 'classnames';
 import { useRef, useState } from 'react';
 import { postRegistration } from '../../utils/api';
-import { fetchRegistration } from '../../services/reducers/user-info/registration';
+import { fetchRegistration } from '../../services/reducers/user-info/user';
 import { useDispatch } from 'react-redux';
 
 
 export const RegistrationPage = () => {
 
         const dispatch = useDispatch();
-    
+
+        // const [userData, setUserData] = useState({
+        //     email: '',
+        //     password: '',
+        //     name: ''
+        // });
+
+        // const handleChange = e => {
+        //     const {name, value} = e.target;
+        //     setUserData({
+        //         ...userData,
+        //         [name]: value
+        //     });
+        // };
+
         const [nameValue, setNameValue] = useState('')
         const onChangeName = e => {
             setNameValue(e.target.value);

@@ -4,7 +4,7 @@ import counter, { counterSlice } from './reducers/counter';
 import ingredientDetails from './reducers/ingredientDetails';
 import ingredients from './reducers/ingredients';
 import order from './reducers/orederDetails';
-import registration from './reducers/user-info/registration';
+import registration from './reducers/user-info/user';
 
 export const store = configureStore({
   reducer: {

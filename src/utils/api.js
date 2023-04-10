@@ -1,3 +1,5 @@
+import { getCookie } from "./cookie";
+
 const apiUrl = 'https://norma.nomoreparties.space/api';
 const resetPassword = 'https://norma.nomoreparties.space/api/password-reset';
 const user = 'https://norma.nomoreparties.space/api';
@@ -103,7 +105,7 @@ export const postRegistration = (email, password, userName) => {
 }
 
 //авторизируемся
-export const postLogin = () => {
+export const postLogin = (email, password) => {
     return fetch(`${user}/auth/login`, {
         method: 'POST',
         headers: {
@@ -124,17 +126,12 @@ export const postLogin = () => {
 }
 
 //получаем пользователя
-
 export const getUser = () => {
     return fetch(`${user}/auth/user`, {
         method: 'GET',
         headers: {
             authorization: getCookie("accessToken")
         },
-        body: JSON.stringify({
-            'email': email,
-            "password": password, 
-        })
     })
 }
 
