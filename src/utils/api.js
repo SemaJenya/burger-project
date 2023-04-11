@@ -133,5 +133,12 @@ export const getUser = () => {
             authorization: getCookie("accessToken")
         },
     })
+    .then(checkResponse)
+        .then((data) => {
+            if(data.success) {
+                return data;
+            }
+            return Promise.reject(data);
+        }) 
 }
 

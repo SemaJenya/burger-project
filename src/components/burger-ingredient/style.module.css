@@ -3,6 +3,8 @@
     flex-direction: column;
     width: 272px;
     position: relative;
+    text-decoration: none;
+    color: white;
 }
 .image {
     width: 240px;

@@ -4,10 +4,14 @@ import s from './style.module.css';
 import { Link } from 'react-router-dom';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { postRegistration } from '../../utils/api';
+import { useDispatch } from 'react-redux';
+import { fetchLoginUser } from '../../services/reducers/user-info/user';
 
 
 export const LoginPage = () => {
     const inputRef = useRef(null)
+
+    const dispatch = useDispatch();
 
     const [emailValue, setEmailValue] = useState('');
     const onChangeEmail = e => {
@@ -20,6 +24,9 @@ export const LoginPage = () => {
     }
 
 
+    const login = () => {
+        dispatch(fetchLoginUser({email: emailValue, password: passwordValue}))
+    }
 
     return (
         <div className={s.registration__page}>
@@ -42,7 +49,7 @@ export const LoginPage = () => {
                     icon="ShowIcon"
                 />
 
-                <Button htmlType="button" type="primary" size="medium" >Войти</ Button>
+                <Button htmlType="button" type="primary" size="medium" onClick={login}>Войти</ Button>
                 <div className={s.subtitle__box}>
                     <p className={sel(s.registration__subtitle, "text text_type_main-small text_color_inactive")}>
                         Вы — новый пользователь? 

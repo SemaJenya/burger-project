@@ -7,15 +7,11 @@ import { useSelector } from 'react-redux';
 
 
 export const IngredientsID = () => {
-
     const params = useParams();
     const ingredientID = params.id;
 
     const ingredients = useSelector(state => state.ingredientsStore.data);
-    console.log(ingredients);
-
-    const currentIngredient = ingredients?.find(item => `:${item._id }`=== ingredientID)
-    console.log(currentIngredient);
+    const currentIngredient = ingredients?.find(item => `${item._id }`=== ingredientID) || {}
    
     return (
         <div className={s.page}>

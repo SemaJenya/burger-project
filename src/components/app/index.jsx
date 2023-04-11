@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useDispatch } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { AppHeader } from '../app-header'
 import s from './style.module.css'
@@ -14,6 +14,10 @@ import { ForgotPasswordPage } from '../../pages/forgot-password-page/forgot-pass
 import { ResetPasswordPage } from '../../pages/reset-password-page/reset-password-page';
 import { ProfilePage } from '../../pages/profile-page/profile-page';
 import { IngredientsID } from '../../pages/ingredients-id/ingredients-id';
+import { checkUserAuth } from '../../services/reducers/user-info/user';
+import { Modal } from '../modal';
+import { IngredientDetails } from '../ingredient-details';
+import { createIngredientDetails } from '../../services/reducers/ingredientDetails';
 
 
 
@@ -21,20 +25,32 @@ export const App = () => {
 
 
 // const [ingredients, setIngredients] = useState([]);
-const dispatch = useDispatch()
+const dispatch = useDispatch();
+const location = useLocation();
+const navigate = useNavigate();
+
+const background = location.state?.background;
+
+console.log(location);
 
 useEffect(() => {
+    console.log('запроса на сервер');
     dispatch(fetchIngredients());
+   
+    dispatch(checkUserAuth());
 }, [dispatch]);
 
 
-const id = '60d3b41abdacab0026a733c7'
+const closeIngredientModal = () => {
+    navigate(background.pathname || '/', {replace: true});
+}
+
 
     return(
     <div className={s.app}>
         <AppHeader />
         <DndProvider backend={HTML5Backend}>
-            <Routes>
+            <Routes location={background || location}>
                 <Route path='/' element={<MainPage />} />
                 <Route path='/register' element={<RegistrationPage />} />
                 <Route path='/login' element={<LoginPage />} />
@@ -42,7 +58,12 @@ const id = '60d3b41abdacab0026a733c7'
                 <Route path='/reset-password' element={<ResetPasswordPage />} />
                 <Route path='/profile' element={<ProfilePage />} />
                 <Route path={`/ingredients/:id`} element={<IngredientsID />} />
-            </Routes>        
+            </Routes>  
+
+            <Routes>
+                <Route path={`/ingredients/:id`} element={background && <Modal title='Детали ингредиента' onClose={closeIngredientModal}><IngredientDetails /></Modal>}/>
+            </Routes>     
+
         </DndProvider>    
     </div>
     )

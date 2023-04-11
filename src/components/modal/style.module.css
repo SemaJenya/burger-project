@@ -32,4 +32,5 @@
     border: none;
     opacity: 1;
     transition: 1s ease ;
+    cursor: pointer;
 }

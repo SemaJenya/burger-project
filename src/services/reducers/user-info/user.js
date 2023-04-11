@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 import { getUser, postLogin, postRegistration } from '../../../utils/api';
+import { setCookie } from '../../../utils/cookie';
+
+
 
 
 export const initialState = {
@@ -24,11 +28,12 @@ export const fetchRegistration = createAsyncThunk(  //возвращает об�
     'registration/fetchRegistration', //имя экшена
     async ({email, password, name}, { rejectWithValue }) => {      
             const data = await postRegistration(email, password, name);
-            console.log('responce', data);
-            if(!data) {
+            if(!data?.success) {
                 return rejectWithValue(data);
             }
-            return data;
+            setCookie('accessToken', data.accessToken);
+            setCookie('refreshToken', data.refreshToken);
+            return data?.user;
         }    
 )
 
@@ -36,23 +41,33 @@ export const fetchLoginUser = createAsyncThunk(  //возвращает объе
     'loginUser/fetchLoginUser', //имя экшена
     async ({email, password}, { rejectWithValue }) => {      
             const data = await postLogin(email, password);
-            console.log('responce', data);
-            if(!data) {
+            if(!data?.success) {
                 return rejectWithValue(data);
             }
-            return data;
+            setCookie('accessToken', data.accessToken);
+            setCookie('refreshToken', data.refreshToken);
+            return data.user;
         }    
 )
 
-export const fetchGetUser = createAsyncThunk(  //возвращает объект с методами pending, fulfield, reject
-    'getUser/fetchGetUser', //имя экшена
-    async (_, { rejectWithValue }) => {      
+
+export const checkUserAuth = createAsyncThunk(  //возвращает объект с методами pending, fulfield, reject
+    'userAuth/checkUserAuth', //имя экшена
+    async (_, { rejectWithValue, dispatch }) => {    
+        try {
             const data = await getUser();
-            console.log('responce', data);
-            if(!data) {
+            if(!data?.success) {
                 return rejectWithValue(data);
             }
-            return data;
+            return data.user;
+        } 
+        catch (error) {
+            return rejectWithValue(error);
+        }  
+        finally {
+            dispatch(authCheck());
+        }
+            
         }    
 )
 
@@ -60,6 +75,11 @@ export const fetchGetUser = createAsyncThunk(  //возвращает объек
 export const registrationSlice = createSlice({
   name: 'registration',
   initialState,
+  reducers: {
+        authCheck: (state) => {
+            state.isAuthChecked = true;
+        }
+  },
   extraReducers: (builder) => {    //для запросов
     builder 
         .addCase(fetchRegistration.pending, (state) => {
@@ -70,19 +90,19 @@ export const registrationSlice = createSlice({
             state.loginUserRequest = true;
             state.loginUserError = null;
         })
-        .addCase(fetchGetUser.pending, (state) => {
+        .addCase(checkUserAuth.pending, (state) => {
             state.getUserRequest = true;
             state.getUserError = null;
         })
         .addCase(fetchRegistration.fulfilled, (state, action) => {
-            state.data = action.payload?.user;
+            state.data = action.payload;
             state.registerUserRequest = false;
         })
         .addCase(fetchLoginUser.fulfilled, (state, action) => {
             state.data = action.payload;
             state.loginUserRequest = false;
         })
-        .addCase(fetchGetUser.fulfilled, (state, action) => {
+        .addCase(checkUserAuth.fulfilled, (state, action) => {
             state.data = action.payload;
             state.getUserRequest = false;
         })
@@ -94,11 +114,13 @@ export const registrationSlice = createSlice({
             state.loginUserRequest = false;
             state.loginUserError = action.payload;
         })
-        .addCase(fetchGetUser.rejected, (state, action) => {
+        .addCase(checkUserAuth.rejected, (state, action) => {
             state.getUserRequest = false;
             state.getUserError = action.payload;
         })
   }
 })
+
+export const { authCheck } = registrationSlice.actions;
 
 export default registrationSlice.reducer;

@@ -48,10 +48,7 @@ export const BurgerIngredients = () => {
 
 
     const ingredient = useSelector(state => state.ingredientDetailsStore.ingredient)
-    console.log(ingredient);
-    const dispatch = useDispatch();
 
-    const closeIngredientModal = () => dispatch(createIngredientDetails(null))
 
    
 
@@ -87,10 +84,10 @@ export const BurgerIngredients = () => {
                     id='main'
                     ref={refMain}/>
             </div>
-
+{/* 
             {ingredient && <Modal title='Детали ингредиента' onClose={closeIngredientModal}>
                 <IngredientDetails />
-            </Modal>}
+            </Modal>} */}
         </section>)      
     )
     

@@ -13,7 +13,7 @@ export const store = configureStore({
     ingredientDetailsStore: ingredientDetails,
     orderStore: order,
     counterStore: counter, 
-    registrationStore: registration,
+    userStore: registration,
   },
 });
 
