@@ -17,33 +17,35 @@ import { IngredientsID } from '../../pages/ingredients-id/ingredients-id';
 import { checkUserAuth } from '../../services/reducers/user-info/user';
 import { Modal } from '../modal';
 import { IngredientDetails } from '../ingredient-details';
-import { createIngredientDetails } from '../../services/reducers/ingredientDetails';
+import { ProtectedRoute } from '../protected-route/protected-route';
+import { getUser } from '../../utils/api';
 
 
 
 export const App = () => {
 
 
-// const [ingredients, setIngredients] = useState([]);
-const dispatch = useDispatch();
-const location = useLocation();
-const navigate = useNavigate();
+    // const [ingredients, setIngredients] = useState([]);
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
 
-const background = location.state?.background;
-
-console.log(location);
-
-useEffect(() => {
-    console.log('запроса на сервер');
-    dispatch(fetchIngredients());
+    const background = location.state?.background;
+    const user = 'null';
    
-    dispatch(checkUserAuth());
-}, [dispatch]);
 
 
-const closeIngredientModal = () => {
-    navigate(background.pathname || '/', {replace: true});
-}
+    useEffect(() => {
+        console.log('запроса на сервер');
+        dispatch(fetchIngredients());
+    
+        dispatch(checkUserAuth());
+    }, [dispatch]);
+
+
+    const closeIngredientModal = () => {
+        navigate(background.pathname || '/', {replace: true});
+    }
 
 
     return(
@@ -52,13 +54,26 @@ const closeIngredientModal = () => {
         <DndProvider backend={HTML5Backend}>
             <Routes location={background || location}>
                 <Route path='/' element={<MainPage />} />
-                <Route path='/register' element={<RegistrationPage />} />
-                <Route path='/login' element={<LoginPage />} />
+                <Route path='/register' element={
+                    <ProtectedRoute onlyUnAuth user={user}>
+                        <RegistrationPage />
+                    </ProtectedRoute>
+                    } />
+                <Route path='/login' element={
+                    <ProtectedRoute onlyUnAuth user={user}>
+                        <LoginPage />
+                    </ProtectedRoute> 
+                    } />
                 <Route path='/forgot-password' element={<ForgotPasswordPage />} />
                 <Route path='/reset-password' element={<ResetPasswordPage />} />
-                <Route path='/profile' element={<ProfilePage />} />
                 <Route path={`/ingredients/:id`} element={<IngredientsID />} />
-            </Routes>  
+                <Route path='*' element={<div>404</div>} />
+                <Route path='/profile' element={
+                    <ProtectedRoute user={user}>
+                        <ProfilePage />
+                    </ProtectedRoute>
+                }/>
+               </Routes>  
 
             <Routes>
                 <Route path={`/ingredients/:id`} element={background && <Modal title='Детали ингредиента' onClose={closeIngredientModal}><IngredientDetails /></Modal>}/>
