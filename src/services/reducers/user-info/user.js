@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { getUser, postLogin, postRegistration } from '../../../utils/api';
-import { setCookie } from '../../../utils/cookie';
+import { getUser, logoutUser, postLogin, postRegistration } from '../../../utils/api';
+import { deleteCookie, setCookie } from '../../../utils/cookie';
 
 
 
@@ -71,6 +71,19 @@ export const checkUserAuth = createAsyncThunk(  //возвращает объе�
         }    
 )
 
+export const fetchLogout = createAsyncThunk(  //возвращает объект с методами pending, fulfield, reject
+    'userLogout/checkUserAuth', //имя экшена
+    async (_, { rejectWithValue, dispatch }) => {    
+        const data = await logoutUser();
+        if(!data?.success) {
+            return rejectWithValue(data);
+        }
+        deleteCookie('accessToken')
+        deleteCookie('refreshToken')
+        return data;
+    } 
+)
+
 //срез, описывает экшен и редьюсер
 export const registrationSlice = createSlice({
   name: 'registration',
@@ -78,7 +91,7 @@ export const registrationSlice = createSlice({
   reducers: {
         authCheck: (state) => {
             state.isAuthChecked = true;
-        }
+        },
   },
   extraReducers: (builder) => {    //для запросов
     builder 
@@ -105,6 +118,9 @@ export const registrationSlice = createSlice({
         .addCase(checkUserAuth.fulfilled, (state, action) => {
             state.data = action.payload;
             state.getUserRequest = false;
+        })
+        .addCase(fetchLogout.fulfilled, (state, action) => {
+            state.data = null;
         })
         .addCase(fetchRegistration.rejected, (state, action) => {
             state.registerUserRequest = false;

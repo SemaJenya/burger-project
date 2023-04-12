@@ -2,11 +2,16 @@ import { useRef, useState } from 'react';
 import sel from 'classnames';
 import s from './style.module.css'
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { logoutUser } from '../../utils/api';
+import { fetchLoginUser, fetchLogout } from '../../services/reducers/user-info/user';
+import { useDispatch } from 'react-redux';
 
 
 export const ProfilePage = () => {
-    const inputRef = useRef(null)
+    const inputRef = useRef(null);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const activeLink = ({ isActive }) => isActive 
     ? sel("text text_type_main-medium", s.active__link) : sel("text text_type_main-medium text_color_inactive", s.link);
@@ -22,6 +27,11 @@ export const ProfilePage = () => {
     const [passwordValue, setPasswordValue] = useState('')
     const onChangePassword = e => {
         setPasswordValue(e.target.value);
+    }
+
+    const handleLogout = (e) => {
+        // e.preventDefault()
+        dispatch(fetchLogout())
     }
 
     return (
@@ -41,7 +51,7 @@ export const ProfilePage = () => {
                                 </NavLink>
                             </li>
                             <li className={s.navigation__point}>
-                                <NavLink to='/login' className={activeLink}>
+                                <NavLink to='/login' className={activeLink} onClick={handleLogout} >
                                     Выход
                                 </NavLink>
                             </li>

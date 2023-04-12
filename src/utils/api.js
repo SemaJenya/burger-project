@@ -147,7 +147,7 @@ export const postLogin = (email, password) => {
         }) 
 }
 
-//получим ревреш токена
+//получим рефреш токена
 export const refreshToken = () => {
     return fetch(`${user}/auth/token`, {
         method: 'POST',
@@ -173,6 +173,27 @@ export const getUser = () => {
     .then((data) => {
         if(data.success) {
             return data;
+        }
+        return Promise.reject(data);
+    }) 
+}
+
+// выход из системы
+export const logoutUser = () => {
+    return fetch(`${user}/auth/logout`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            'token': getCookie("refreshToken")
+        })
+    })
+    .then(checkResponse)
+    .then((data) => {
+        if(data.success) {
+            return data;
+            
         }
         return Promise.reject(data);
     }) 
