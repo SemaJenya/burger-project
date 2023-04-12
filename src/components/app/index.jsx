@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,16 +33,30 @@ export const App = () => {
     const background = location.state?.background;
 
     useEffect(() => {
-        console.log('запроса на сервер');
         dispatch(fetchIngredients());
     
         dispatch(checkUserAuth());
     }, [dispatch]);
 
+     const userDataInitial = useSelector(state => state.userStore.data);
 
     const closeIngredientModal = () => {
         navigate(background.pathname || '/', {replace: true});
     }
+
+    const [userData, setUserData] = useState({
+        email: '',
+        password: '',
+        name: ''
+    });
+
+    const handleChange = e => {
+        const {name, value} = e.target;
+        setUserData({
+            ...userData,
+            [name]: value
+        });
+    };
 
 
     return(
@@ -53,21 +67,21 @@ export const App = () => {
                 <Route path='/' element={<MainPage />} />
                 <Route path='/register' element={
                     <ProtectedRoute onlyUnAuth >
-                        <RegistrationPage />
+                        <RegistrationPage userData={userData} handleChange={handleChange}/>
                     </ProtectedRoute>
                     } />
                 <Route path='/login' element={
                     <ProtectedRoute onlyUnAuth >
-                        <LoginPage />
+                        <LoginPage userData={userData} handleChange={handleChange}/>
                     </ProtectedRoute> 
                     } />
-                <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+                <Route path='/forgot-password' element={<ForgotPasswordPage userData={userData} handleChange={handleChange}/>} />
                 <Route path='/reset-password' element={<ResetPasswordPage />} />
                 <Route path={`/ingredients/:id`} element={<IngredientsID />} />
                 <Route path='*' element={<div>404</div>} />
                 <Route path='/profile' element={
                     <ProtectedRoute >
-                        <ProfilePage />
+                        <ProfilePage  userData={userData} handleChange={handleChange}/>
                     </ProtectedRoute>
                 }/>
                </Routes>  

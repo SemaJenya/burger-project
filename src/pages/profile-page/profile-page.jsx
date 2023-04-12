@@ -1,14 +1,14 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import sel from 'classnames';
 import s from './style.module.css'
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { logoutUser } from '../../utils/api';
 import { fetchLoginUser, fetchLogout } from '../../services/reducers/user-info/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
-export const ProfilePage = () => {
+export const ProfilePage = ({ userData, handleChange }) => {
     const inputRef = useRef(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -16,21 +16,25 @@ export const ProfilePage = () => {
     const activeLink = ({ isActive }) => isActive 
     ? sel("text text_type_main-medium", s.active__link) : sel("text text_type_main-medium text_color_inactive", s.link);
 
-    const [nameValue, setNameValue] = useState('');
-    const onChangeName = e => {
-        setNameValue(e.target.value);
-    }
-    const [emailValue, setEmailValue] = useState('password')
-    const onChangeEmail = e => {
-        setEmailValue(e.target.value);
-    }
-    const [passwordValue, setPasswordValue] = useState('')
-    const onChangePassword = e => {
-        setPasswordValue(e.target.value);
-    }
+    const userDataStore = useSelector(state => state.userStore.data);
 
-    const handleLogout = (e) => {
-        // e.preventDefault()
+    console.log(userData);
+    
+
+    // const [nameValue, setNameValue] = useState(userData.name);
+    // const onChangeName = e => {
+    //     setNameValue(e.target.value);
+    // }
+    // const [emailValue, setEmailValue] = useState(userData.email)
+    // const onChangeEmail = e => {
+    //     setEmailValue(e.target.value);
+    // }
+    // const [passwordValue, setPasswordValue] = useState('')
+    // const onChangePassword = e => {
+    //     setPasswordValue(e.target.value);
+    // }
+
+    const handleLogout = () => {
         dispatch(fetchLogout())
     }
 
@@ -64,20 +68,20 @@ export const ProfilePage = () => {
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
-                    onChange={e => setNameValue(e.target.value)}
+                    onChange={handleChange}
                     icon="EditIcon"
-                    value={nameValue}
+                    value={userDataStore.name}
                     name={'name'}
                     error={false}
                     ref={inputRef}
-                    onIconClick={onChangeName}
+                    // onIconClick={onChangeName}
                     errorText={'Ошибка'}
                     size={'default'}
                     extraClass="ml-1"/>
 
                 <EmailInput
-                    onChange={onChangeEmail}
-                    value={emailValue}
+                    onChange={handleChange}
+                    value={userDataStore.email}
                     name={'email'}
                     placeholder="Логин"
                     isIcon={true}
@@ -85,8 +89,8 @@ export const ProfilePage = () => {
                 />
 
                 <PasswordInput
-                    onChange={onChangePassword}
-                    value={passwordValue}
+                    onChange={handleChange}
+                    value={userData.password}
                     name={'password'}
                     extraClass="mb-2"
                     icon="EditIcon"

@@ -18,8 +18,6 @@ export const ProtectedRoute = ({children, onlyUnAuth}) => {
     }
 
     if(user && onlyUnAuth) {
-        console.log('jhere')
-        
         const { from } = location.state || { from: {pathname: '/profile'}};
         const { background } = location.state?.from?.state || { background: null };
 
@@ -28,7 +26,6 @@ export const ProtectedRoute = ({children, onlyUnAuth}) => {
             <Navigate replace to={from} state={{background}}/>
         )
     }
-    console.log(children)
 
     return children
 }

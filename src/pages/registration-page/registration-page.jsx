@@ -8,38 +8,10 @@ import { fetchRegistration } from '../../services/reducers/user-info/user';
 import { useDispatch } from 'react-redux';
 
 
-export const RegistrationPage = () => {
+export const RegistrationPage = ({userData, handleChange}) => {
 
         const dispatch = useDispatch();
 
-        // const [userData, setUserData] = useState({
-        //     email: '',
-        //     password: '',
-        //     name: ''
-        // });
-
-        // const handleChange = e => {
-        //     const {name, value} = e.target;
-        //     setUserData({
-        //         ...userData,
-        //         [name]: value
-        //     });
-        // };
-
-        const [nameValue, setNameValue] = useState('')
-        const onChangeName = e => {
-            setNameValue(e.target.value);
-        };
-
-        const [emailValue, setEmailValue] = useState('')
-        const onChangeEmail = e => {
-            setEmailValue(e.target.value);
-        };
-
-        const [passwordValue, setPasswordValue] = useState('')
-        const onChangePassword = e => {
-            setPasswordValue(e.target.value);
-        }
 
         const inputRef = useRef(null)
         const onIconClick = () => {
@@ -48,7 +20,7 @@ export const RegistrationPage = () => {
         }
 
         const registration = () => {
-            dispatch(fetchRegistration({email: emailValue, password: passwordValue, name: nameValue}))
+            dispatch(fetchRegistration({email: userData.email, password: userData.password, name: userData.name}))
         }
 
     return (
@@ -58,8 +30,8 @@ export const RegistrationPage = () => {
                 <Input
                 type={'text'}
                 placeholder={'Имя'}
-                onChange={onChangeName}
-                value={nameValue}
+                onChange={handleChange}
+                value={userData.name}
                 name={'name'}
                 error={false}
                 ref={inputRef}
@@ -69,16 +41,16 @@ export const RegistrationPage = () => {
                 extraClass="ml-1"/>
 
                 <EmailInput
-                    onChange={onChangeEmail}
-                    value={emailValue}
+                    onChange={handleChange}
+                    value={userData.email}
                     name={'email'}
                     placeholder="Логин"
                     extraClass="mb-2"
                 />
 
                 <PasswordInput
-                    onChange={onChangePassword}
-                    value={passwordValue}
+                    onChange={handleChange}
+                    value={userData.password}
                     name={'password'}
                     extraClass="mb-2"
                     icon="ShowIcon"

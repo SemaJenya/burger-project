@@ -6,26 +6,21 @@ import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-
 import { postPasswordRecovery } from '../../utils/api';
 
 
-export const ForgotPasswordPage = () => {
+export const ForgotPasswordPage = ({userData, handleChange}) => {
 
     const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 
     const navigate = useNavigate();
 
-    const [emailValue, setEmailValue] = useState('')
-    const onChangeEmail = e => {
-        setEmailValue(e.target.value);
-    };
-
     const isEmailValid = (emailValue) => {
         return EMAIL_REGEXP.test(emailValue);
     }
     
-   const disabledButton = isEmailValid(emailValue);
+   const disabledButton = isEmailValid(userData.email);
 
     const handleClick = () => {
-        if(emailValue) {
-            postPasswordRecovery(emailValue)
+        if(userData.email) {
+            postPasswordRecovery(userData.email)
             .then(() => {
                 navigate('/reset-password')
             })
@@ -40,8 +35,8 @@ export const ForgotPasswordPage = () => {
                 <h2 className={sel(s.registration__title, 'text text_type_main-medium')}>Вход</h2>
            
                 <EmailInput
-                    onChange={onChangeEmail}
-                    value={emailValue}
+                    onChange={handleChange}
+                    value={userData.email}
                     name={'email'}
                     placeholder="Логин"
                     extraClass="mb-2"

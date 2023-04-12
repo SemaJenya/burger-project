@@ -178,6 +178,28 @@ export const getUser = () => {
     }) 
 }
 
+// изменяем данные о юзере в провиле
+export const updateUserData = (email, password, userName) => {
+    return fetch(`${user}/auth/user`, {
+        method: 'PATCH',
+        headers: {
+            authorization: getCookie("accessToken")
+        },
+        body: JSON.stringify({
+            'email': email,
+            "password": password, 
+            "name": userName
+        })
+    })
+    .then(checkResponse)
+    .then((data) => {
+        if(data.success) {
+            return data;
+        }
+        return Promise.reject(data);
+    }) 
+}
+
 // выход из системы
 export const logoutUser = () => {
     return fetch(`${user}/auth/logout`, {

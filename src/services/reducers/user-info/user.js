@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
 import { getUser, logoutUser, postLogin, postRegistration } from '../../../utils/api';
 import { deleteCookie, setCookie } from '../../../utils/cookie';
 

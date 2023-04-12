@@ -8,24 +8,15 @@ import { useDispatch } from 'react-redux';
 import { fetchLoginUser } from '../../services/reducers/user-info/user';
 
 
-export const LoginPage = () => {
+export const LoginPage = ({userData, handleChange}) => {
     const inputRef = useRef(null)
 
     const dispatch = useDispatch();
 
-    const [emailValue, setEmailValue] = useState('');
-    const onChangeEmail = e => {
-        setEmailValue(e.target.value);
-    };
-
-    const [passwordValue, setPasswordValue] = useState('')
-    const onChangePassword = e => {
-        setPasswordValue(e.target.value);
-    }
 
 
     const login = () => {
-        dispatch(fetchLoginUser({email: emailValue, password: passwordValue}))
+        dispatch(fetchLoginUser({email: userData.email, password: userData.password}))
     }
 
     return (
@@ -34,16 +25,16 @@ export const LoginPage = () => {
                 <h2 className={sel(s.registration__title, 'text text_type_main-medium')}>Вход</h2>
            
                 <EmailInput
-                    onChange={onChangeEmail}
-                    value={emailValue}
+                    onChange={handleChange}
+                    value={userData.email}
                     name={'email'}
                     placeholder="Логин"
                     extraClass="mb-2"
                 />
 
                 <PasswordInput
-                    onChange={onChangePassword}
-                    value={passwordValue}
+                    onChange={handleChange}
+                    value={userData.password}
                     name={'password'}
                     extraClass="mb-2"
                     icon="ShowIcon"
