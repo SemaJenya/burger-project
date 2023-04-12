@@ -31,9 +31,6 @@ export const App = () => {
     const navigate = useNavigate();
 
     const background = location.state?.background;
-    const user = 'null';
-   
-
 
     useEffect(() => {
         console.log('запроса на сервер');
@@ -55,12 +52,12 @@ export const App = () => {
             <Routes location={background || location}>
                 <Route path='/' element={<MainPage />} />
                 <Route path='/register' element={
-                    <ProtectedRoute onlyUnAuth user={user}>
+                    <ProtectedRoute onlyUnAuth >
                         <RegistrationPage />
                     </ProtectedRoute>
                     } />
                 <Route path='/login' element={
-                    <ProtectedRoute onlyUnAuth user={user}>
+                    <ProtectedRoute onlyUnAuth >
                         <LoginPage />
                     </ProtectedRoute> 
                     } />
@@ -69,7 +66,7 @@ export const App = () => {
                 <Route path={`/ingredients/:id`} element={<IngredientsID />} />
                 <Route path='*' element={<div>404</div>} />
                 <Route path='/profile' element={
-                    <ProtectedRoute user={user}>
+                    <ProtectedRoute >
                         <ProfilePage />
                     </ProtectedRoute>
                 }/>
