@@ -100,8 +100,11 @@ export const ProfilePage = () => {
                     extraClass="mb-2"
                     icon="EditIcon"
                 />
-
-                    <Button htmlType="button" type="primary" size="medium" onClick={updateUserInfo} disabled={disabledButton}>Сохранить</ Button>                  
+                <div className={s.button__container}>
+                    <Button htmlType="button" type="primary" size="medium" onClick={updateUserInfo} disabled={disabledButton}>Сохранить</ Button> 
+                    <Button htmlType="button" type="primary" size="medium" onClick={updateUserInfo} disabled={!disabledButton}>Oтменить</ Button>
+                </div>
+                                     
                 </div>   
             </div>     
        </div>
