@@ -8,7 +8,7 @@ import { fetchRegistration } from '../../services/reducers/user-info/user';
 import { useDispatch } from 'react-redux';
 
 
-export const RegistrationPage = ({userData, handleChange}) => {
+export const RegistrationPage = () => {
 
         const dispatch = useDispatch();
 
@@ -18,6 +18,20 @@ export const RegistrationPage = ({userData, handleChange}) => {
           setTimeout(() => inputRef.current.focus(), 0)
           alert('Icon Click Callback')
         }
+
+        const [userData, setUserData] = useState({
+            email: '',
+            password: '',
+            name: ''
+        });
+    
+        const handleChange = e => {
+            const {name, value} = e.target;
+            setUserData({
+                ...userData,
+                [name]: value
+            });
+        };
 
         const registration = () => {
             dispatch(fetchRegistration({email: userData.email, password: userData.password, name: userData.name}))

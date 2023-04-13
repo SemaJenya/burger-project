@@ -8,12 +8,24 @@ import { useDispatch } from 'react-redux';
 import { fetchLoginUser } from '../../services/reducers/user-info/user';
 
 
-export const LoginPage = ({userData, handleChange}) => {
+export const LoginPage = () => {
     const inputRef = useRef(null)
 
     const dispatch = useDispatch();
 
+    const [userData, setUserData] = useState({
+        email: '',
+        password: '',
+        name: ''
+    });
 
+    const handleChange = e => {
+        const {name, value} = e.target;
+        setUserData({
+            ...userData,
+            [name]: value
+        });
+    };
 
     const login = () => {
         dispatch(fetchLoginUser({email: userData.email, password: userData.password}))

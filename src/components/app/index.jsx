@@ -67,21 +67,21 @@ export const App = () => {
                 <Route path='/' element={<MainPage />} />
                 <Route path='/register' element={
                     <ProtectedRoute onlyUnAuth >
-                        <RegistrationPage userData={userData} handleChange={handleChange}/>
+                        <RegistrationPage />
                     </ProtectedRoute>
                     } />
                 <Route path='/login' element={
                     <ProtectedRoute onlyUnAuth >
-                        <LoginPage userData={userData} handleChange={handleChange}/>
+                        <LoginPage />
                     </ProtectedRoute> 
                     } />
-                <Route path='/forgot-password' element={<ForgotPasswordPage userData={userData} handleChange={handleChange}/>} />
+                <Route path='/forgot-password' element={<ForgotPasswordPage />} />
                 <Route path='/reset-password' element={<ResetPasswordPage />} />
                 <Route path={`/ingredients/:id`} element={<IngredientsID />} />
                 <Route path='*' element={<div>404</div>} />
                 <Route path='/profile' element={
                     <ProtectedRoute >
-                        <ProfilePage  userData={userData} handleChange={handleChange}/>
+                        <ProfilePage />
                     </ProtectedRoute>
                 }/>
                </Routes>  

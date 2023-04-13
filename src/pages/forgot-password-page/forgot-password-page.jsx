@@ -6,7 +6,7 @@ import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-
 import { postPasswordRecovery } from '../../utils/api';
 
 
-export const ForgotPasswordPage = ({userData, handleChange}) => {
+export const ForgotPasswordPage = () => {
 
     const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 
@@ -17,6 +17,20 @@ export const ForgotPasswordPage = ({userData, handleChange}) => {
     }
     
    const disabledButton = isEmailValid(userData.email);
+
+   const [userData, setUserData] = useState({
+        email: '',
+        password: '',
+        name: ''
+    });
+
+    const handleChange = e => {
+        const {name, value} = e.target;
+        setUserData({
+            ...userData,
+            [name]: value
+        });
+    };
 
     const handleClick = () => {
         if(userData.email) {

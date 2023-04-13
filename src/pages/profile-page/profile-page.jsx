@@ -8,7 +8,7 @@ import { fetchLoginUser, fetchLogout } from '../../services/reducers/user-info/u
 import { useDispatch, useSelector } from 'react-redux';
 
 
-export const ProfilePage = ({ userData, handleChange }) => {
+export const ProfilePage = () => {
     const inputRef = useRef(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -18,21 +18,22 @@ export const ProfilePage = ({ userData, handleChange }) => {
 
     const userDataStore = useSelector(state => state.userStore.data);
 
-    console.log(userData);
     
+    const [userData, setUserData] = useState({
+        email: userDataStore.email,
+        password: '',
+        name: userDataStore.name
+    });
 
-    // const [nameValue, setNameValue] = useState(userData.name);
-    // const onChangeName = e => {
-    //     setNameValue(e.target.value);
-    // }
-    // const [emailValue, setEmailValue] = useState(userData.email)
-    // const onChangeEmail = e => {
-    //     setEmailValue(e.target.value);
-    // }
-    // const [passwordValue, setPasswordValue] = useState('')
-    // const onChangePassword = e => {
-    //     setPasswordValue(e.target.value);
-    // }
+    const handleChange = e => {
+        const {name, value} = e.target;
+        setUserData({
+            ...userData,
+            [name]: value
+        });
+    };
+
+    
 
     const handleLogout = () => {
         dispatch(fetchLogout())
@@ -70,7 +71,7 @@ export const ProfilePage = ({ userData, handleChange }) => {
                     placeholder={'Имя'}
                     onChange={handleChange}
                     icon="EditIcon"
-                    value={userDataStore.name}
+                    value={userData?.name}
                     name={'name'}
                     error={false}
                     ref={inputRef}
@@ -81,7 +82,7 @@ export const ProfilePage = ({ userData, handleChange }) => {
 
                 <EmailInput
                     onChange={handleChange}
-                    value={userDataStore.email}
+                    value={userData?.email}
                     name={'email'}
                     placeholder="Логин"
                     isIcon={true}
