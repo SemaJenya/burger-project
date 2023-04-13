@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getUser, logoutUser, postLogin, postRegistration } from '../../../utils/api';
+import { getUser, logoutUser, postLogin, postRegistration, updateUserData } from '../../../utils/api';
 import { deleteCookie, setCookie } from '../../../utils/cookie';
 
 
@@ -83,6 +83,17 @@ export const fetchLogout = createAsyncThunk(  //возвращает объек�
     } 
 )
 
+export const fetchChangeProfile = createAsyncThunk (
+    'userChange/fetchChangeProfile', //имя экшена
+    async (userData, { rejectWithValue }) => {    
+        const data = await updateUserData(userData);
+        if(!data?.success) {
+            return rejectWithValue(data);
+        }
+        return data;
+    } 
+)
+
 //срез, описывает экшен и редьюсер
 export const registrationSlice = createSlice({
   name: 'registration',
@@ -120,6 +131,9 @@ export const registrationSlice = createSlice({
         })
         .addCase(fetchLogout.fulfilled, (state, action) => {
             state.data = null;
+        })
+        .addCase(fetchChangeProfile.fulfilled, (state, action) => {
+            state.data = action.payload;
         })
         .addCase(fetchRegistration.rejected, (state, action) => {
             state.registerUserRequest = false;

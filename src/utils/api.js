@@ -179,16 +179,17 @@ export const getUser = () => {
 }
 
 // изменяем данные о юзере в провиле
-export const updateUserData = (email, password, userName) => {
+export const updateUserData = (userData) => {
     return fetch(`${user}/auth/user`, {
         method: 'PATCH',
         headers: {
-            authorization: getCookie("accessToken")
+            authorization: getCookie("accessToken"),
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            'email': email,
-            "password": password, 
-            "name": userName
+            'email': userData.email,
+            "password": userData.password, 
+            "name": userData.name
         })
     })
     .then(checkResponse)

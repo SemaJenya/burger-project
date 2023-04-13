@@ -38,25 +38,10 @@ export const App = () => {
         dispatch(checkUserAuth());
     }, [dispatch]);
 
-     const userDataInitial = useSelector(state => state.userStore.data);
-
     const closeIngredientModal = () => {
         navigate(background.pathname || '/', {replace: true});
     }
 
-    const [userData, setUserData] = useState({
-        email: '',
-        password: '',
-        name: ''
-    });
-
-    const handleChange = e => {
-        const {name, value} = e.target;
-        setUserData({
-            ...userData,
-            [name]: value
-        });
-    };
 
 
     return(

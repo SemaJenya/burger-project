@@ -4,13 +4,12 @@ import s from './style.module.css'
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { logoutUser } from '../../utils/api';
-import { fetchLoginUser, fetchLogout } from '../../services/reducers/user-info/user';
+import { fetchChangeProfile, fetchLoginUser, fetchLogout } from '../../services/reducers/user-info/user';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 export const ProfilePage = () => {
     const inputRef = useRef(null);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const activeLink = ({ isActive }) => isActive 
@@ -32,8 +31,13 @@ export const ProfilePage = () => {
             [name]: value
         });
     };
+    console.log(userData);
 
-    
+    const disabledButton = userData.email !== userDataStore.email || userData.name !== userDataStore.name || userData.password ? false : true;
+
+    const updateUserInfo = () => {
+            dispatch(fetchChangeProfile(userData))     
+    }
 
     const handleLogout = () => {
         dispatch(fetchLogout())
@@ -97,7 +101,7 @@ export const ProfilePage = () => {
                     icon="EditIcon"
                 />
 
-                    <Button htmlType="button" type="primary" size="medium" >Сохранить</ Button>                  
+                    <Button htmlType="button" type="primary" size="medium" onClick={updateUserInfo} disabled={disabledButton}>Сохранить</ Button>                  
                 </div>   
             </div>     
        </div>
