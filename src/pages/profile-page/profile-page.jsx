@@ -31,7 +31,6 @@ export const ProfilePage = () => {
             [name]: value
         });
     };
-    console.log(userData);
 
     const disabledButton = userData.email !== userDataStore.email || userData.name !== userDataStore.name || userData.password ? false : true;
 

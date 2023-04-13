@@ -26,7 +26,6 @@ export const ForgotPasswordPage = () => {
 
     const handleClick = () => {
         if(userDataEmail) {
-            console.log('я тут');
             postPasswordRecovery(userDataEmail)
             .then(() => {
                 navigate('/reset-password')
