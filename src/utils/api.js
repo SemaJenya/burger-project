@@ -48,7 +48,7 @@ export const postOrderInfo = (dataID) => {  //ID всех ингредиенто
     return fetch(`${apiUrl}/orders`, {
         method: 'POST',
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
         body: JSON.stringify({
             'ingredients': dataID

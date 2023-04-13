@@ -1,5 +1,6 @@
 import { Button, ConstructorElement, CurrencyIcon, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import s from './style.module.css';
 import sel from 'classnames';
 import { OrderDetails } from '../order-details';
@@ -18,12 +19,12 @@ import { addCounter } from '../../services/reducers/counter'
 
 export const BurgerConstructor = () => {
 
-    // const [bunTop, setBunTop] = useState("https://code.s3.yandex.net/react/code/bun-02.png");
-    // const [bunBottom, setBunBottom] = useState("https://code.s3.yandex.net/react/code/bun-02.png");
+    const navigate = useNavigate();
     
     const [isClick, setIsClick] = useState(false);
 
     const {ingredients, bun} = useSelector(state => state.constructorStore); //достаем данные из стора
+    const userDataStore = useSelector(state => state.userStore.data);
 
     const dataAvailable = ingredients.length === 0 ? true : false;
 
@@ -48,8 +49,14 @@ export const BurgerConstructor = () => {
 
 
     const handleClickButton = () => {
+        if(userDataStore) {
             setIsClick(!isClick);
             dispatch(fetchOrder(ingredientsID));
+        }
+        else {
+            navigate('/login');
+        }
+            
     };
 
 

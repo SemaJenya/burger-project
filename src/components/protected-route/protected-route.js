@@ -18,7 +18,7 @@ export const ProtectedRoute = ({children, onlyUnAuth}) => {
     }
 
     if(user && onlyUnAuth) {
-        const { from } = location.state || { from: {pathname: '/profile'}};
+        const { from } = location.state || { from: {pathname: '/'}};
         const { background } = location.state?.from?.state || { background: null };
 
 
