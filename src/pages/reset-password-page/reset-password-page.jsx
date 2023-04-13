@@ -35,7 +35,7 @@ export const ResetPasswordPage = () => {
 
     return (
         <div className={s.registration__page}>
-            <div className={s.registration__container}>
+            <form className={s.registration__container}>
                 <h2 className={sel(s.registration__title, 'text text_type_main-medium')}>Восстановление пароля</h2>
            
                 <PasswordInput
@@ -71,7 +71,7 @@ export const ResetPasswordPage = () => {
                     </p>
                 </div>
                 
-            </div>        
+            </form>        
        </div>
     )
 }

@@ -33,7 +33,7 @@ export const LoginPage = () => {
 
     return (
         <div className={s.registration__page}>
-            <div className={s.registration__container}>
+            <form className={s.registration__container}>
                 <h2 className={sel(s.registration__title, 'text text_type_main-medium')}>Вход</h2>
            
                 <EmailInput
@@ -68,7 +68,7 @@ export const LoginPage = () => {
                     </p>
                 </div>
                 
-            </div>        
+            </form>        
        </div>
     )
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useDispatch, useSelector } from 'react-redux';
-import { Routes, Route, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate, BrowserRouter} from 'react-router-dom';
 
 import { AppHeader } from '../app-header'
 import s from './style.module.css'
@@ -54,14 +54,22 @@ export const App = () => {
                     <ProtectedRoute onlyUnAuth >
                         <RegistrationPage />
                     </ProtectedRoute>
-                    } />
+                } />
                 <Route path='/login' element={
                     <ProtectedRoute onlyUnAuth >
                         <LoginPage />
                     </ProtectedRoute> 
-                    } />
-                <Route path='/forgot-password' element={<ForgotPasswordPage />} />
-                <Route path='/reset-password' element={<ResetPasswordPage />} />
+                } />
+                <Route path='/forgot-password' element={
+                    <ProtectedRoute onlyUnAuth>
+                        <ForgotPasswordPage />
+                    </ProtectedRoute>
+                } />
+                <Route path='/reset-password' element={
+                    <ProtectedRoute onlyUnAuth >
+                        <ResetPasswordPage />
+                    </ProtectedRoute>
+                }/>
                 <Route path={`/ingredients/:id`} element={<IngredientsID />} />
                 <Route path='*' element={<div>404</div>} />
                 <Route path='/profile' element={
@@ -69,12 +77,12 @@ export const App = () => {
                         <ProfilePage />
                     </ProtectedRoute>
                 }/>
-               </Routes>  
+            </Routes>  
 
             <Routes>
                 <Route path={`/ingredients/:id`} element={background && <Modal title='Детали ингредиента' onClose={closeIngredientModal}><IngredientDetails /></Modal>}/>
-            </Routes>     
-
+            </Routes> 
+    
         </DndProvider>    
     </div>
     )

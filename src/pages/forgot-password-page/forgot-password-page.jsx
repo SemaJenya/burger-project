@@ -15,26 +15,19 @@ export const ForgotPasswordPage = () => {
     const isEmailValid = (emailValue) => {
         return EMAIL_REGEXP.test(emailValue);
     }
-    
-   const disabledButton = isEmailValid(userData.email);
 
-   const [userData, setUserData] = useState({
-        email: '',
-        password: '',
-        name: ''
-    });
+    const [userDataEmail, setUserData] = useState('');
 
     const handleChange = e => {
-        const {name, value} = e.target;
-        setUserData({
-            ...userData,
-            [name]: value
-        });
+        setUserData(e.target.value);
     };
 
+    const disabledButton = isEmailValid(userDataEmail);
+
     const handleClick = () => {
-        if(userData.email) {
-            postPasswordRecovery(userData.email)
+        if(userDataEmail) {
+            console.log('я тут');
+            postPasswordRecovery(userDataEmail)
             .then(() => {
                 navigate('/reset-password')
             })
@@ -45,12 +38,12 @@ export const ForgotPasswordPage = () => {
 
     return (
         <div className={s.registration__page}>
-            <div className={s.registration__container}>
+            <form className={s.registration__container}>
                 <h2 className={sel(s.registration__title, 'text text_type_main-medium')}>Вход</h2>
            
                 <EmailInput
                     onChange={handleChange}
-                    value={userData.email}
+                    value={userDataEmail}
                     name={'email'}
                     placeholder="Логин"
                     extraClass="mb-2"
@@ -67,7 +60,7 @@ export const ForgotPasswordPage = () => {
                     </p>
                 </div>
                 
-            </div>        
+            </form>        
        </div>
     )
 }

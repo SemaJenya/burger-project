@@ -76,44 +76,44 @@ export const ProfilePage = () => {
                     </nav>
                     <p className={sel(s.subtitle, 'text text_type_main-default text_color_inactive')}>В этом разделе вы можете изменить свои персональные данные</p>
                 </div>
-                <div className={s.container}>
+                <form className={s.container}>
             
-                <Input
-                    type={'text'}
-                    placeholder={'Имя'}
-                    onChange={handleChange}
-                    icon="EditIcon"
-                    value={userData?.name}
-                    name={'name'}
-                    error={false}
-                    ref={inputRef}
-                    // onIconClick={onChangeName}
-                    errorText={'Ошибка'}
-                    size={'default'}
-                    extraClass="ml-1"/>
+                    <Input
+                        type={'text'}
+                        placeholder={'Имя'}
+                        onChange={handleChange}
+                        icon="EditIcon"
+                        value={userData?.name}
+                        name={'name'}
+                        error={false}
+                        ref={inputRef}
+                        // onIconClick={onChangeName}
+                        errorText={'Ошибка'}
+                        size={'default'}
+                        extraClass="ml-1"/>
 
-                <EmailInput
-                    onChange={handleChange}
-                    value={userData?.email}
-                    name={'email'}
-                    placeholder="Логин"
-                    isIcon={true}
-                    extraClass="mb-2"
-                />
+                    <EmailInput
+                        onChange={handleChange}
+                        value={userData?.email}
+                        name={'email'}
+                        placeholder="Логин"
+                        isIcon={true}
+                        extraClass="mb-2"
+                    />
 
-                <PasswordInput
-                    onChange={handleChange}
-                    value={userData.password}
-                    name={'password'}
-                    extraClass="mb-2"
-                    icon="EditIcon"
-                />
-                <div className={s.button__container}>
-                    <Button htmlType="button" type="primary" size="medium" onClick={updateUserInfo} disabled={disabledButton}>Сохранить</ Button> 
-                    <Button htmlType="button" type="primary" size="medium" onClick={resetUserInfo} disabled={disabledButton}>Oтменить</ Button>
-                </div>
+                    <PasswordInput
+                        onChange={handleChange}
+                        value={userData.password}
+                        name={'password'}
+                        extraClass="mb-2"
+                        icon="EditIcon"
+                    />
+                    <div className={s.button__container}>
+                        <Button htmlType="button" type="primary" size="medium" onClick={updateUserInfo} disabled={disabledButton}>Сохранить</ Button> 
+                        <Button htmlType="button" type="primary" size="medium" onClick={resetUserInfo} disabled={disabledButton}>Oтменить</ Button>
+                    </div>
                                      
-                </div>   
+                </form>   
             </div>     
        </div>
     )
