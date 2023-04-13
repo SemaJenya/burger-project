@@ -79,9 +79,10 @@ export const App = () => {
                 }/>
             </Routes>  
 
+            {background &&
             <Routes>
                 <Route path={`/ingredients/:id`} element={background && <Modal title='Детали ингредиента' onClose={closeIngredientModal}><IngredientDetails /></Modal>}/>
-            </Routes> 
+            </Routes> }
     
         </DndProvider>    
     </div>
