@@ -1,7 +1,7 @@
 {
   "name": "burger-project",
   "version": "0.1.0",
-  "homepage": "https://semajenya.github.io/burger-project",
+  "homepage": "https://semajenya.github.io/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
