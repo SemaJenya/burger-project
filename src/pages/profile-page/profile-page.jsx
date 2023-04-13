@@ -39,6 +39,14 @@ export const ProfilePage = () => {
             dispatch(fetchChangeProfile(userData))     
     }
 
+    const resetUserInfo = () => {
+        setUserData({
+            email: userDataStore.email,
+            password: '',
+            name: userDataStore.name
+        });
+    }
+
     const handleLogout = () => {
         dispatch(fetchLogout())
     }
@@ -102,7 +110,7 @@ export const ProfilePage = () => {
                 />
                 <div className={s.button__container}>
                     <Button htmlType="button" type="primary" size="medium" onClick={updateUserInfo} disabled={disabledButton}>Сохранить</ Button> 
-                    <Button htmlType="button" type="primary" size="medium" onClick={updateUserInfo} disabled={!disabledButton}>Oтменить</ Button>
+                    <Button htmlType="button" type="primary" size="medium" onClick={resetUserInfo} disabled={disabledButton}>Oтменить</ Button>
                 </div>
                                      
                 </div>   
