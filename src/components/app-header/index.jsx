@@ -1,4 +1,4 @@
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useMatch, useParams } from 'react-router-dom';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import s from './style.module.css'
 import sel from 'classnames'
@@ -8,10 +8,14 @@ export const AppHeader = () => {
 
     const activeLink = ({ isActive }) => isActive ? sel(s.active, 'pl-5', 'pr-5', 'pt-4', 'pb-4') : sel(s.link, 'pl-5', 'pr-5', 'pt-4', 'pb-4')
     const [personalAreaIcon, setPersonalAreaIcon] = useState('secondary');
-    
+        
+    const isProfile = useMatch('/profile')
+
+
     const handleClickPersonalArea = () => {
         setPersonalAreaIcon('primary')
     }
+
 
     return (
         <header className={s.header}>
@@ -34,7 +38,7 @@ export const AppHeader = () => {
 
                 <div className={sel(s.nav__box, s.nav__box_right)}>
                     <NavLink to='/profile' className={activeLink} onClick={handleClickPersonalArea}>            
-                            <ProfileIcon type={personalAreaIcon} />
+                            <ProfileIcon type={isProfile? "primary": "secondary"} />
                             <span className={sel('text text_type_main-default ml-2')}>Личный кабинет</span>
                     </NavLink>
                 </div>        
