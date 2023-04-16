@@ -33,13 +33,14 @@ export const RegistrationPage = () => {
             });
         };
 
-        const registration = () => {
+        const registration = (e) => {
+            e.preventDefault();
             dispatch(fetchRegistration({email: userData.email, password: userData.password, name: userData.name}))
         }
 
     return (
         <div className={s.registration__page}>
-            <div className={s.registration__container}>
+            <form className={s.registration__container} onSubmit={registration}>
                 <h2 className={sel(s.registration__title, 'text text_type_main-medium')}>Регистрация</h2>
                 <Input
                 type={'text'}
@@ -70,14 +71,14 @@ export const RegistrationPage = () => {
                     icon="ShowIcon"
                 />
 
-                <Button htmlType="button" type="primary" size="medium" onClick={registration}>Зарегистрироваться</ Button>
+                <Button htmlType="submit" type="primary" size="medium" >Зарегистрироваться</ Button>
                 <p className={sel(s.registration__subtitle, "text text_type_main-small text_color_inactive")}>
                     Уже зарегистрированы? 
                     <Link to='/login' className={sel(s.link, "text text_type_main-small text_color_inactive, ml-2")}>
                         Войти
                     </Link>
                 </p>
-            </div>        
+            </form>        
        </div>
     )
 }

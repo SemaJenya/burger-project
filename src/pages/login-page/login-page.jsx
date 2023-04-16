@@ -27,13 +27,14 @@ export const LoginPage = () => {
         });
     };
 
-    const login = () => {
+    const login = (e) => {
+        e.preventDefault();
         dispatch(fetchLoginUser({email: userData.email, password: userData.password}))
     }
 
     return (
         <div className={s.registration__page}>
-            <form className={s.registration__container}>
+            <form className={s.registration__container} onSubmit={login}>
                 <h2 className={sel(s.registration__title, 'text text_type_main-medium')}>Вход</h2>
            
                 <EmailInput
@@ -52,7 +53,7 @@ export const LoginPage = () => {
                     icon="ShowIcon"
                 />
 
-                <Button htmlType="button" type="primary" size="medium" onClick={login}>Войти</ Button>
+                <Button htmlType="submit" type="primary" size="medium"  >Войти</ Button>
                 <div className={s.subtitle__box}>
                     <p className={sel(s.registration__subtitle, "text text_type_main-small text_color_inactive")}>
                         Вы — новый пользователь? 

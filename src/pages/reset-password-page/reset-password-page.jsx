@@ -68,7 +68,7 @@ export const ResetPasswordPage = () => {
                 />
 
 
-                <Button htmlType="submit" type="primary" size="medium" onClick={saveNewPassword}>Cохранить</ Button>
+                <Button htmlType="submit" type="primary" size="medium" >Cохранить</ Button>
                 <div className={s.subtitle__box}>
                     <p className={sel(s.registration__subtitle, "text text_type_main-small text_color_inactive")}>
                         Вспомнили пароль? 

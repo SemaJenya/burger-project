@@ -51,7 +51,7 @@ export const ForgotPasswordPage = () => {
                     type="email"
                 />
 
-                <Button htmlType="submit" type="primary" size="medium" onClick={handleClick} disabled={!disabledButton}>Восстановить</ Button>
+                <Button htmlType="submit" type="primary" size="medium"  disabled={!disabledButton}>Восстановить</ Button>
                 <div className={s.subtitle__box}>
                     <p className={sel(s.registration__subtitle, "text text_type_main-small text_color_inactive")}>
                         Вспомнили пароль? 
