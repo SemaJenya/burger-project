@@ -1,4 +1,4 @@
-import { NavLink, useMatch, useParams } from 'react-router-dom';
+import { Link, NavLink, useMatch, useParams } from 'react-router-dom';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import s from './style.module.css'
 import sel from 'classnames'
@@ -32,9 +32,9 @@ export const AppHeader = () => {
                     </a>
                 </div>  
 
-                <div className={sel(s.nav__box, s.logo)}>
+                <Link className={sel(s.nav__box, s.logo)} to='/'>
                     <Logo />
-                </div>                 
+                </Link>                 
 
                 <div className={sel(s.nav__box, s.nav__box_right)}>
                     <NavLink to='/profile' className={activeLink} onClick={handleClickPersonalArea}>            
