@@ -1,8 +1,7 @@
 import { getCookie, setCookie } from "./cookie";
 
 const apiUrl = 'https://norma.nomoreparties.space/api';
-const resetPassword = 'https://norma.nomoreparties.space/api/password-reset';
-const user = 'https://norma.nomoreparties.space/api';
+
 
 
 const checkResponse = (res) => {
@@ -64,7 +63,7 @@ export const postOrderInfo = (dataID) => {  //ID всех ингредиенто
 }
  // Страница восстановления пароля. Вводим логин и получаем код из почты
 export const postPasswordRecovery = (email) => {
-    return fetch(`${resetPassword}`, {
+    return fetch(`${apiUrl}/password-reset`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -83,7 +82,7 @@ export const postPasswordRecovery = (email) => {
 }
 // вводим новый пароль и код из почты
 export const postResetPassword = (newPassword, token) => {
-    return fetch(`${resetPassword}/reset`, {
+    return fetch(`${apiUrl}/password-reset/reset`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -106,7 +105,7 @@ export const postResetPassword = (newPassword, token) => {
 }
 // регестрируемся
 export const postRegistration = (email, password, userName) => {
-    return fetch(`${user}/auth/register`, {
+    return fetch(`${apiUrl}/auth/register`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -128,7 +127,7 @@ export const postRegistration = (email, password, userName) => {
 
 //авторизируемся
 export const postLogin = (email, password) => {
-    return fetch(`${user}/auth/login`, {
+    return fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -149,7 +148,7 @@ export const postLogin = (email, password) => {
 
 //получим рефреш токена
 export const refreshToken = () => {
-    return fetch(`${user}/auth/token`, {
+    return fetch(`${apiUrl}/auth/token`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -164,7 +163,7 @@ export const refreshToken = () => {
 
 //получаем пользователя
 export const getUser = () => {
-    return fetchRefresh(`${user}/auth/user`, {
+    return fetchRefresh(`${apiUrl}/auth/user`, {
         method: 'GET',
         headers: {
             authorization: getCookie("accessToken")
@@ -180,7 +179,7 @@ export const getUser = () => {
 
 // изменяем данные о юзере в провиле
 export const updateUserData = (userData) => {
-    return fetch(`${user}/auth/user`, {
+    return fetch(`${apiUrl}/auth/user`, {
         method: 'PATCH',
         headers: {
             authorization: getCookie("accessToken"),
@@ -203,7 +202,7 @@ export const updateUserData = (userData) => {
 
 // выход из системы
 export const logoutUser = () => {
-    return fetch(`${user}/auth/logout`, {
+    return fetch(`${apiUrl}/auth/logout`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
