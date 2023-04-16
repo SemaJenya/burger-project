@@ -21,10 +21,15 @@ export const ProtectedRoute = ({children, onlyUnAuth}) => {
     if(user && onlyUnAuth) {
         const { from } = location.state || { from: {pathname: '/profile'}};
         const { background } = location.state?.from?.state || { background: null };
-
-
         return (
             <Navigate replace to={from} state={{background}}/>
+        )
+    }
+
+    if(!user && onlyUnAuth && location.state === null &&  location.pathname === "/reset-password") {
+
+        return (
+            <Navigate to={{ pathname: '/forgot-password'}} />
         )
     }
 

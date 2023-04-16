@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import sel from 'classnames';
 import s from './style.module.css';
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -8,6 +8,9 @@ import { postResetPassword } from '../../utils/api';
 
 export const ResetPasswordPage = () => {
     const inputRef = useRef(null);
+    const location = useLocation();
+    console.log(location);
+   
 
     const navigate = useNavigate();
 

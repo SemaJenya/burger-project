@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import sel from 'classnames';
 import s from './style.module.css';
 import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -11,6 +11,7 @@ export const ForgotPasswordPage = () => {
     const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const isEmailValid = (emailValue) => {
         return EMAIL_REGEXP.test(emailValue);
@@ -28,7 +29,7 @@ export const ForgotPasswordPage = () => {
         if(userDataEmail) {
             postPasswordRecovery(userDataEmail)
             .then(() => {
-                navigate('/reset-password')
+                navigate('/reset-password', {state: location})
             })
             .catch((error) => console.log(error, 'Ошибка. Проверь адрес'))
         }  
