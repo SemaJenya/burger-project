@@ -9,13 +9,12 @@ import { postResetPassword } from '../../utils/api';
 export const ResetPasswordPage = () => {
     const inputRef = useRef(null);
     const location = useLocation();
-    console.log(location);
+
    
 
     const navigate = useNavigate();
 
     const params = useParams();
-    console.log(params);
 
     const [newPasswordValue, setNewPasswordValue] = useState('');
     const onChangePassword = e => {
@@ -27,18 +26,23 @@ export const ResetPasswordPage = () => {
         setCodeValue(e.target.value);
     }
 
-    const saveNewPassword = () => {
-        postResetPassword(newPasswordValue, codeValue)
+    const saveNewPassword = (e) => {
+        e.preventDefault();
+        console.log('сработал сабмин');
+        if(newPasswordValue, codeValue) {
+            postResetPassword(newPasswordValue, codeValue)
             .then(() => {
                 navigate('/')
             })
             .catch((error) => error.massage)
+        }
+      
     }
    
 
     return (
         <div className={s.registration__page}>
-            <form className={s.registration__container}>
+            <form className={s.registration__container} onSubmit={saveNewPassword} >
                 <h2 className={sel(s.registration__title, 'text text_type_main-medium')}>Восстановление пароля</h2>
            
                 <PasswordInput
@@ -64,7 +68,7 @@ export const ResetPasswordPage = () => {
                 />
 
 
-                <Button htmlType="button" type="primary" size="medium" onClick={saveNewPassword}>Cохранить</ Button>
+                <Button htmlType="submit" type="primary" size="medium" onClick={saveNewPassword}>Cохранить</ Button>
                 <div className={s.subtitle__box}>
                     <p className={sel(s.registration__subtitle, "text text_type_main-small text_color_inactive")}>
                         Вспомнили пароль? 

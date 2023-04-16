@@ -25,7 +25,8 @@ export const ForgotPasswordPage = () => {
 
     const disabledButton = isEmailValid(userDataEmail);
 
-    const handleClick = () => {
+    const handleClick = (e) => {
+        e.preventDefault();
         if(userDataEmail) {
             postPasswordRecovery(userDataEmail)
             .then(() => {
@@ -38,7 +39,7 @@ export const ForgotPasswordPage = () => {
 
     return (
         <div className={s.registration__page}>
-            <form className={s.registration__container}>
+            <form className={s.registration__container} onSubmit={handleClick}>
                 <h2 className={sel(s.registration__title, 'text text_type_main-medium')}>Вход</h2>
            
                 <EmailInput
@@ -50,7 +51,7 @@ export const ForgotPasswordPage = () => {
                     type="email"
                 />
 
-                <Button htmlType="button" type="primary" size="medium" onClick={handleClick} disabled={!disabledButton}>Восстановить</ Button>
+                <Button htmlType="submit" type="primary" size="medium" onClick={handleClick} disabled={!disabledButton}>Восстановить</ Button>
                 <div className={s.subtitle__box}>
                     <p className={sel(s.registration__subtitle, "text text_type_main-small text_color_inactive")}>
                         Вспомнили пароль? 
