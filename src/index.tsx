@@ -17,7 +17,7 @@ import {BrowserRouter} from 'react-router-dom'
 
 // const store = createStore(rootReducer, enhancer)
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLDivElement);
 root.render(
   // <React.StrictMode>
     <Provider store={store}>

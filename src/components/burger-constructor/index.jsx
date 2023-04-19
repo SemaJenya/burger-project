@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import s from './style.module.css';
 import sel from 'classnames';
 import { OrderDetails } from '../order-details';
-import image from '../../images/icon.svg';
 import { Modal } from '../modal';
 import { useDispatch, useSelector } from 'react-redux';
 import burger from '../../images/burger.jpg'
