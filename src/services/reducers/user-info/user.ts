@@ -1,11 +1,27 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getUser, logoutUser, postLogin, postRegistration, updateUserData } from '../../../utils/api';
+import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { UserLogin, UserRegister, getUser, logoutUser, postLogin, postRegistration, updateUserData } from '../../../utils/api';
 import { deleteCookie, setCookie } from '../../../utils/cookie';
 
 
+export interface TUserState {
+    isAuthChecked: boolean;
+    
+    data: any;
 
+    isLoading: boolean;
+    error: SerializedError | null;
 
-export const initialState = {
+    registerUserError: SerializedError | null;
+    registerUserRequest: boolean;
+
+    loginUserError: SerializedError | null;
+    loginUserRequest: boolean;
+
+    getUserError: SerializedError | null;
+    getUserRequest: boolean;
+}
+
+export const initialState: TUserState = {
     isAuthChecked: false, //попытка проверки пользователя. Может быть удачной или нет. True - если была попытка. Отвечает за прелоудер
     
     data: null,
@@ -23,10 +39,10 @@ export const initialState = {
     getUserRequest: false
 }
 //асинхронный экшен
-export const fetchRegistration = createAsyncThunk(  //возвращает объект с методами pending, fulfield, reject
+export const fetchRegistration = createAsyncThunk<any, UserRegister>(  //возвращает объект с методами pending, fulfield, reject
     'registration/fetchRegistration', //имя экшена
     async (userData, { rejectWithValue }) => {      
-            const data = await postRegistration(userData);
+            const data: any = await postRegistration(userData);
             if(!data?.success) {
                 return rejectWithValue(data);
             }
@@ -36,10 +52,10 @@ export const fetchRegistration = createAsyncThunk(  //возвращает об�
         }    
 )
 
-export const fetchLoginUser = createAsyncThunk(  //возвращает объект с методами pending, fulfield, reject
+export const fetchLoginUser = createAsyncThunk<any, UserLogin>(  //возвращает объект с методами pending, fulfield, reject
     'loginUser/fetchLoginUser', //имя экшена
     async (userData, { rejectWithValue }) => {      
-            const data = await postLogin(userData);
+            const data: any = await postLogin(userData);
             if(!data?.success) {
                 return rejectWithValue(data);
             }
@@ -83,7 +99,7 @@ export const fetchLogout = createAsyncThunk(  //возвращает объек�
     } 
 )
 
-export const fetchChangeProfile = createAsyncThunk (
+export const fetchChangeProfile = createAsyncThunk<any, UserRegister> (
     'userChange/fetchChangeProfile', //имя экшена
     async (userData, { rejectWithValue }) => {    
         const data = await updateUserData(userData);
@@ -129,21 +145,21 @@ export const registrationSlice = createSlice({
             state.data = action.payload;
             state.getUserRequest = false;
         })
-        .addCase(fetchLogout.fulfilled, (state, action) => {
+        .addCase(fetchLogout.fulfilled, (state) => {
             state.data = null;
         })
         .addCase(fetchChangeProfile.fulfilled, (state, action) => {
             state.data = action.payload;
         })
-        .addCase(fetchRegistration.rejected, (state: any, action) => {
+        .addCase(fetchRegistration.rejected, (state: {[key: string]: unknown}, action) => {
             state.registerUserRequest = false;
             state.registerUserError = action.payload;
         })
-        .addCase(fetchLoginUser.rejected, (state: any, action) => {
+        .addCase(fetchLoginUser.rejected, (state: {[key: string]: unknown}, action) => {
             state.loginUserRequest = false;
             state.loginUserError = action.payload;
         })
-        .addCase(checkUserAuth.rejected, (state: any, action) => {
+        .addCase(checkUserAuth.rejected, (state: {[key: string]: unknown}, action) => {
             state.getUserRequest = false;
             state.getUserError = action.payload;
         })

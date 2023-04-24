@@ -20,6 +20,6 @@ export const ingredientDetailsSlice = createSlice({
   }
 })
 
-export const {createIngredientDetails, removeIngredientDetails} = ingredientDetailsSlice.actions;
+export const {createIngredientDetails} = ingredientDetailsSlice.actions;
 
 export default ingredientDetailsSlice.reducer;

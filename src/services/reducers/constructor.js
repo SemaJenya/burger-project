@@ -6,7 +6,6 @@ export const initialState = {
   ingredients: []
 }
 
-//значения return сверху прилетают в экшен функции снизу
 
 //срез, описывает экшен и редьюсер
 export const constructorSlice = createSlice({
