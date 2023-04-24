@@ -25,8 +25,8 @@ export const initialState = {
 //асинхронный экшен
 export const fetchRegistration = createAsyncThunk(  //возвращает объект с методами pending, fulfield, reject
     'registration/fetchRegistration', //имя экшена
-    async ({email, password, name}, { rejectWithValue }) => {      
-            const data = await postRegistration(email, password, name);
+    async (userData, { rejectWithValue }) => {      
+            const data = await postRegistration(userData);
             if(!data?.success) {
                 return rejectWithValue(data);
             }
@@ -38,8 +38,8 @@ export const fetchRegistration = createAsyncThunk(  //возвращает об�
 
 export const fetchLoginUser = createAsyncThunk(  //возвращает объект с методами pending, fulfield, reject
     'loginUser/fetchLoginUser', //имя экшена
-    async ({email, password}, { rejectWithValue }) => {      
-            const data = await postLogin(email, password);
+    async (userData, { rejectWithValue }) => {      
+            const data = await postLogin(userData);
             if(!data?.success) {
                 return rejectWithValue(data);
             }
@@ -135,15 +135,15 @@ export const registrationSlice = createSlice({
         .addCase(fetchChangeProfile.fulfilled, (state, action) => {
             state.data = action.payload;
         })
-        .addCase(fetchRegistration.rejected, (state, action) => {
+        .addCase(fetchRegistration.rejected, (state: any, action) => {
             state.registerUserRequest = false;
             state.registerUserError = action.payload;
         })
-        .addCase(fetchLoginUser.rejected, (state, action) => {
+        .addCase(fetchLoginUser.rejected, (state: any, action) => {
             state.loginUserRequest = false;
             state.loginUserError = action.payload;
         })
-        .addCase(checkUserAuth.rejected, (state, action) => {
+        .addCase(checkUserAuth.rejected, (state: any, action) => {
             state.getUserRequest = false;
             state.getUserError = action.payload;
         })

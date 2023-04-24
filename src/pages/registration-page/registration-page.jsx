@@ -35,7 +35,7 @@ export const RegistrationPage = () => {
 
         const registration = (e) => {
             e.preventDefault();
-            dispatch(fetchRegistration({email: userData.email, password: userData.password, name: userData.name}))
+            dispatch(fetchRegistration(userData))
         }
 
     return (

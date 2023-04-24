@@ -29,7 +29,7 @@ export const LoginPage = () => {
 
     const login = (e) => {
         e.preventDefault();
-        dispatch(fetchLoginUser({email: userData.email, password: userData.password}))
+        dispatch(fetchLoginUser(userData))
     }
 
     return (

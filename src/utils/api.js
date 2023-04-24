@@ -104,16 +104,16 @@ export const postResetPassword = (newPassword, token) => {
         })   
 }
 // регестрируемся
-export const postRegistration = (email, password, userName) => {
+export const postRegistration = (userData) => {
     return fetch(`${apiUrl}/auth/register`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            'email': email,
-            "password": password, 
-            "name": userName
+            'email': userData.email,
+            "password": userData.password, 
+            "name": userData.name
         })
     })
     .then(checkResponse)
@@ -126,15 +126,15 @@ export const postRegistration = (email, password, userName) => {
 }
 
 //авторизируемся
-export const postLogin = (email, password) => {
+export const postLogin = (userData) => {
     return fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            'email': email,
-            "password": password, 
+            'email': userData.email,
+            "password": userData.password, 
         })
     })
     .then(checkResponse)
