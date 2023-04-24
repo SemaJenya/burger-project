@@ -10,6 +10,8 @@ export type UserObject = {
 export type UserResponse = {
     success: boolean;
     user: UserObject;
+    accessToken: string;
+    refreshToken: string;
 }
 
 export type UserRegister = {

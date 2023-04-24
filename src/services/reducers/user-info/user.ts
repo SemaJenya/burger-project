@@ -42,7 +42,7 @@ export const initialState: TUserState = {
 export const fetchRegistration = createAsyncThunk<any, UserRegister>(  //возвращает объект с методами pending, fulfield, reject
     'registration/fetchRegistration', //имя экшена
     async (userData, { rejectWithValue }) => {      
-            const data: any = await postRegistration(userData);
+            const data = await postRegistration(userData);
             if(!data?.success) {
                 return rejectWithValue(data);
             }
@@ -55,7 +55,7 @@ export const fetchRegistration = createAsyncThunk<any, UserRegister>(  //воз�
 export const fetchLoginUser = createAsyncThunk<any, UserLogin>(  //возвращает объект с методами pending, fulfield, reject
     'loginUser/fetchLoginUser', //имя экшена
     async (userData, { rejectWithValue }) => {      
-            const data: any = await postLogin(userData);
+            const data = await postLogin(userData);
             if(!data?.success) {
                 return rejectWithValue(data);
             }
