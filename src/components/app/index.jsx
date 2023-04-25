@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { Routes, Route, useLocation, useNavigate, BrowserRouter} from 'react-router-dom';
 
 import { AppHeader } from '../app-header'
@@ -18,7 +18,8 @@ import { checkUserAuth } from '../../services/reducers/user-info/user';
 import { Modal } from '../modal';
 import { IngredientDetails } from '../ingredient-details';
 import { ProtectedRoute } from '../protected-route/protected-route';
-import { getUser } from '../../utils/api';
+import { useDispatch } from '../../services/hooks';
+
 
 
 
