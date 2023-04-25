@@ -11,7 +11,7 @@ export function getCookie(name: string) {
   setCookie(name, '', { expires: -1 });
 }
 
-  export function setCookie(name: string, value: string | number | boolean , props: any = {}) {
+  export function setCookie(name: string, value: string, props: any = {}) {
     props = {
         path: '/',
         ...props

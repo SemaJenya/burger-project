@@ -204,23 +204,23 @@ export const getUser = (): Promise<UserResponse> => {
 }
 
 
-const fetchUpdate = async (url: string, options: RequestInitWithAuth) => {
-    try {
-        const res = await fetch(url, options);
-        return await checkResponse(res)
-    } catch (error: any) {
-            Promise.reject(error)
-    }
-}
+// const fetchUpdate = async (url: string, options: RequestInitWithAuth) => {
+//     try {
+//         const res = await fetch(url, options);
+//         return await checkResponse(res)
+//     } catch (error: any) {
+//             Promise.reject(error)
+//     }
+// }
 
 // изменяем данные о юзере в провиле
 export const updateUserData = (userData: UserRegister): Promise<UserResponse> => {
-    return fetchUpdate(`${apiUrl}/auth/user`, {
+    return fetch(`${apiUrl}/auth/user`, {
         method: 'PATCH',
         headers: {
             authorization: getCookie("accessToken"),
             "Content-Type": "application/json"
-        },
+        } as HeadersInit | {authorization?: string | undefined},
         body: JSON.stringify({
             'email': userData.email,
             "password": userData.password, 
