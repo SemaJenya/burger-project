@@ -14,6 +14,11 @@ export type UserResponse = {
     refreshToken: string;
 }
 
+export type GetUserResponse = {
+    success: boolean;
+    user: UserObject;
+}
+
 export type UserRegister = {
     password: string;
 } & UserObject;
@@ -23,6 +28,16 @@ export type UserLogin = {
     email: string;
 } 
 
+export type UserLogout = {
+    message: string;
+    success: boolean;
+} 
+
+export type RefreshResponse = {
+    success: boolean;
+    accessToken: string;
+    refreshToken: string;
+} 
 
 export interface RequestInitWithAuth extends RequestInit {
     headers?: HeadersInit | {authorization?: string | undefined}
@@ -58,7 +73,7 @@ export const fetchRefresh = async (url: string, options: RequestInitWithAuth) =>
 }
 
 // Получим данные ингредиентов    
-export const getIngredients = (): Promise<UserResponse>  => {
+export const getIngredients = ()  => {
     return fetch(`${apiUrl}/ingredients`)
         .then(checkResponse)
         .then((dataIng) => {
@@ -69,7 +84,7 @@ export const getIngredients = (): Promise<UserResponse>  => {
 };
 
 //Получим информацию о заказе
-export const postOrderInfo = (dataID: string): Promise<UserResponse>  => {  //ID всех ингредиентов, которые находятся в конструкторе бургера
+export const postOrderInfo = (dataID: string) => {  //ID всех ингредиентов, которые находятся в конструкторе бургера
     return fetch(`${apiUrl}/orders`, {
         method: 'POST',
         headers: {
@@ -88,7 +103,7 @@ export const postOrderInfo = (dataID: string): Promise<UserResponse>  => {  //ID
         
 }
  // Страница восстановления пароля. Вводим логин и получаем код из почты
-export const postPasswordRecovery = (email: string): Promise<UserResponse>  => {
+export const postPasswordRecovery = (email: string)  => {
     return fetch(`${apiUrl}/password-reset`, {
         method: 'POST',
         headers: {
@@ -107,7 +122,7 @@ export const postPasswordRecovery = (email: string): Promise<UserResponse>  => {
         })       
 }
 // вводим новый пароль и код из почты
-export const postResetPassword = (newPassword: string, token: string): Promise<UserResponse>  => {
+export const postResetPassword = (newPassword: string, token: string)  => {
     return fetch(`${apiUrl}/password-reset/reset`, {
         method: 'POST',
         headers: {
@@ -173,7 +188,7 @@ export const postLogin = (userData: UserLogin): Promise<UserResponse> => {
 }
 
 //получим рефреш токена
-export const refreshToken = ()  => {
+export const refreshToken = (): Promise<RefreshResponse>  => {
     return fetch(`${apiUrl}/auth/token`, {
         method: 'POST',
         headers: {
@@ -188,7 +203,7 @@ export const refreshToken = ()  => {
 }
 
 //получаем пользователя
-export const getUser = (): Promise<UserResponse> => {
+export const getUser = (): Promise<GetUserResponse> => {
     return fetchRefresh(`${apiUrl}/auth/user`, {
         method: 'GET',
         headers: {
@@ -204,17 +219,8 @@ export const getUser = (): Promise<UserResponse> => {
 }
 
 
-// const fetchUpdate = async (url: string, options: RequestInitWithAuth) => {
-//     try {
-//         const res = await fetch(url, options);
-//         return await checkResponse(res)
-//     } catch (error: any) {
-//             Promise.reject(error)
-//     }
-// }
-
 // изменяем данные о юзере в провиле
-export const updateUserData = (userData: UserRegister): Promise<UserResponse> => {
+export const updateUserData = (userData: UserRegister): Promise<GetUserResponse>=> {
     return fetch(`${apiUrl}/auth/user`, {
         method: 'PATCH',
         headers: {
@@ -237,7 +243,7 @@ export const updateUserData = (userData: UserRegister): Promise<UserResponse> =>
 }
 
 // выход из системы
-export const logoutUser = (): Promise<UserResponse>  => {
+export const logoutUser = (): Promise<UserLogout>  => {
     return fetch(`${apiUrl}/auth/logout`, {
         method: 'POST',
         headers: {

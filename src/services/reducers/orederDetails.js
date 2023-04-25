@@ -1,11 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { postOrderInfo } from '../../utils/api';
-
+import { number } from 'prop-types';
 export const initialState = {
   data: [],
   isLoading: false,
   error: null
 }
+
+// <any, string>
+
 //асинхронный экшен
 export const fetchOrder = createAsyncThunk(  //возвращает объект с методами pending, fulfield, reject
     'order/fetchOrder', //имя экшена

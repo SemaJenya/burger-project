@@ -27,7 +27,7 @@ export const BurgerConstructor = () => {
 
     const dataAvailable = ingredients.length === 0 ? true : false;
 
-    const ingredientsID = ingredients?.map((item) => item._id)
+    const ingredientsID = ingredients?.map((item) => item._id);
 
     const calculateSum = (ingredients, bun) => {
         let sum = 0;
