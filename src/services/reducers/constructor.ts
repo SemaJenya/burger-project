@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
+import { TIngredient } from '../../utils/types';
 
-export const initialState = {
+type TConstructorStore = {
+  bun: string | null;
+  ingredients: TIngredient[];
+}
+
+export const initialState: TConstructorStore = {
   bun: null,
   ingredients: []
 }
@@ -21,7 +27,7 @@ export const constructorSlice = createSlice({
         }
     },
     removeConstructor: (state, action) => {
-      state.ingredients = state.ingredients.filter((ingredient) => ingredient.randomId != action.payload)
+      state.ingredients = state.ingredients.filter((ingredient: TIngredient) => ingredient.randomId != action.payload)
     },
     reorder: (state, action) => {
       state.ingredients.splice(action.payload.to, 0, state.ingredients.splice(action.payload.from, 1)[0])

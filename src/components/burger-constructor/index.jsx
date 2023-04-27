@@ -12,6 +12,7 @@ import { useDrop } from 'react-dnd';
 import { createConstructor } from '../../services/reducers/constructor';
 import { ElementInConctructor } from '../element-in-constructor';
 import { addCounter } from '../../services/reducers/counter'
+import { RootState } from '../../services/store';
 
 
 

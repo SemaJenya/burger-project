@@ -1,9 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
+import { TIngredient } from '../../utils/types';
 
-export const initialState = {
-  counter: {},
+type TCounter = {
+  type: string;
+  count: number;
 }
+
+type TInitialState = {
+  counter: {[kye: string]: TCounter};
+}
+
+export const initialState: TInitialState = {
+  counter: {}
+}
+
 
 //срез, описывает экшен и редьюсер
 export const counterSlice = createSlice({
@@ -11,8 +22,9 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     addCounter: (state, action) => {   //это экшен
-      const item_id = action.payload._id
-      const existed_ids = Object.keys(state.counter)
+      const item_id: string = action.payload._id;
+      const existed_ids: string[] = Object.keys(state.counter);
+      console.log(existed_ids);
       
       // handle buns 
       if(action.payload.type === 'bun' &&  !existed_ids.includes(item_id)) {
@@ -47,7 +59,7 @@ export const counterSlice = createSlice({
   },
 
   reduceCounter: (state, action) => {
-    const item_id = action.payload._id
+    const item_id: string = action.payload._id
     if (state.counter[item_id]['count'] > 1){
       state.counter[item_id]['count'] -= 1
     }
