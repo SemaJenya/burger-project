@@ -12,13 +12,13 @@ export interface TUserState {
     isLoading: boolean;
     error: SerializedError | null;
 
-    registerUserError: SerializedError | null;
+    registerUserError: SerializedError | null | unknown;
     registerUserRequest: boolean;
 
-    loginUserError: SerializedError | null;
+    loginUserError: SerializedError | null | unknown;
     loginUserRequest: boolean;
 
-    getUserError: SerializedError | null;
+    getUserError: SerializedError | null | unknown;
     getUserRequest: boolean;
 }
 
@@ -153,17 +153,17 @@ export const registrationSlice = createSlice({
         .addCase(fetchChangeProfile.fulfilled, (state, action) => {
             state.data = action.payload;
         })
-        .addCase(fetchRegistration.rejected, (state: {[key: string]: unknown}, action) => {
-            state = {...state, registerUserRequest: false}
-            state.registerUserError = action.payload;
+        .addCase(fetchRegistration.rejected, (state, action) => {
+            state = {...state, registerUserRequest: false};
+            state = {...state, registerUserError: action.payload};
         })
-        .addCase(fetchLoginUser.rejected, (state: {[key: string]: unknown}, action) => {
-            state.loginUserRequest = false;
-            state.loginUserError = action.payload;
+        .addCase(fetchLoginUser.rejected, (state, action) => {
+            state = {...state, loginUserRequest: false};
+            state = {...state, loginUserError: action.payload};
         })
-        .addCase(checkUserAuth.rejected, (state: {[key: string]: unknown}, action) => {
-            state.getUserRequest = false;
-            state.getUserError = action.payload;
+        .addCase(checkUserAuth.rejected, (state, action) => {
+            state = {...state, getUserRequest: false};
+            state = {...state, getUserError: action.payload};
         })
   }
 })

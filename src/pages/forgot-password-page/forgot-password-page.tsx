@@ -4,6 +4,7 @@ import sel from 'classnames';
 import s from './style.module.css';
 import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { postPasswordRecovery } from '../../utils/api';
+import { FormEventHandler } from 'react';
 
 
 export const ForgotPasswordPage = () => {
@@ -13,20 +14,20 @@ export const ForgotPasswordPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const isEmailValid = (emailValue) => {
+    const isEmailValid = (emailValue: string) => {
         return EMAIL_REGEXP.test(emailValue);
     }
 
-    const [userDataEmail, setUserData] = useState('');
+    const [userDataEmail, setUserData] = useState<string>('');
 
-    const handleChange = e => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserData(e.target.value);
     };
 
     const disabledButton = isEmailValid(userDataEmail);
 
-    const handleClick = (e) => {
-        e.preventDefault();
+    const handleClick = (event: React.FormEvent) => {
+        event.preventDefault();
         if(userDataEmail) {
             postPasswordRecovery(userDataEmail)
             .then(() => {
@@ -48,7 +49,6 @@ export const ForgotPasswordPage = () => {
                     name={'email'}
                     placeholder="Логин"
                     extraClass="mb-2"
-                    type="email"
                 />
 
                 <Button htmlType="submit" type="primary" size="medium"  disabled={!disabledButton}>Восстановить</ Button>

@@ -45,14 +45,14 @@ export interface RequestInitWithAuth extends RequestInit {
 
 
 
-const checkResponse = (res: Response): Promise<any> => {
+const checkResponse = <T>(res: Response): Promise<T> => {
     return res.ok ? res.json() : res.json().then((error) => Promise.reject({...error, statusCode: res.status}))}
 
 // функция-обертка для автоматического обновления токена через ревреш токен
-export const fetchRefresh = async (url: string, options: RequestInitWithAuth) => {
+export const fetchRefresh = async <T>(url: RequestInfo, options: RequestInitWithAuth) => {
     try {
         const res = await fetch(url, options);
-        return await checkResponse(res)
+        return await checkResponse<T>(res)
     } catch (error: any) {
         console.log('fetchRefresh', error);
         if(error.statusCode === 401 || error.statusCode === 403) {
@@ -64,7 +64,7 @@ export const fetchRefresh = async (url: string, options: RequestInitWithAuth) =>
             setCookie('refreshToken', refreshData.refreshToken);
 
             const res = await fetch(url, {...options, headers: {...options.headers, authorization: refreshData.accessToken}});
-            return await checkResponse(res)
+            return await checkResponse<T>(res)
         }
         else {
             Promise.reject(error)
@@ -76,7 +76,7 @@ export const fetchRefresh = async (url: string, options: RequestInitWithAuth) =>
 export const getIngredients = ()  => {
     return fetch(`${apiUrl}/ingredients`)
         .then(checkResponse)
-        .then((dataIng) => {
+        .then((dataIng:any) => {
             if(dataIng.success) {
                 return dataIng.data;
             }
@@ -95,7 +95,7 @@ export const postOrderInfo = (dataID: string) => {  //ID всех ингреди
         })
     })
         .then(checkResponse)
-        .then((data) => {
+        .then((data:any) => {
             if(data.success) {
                 return data;
             }
@@ -113,16 +113,16 @@ export const postPasswordRecovery = (email: string)  => {
             'email': email
         })
     })
-        .then(checkResponse)
+        .then(checkResponse<UserResponse>)
         .then((data) => {
-            if(data.success) {
+            if(data?.success) {
                 return data;
             }
 
         })       
 }
 // вводим новый пароль и код из почты
-export const postResetPassword = (newPassword: string, token: string)  => {
+export const postResetPassword = (newPassword: string, token: string) => {
     return fetch(`${apiUrl}/password-reset/reset`, {
         method: 'POST',
         headers: {
@@ -133,13 +133,13 @@ export const postResetPassword = (newPassword: string, token: string)  => {
             "token": token
         })
     })
-        .then(checkResponse)
+        .then(checkResponse<UserResponse>)
         .then((data) => {
             if(data.success) {
                 return data;
             }
             else {
-                return console.log(data.error); 
+                return console.log(Error); 
             }
 
         })   
@@ -157,7 +157,7 @@ export const postRegistration = (userData: UserRegister): Promise<UserResponse> 
             "name": userData.name
         })
     })
-    .then(checkResponse)
+    .then(checkResponse<UserResponse>)
         .then((data) => {
             if(data.success) {
                 return data;
@@ -178,7 +178,7 @@ export const postLogin = (userData: UserLogin): Promise<UserResponse> => {
             "password": userData.password, 
         })
     })
-    .then(checkResponse)
+    .then(checkResponse<UserResponse>)
         .then((data) => {
             if(data.success) {
                 return data;
@@ -198,20 +198,20 @@ export const refreshToken = (): Promise<RefreshResponse>  => {
             token: getCookie("refreshToken")
         })
     })
-    .then(checkResponse)
+    .then(checkResponse<RefreshResponse>)
 
 }
 
 //получаем пользователя
-export const getUser = (): Promise<GetUserResponse> => {
-    return fetchRefresh(`${apiUrl}/auth/user`, {
+export const getUser = () => {
+    return fetchRefresh<GetUserResponse>(`${apiUrl}/auth/user`, {
         method: 'GET',
         headers: {
             authorization: getCookie("accessToken")
         },
     })
     .then((data) => {
-        if(data.success) {
+        if(data?.success) {
             return data;
         }
         return Promise.reject(data);
@@ -233,7 +233,7 @@ export const updateUserData = (userData: UserRegister): Promise<GetUserResponse>
             "name": userData.name
         })
     })
-    .then(checkResponse)
+    .then(checkResponse<GetUserResponse>)
     .then((data) => {
         if(data.success) {
             return data;
@@ -253,7 +253,7 @@ export const logoutUser = (): Promise<UserLogout>  => {
             'token': getCookie("refreshToken")
         })
     })
-    .then(checkResponse)
+    .then(checkResponse<UserLogout>)
     .then((data) => {
         if(data.success) {
             return data;
