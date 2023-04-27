@@ -6,10 +6,11 @@ import { useState } from 'react';
 
 export const AppHeader = () => {
 
-    const activeLink = ({ isActive }) => isActive ? sel(s.active, 'pl-5', 'pr-5', 'pt-4', 'pb-4') : sel(s.link, 'pl-5', 'pr-5', 'pt-4', 'pb-4')
+    const activeLink = ({ isActive }: {[key: string]: boolean}) => isActive ? sel(s.active, 'pl-5', 'pr-5', 'pt-4', 'pb-4') : sel(s.link, 'pl-5', 'pr-5', 'pt-4', 'pb-4')
     const [personalAreaIcon, setPersonalAreaIcon] = useState('secondary');
         
     const isProfile = useMatch('/profile')
+    const isConstructor = useMatch('/')
 
 
     const handleClickPersonalArea = () => {
@@ -23,7 +24,7 @@ export const AppHeader = () => {
 
                 <div className={s.nav__box}>
                     <NavLink to='/' className={activeLink} >
-                        <BurgerIcon type="primary"/>
+                        <BurgerIcon type={isConstructor? "primary": "secondary"}/>
                         <span className={sel('text text_type_main-default ml-2')}>Конструктор</span>
                     </NavLink>
                     <a className={sel(s.link,  'pl-5', 'pr-5', 'pt-4', 'pb-4')} href='#'>
