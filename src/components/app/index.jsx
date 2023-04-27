@@ -25,8 +25,6 @@ import { useDispatch } from '../../services/hooks';
 
 export const App = () => {
 
-
-    // const [ingredients, setIngredients] = useState([]);
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
