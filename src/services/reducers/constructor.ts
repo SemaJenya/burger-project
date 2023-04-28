@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 import { TIngredient } from '../../utils/types';
 
-type TConstructorStore = {
-  bun: string | null;
+export type TConstructorStore = {
+  bun: TIngredient | null;
   ingredients: TIngredient[];
 }
 

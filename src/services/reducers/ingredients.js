@@ -1,5 +1,17 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getIngredients } from '../../utils/api';
+import { TIngredient } from '../../utils/types';
+
+// type TInitialState = {
+//     data: any[];
+//     isLoading: boolean;
+//     error: SerializedError | null;
+// }
+
+// type IngredientsResponse = {
+//     success: boolean;
+//     data: {[key: string]: TIngredient}[];
+// }
 
 export const initialState = {
   data: [],

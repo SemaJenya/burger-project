@@ -5,14 +5,16 @@ import s from './style.module.css';
 import sel from 'classnames';
 import { OrderDetails } from '../order-details';
 import { Modal } from '../modal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import burger from '../../images/burger.jpg'
 import { fetchOrder } from '../../services/reducers/orederDetails';
 import { useDrop } from 'react-dnd';
-import { createConstructor } from '../../services/reducers/constructor';
+import { TConstructorStore, createConstructor } from '../../services/reducers/constructor';
 import { ElementInConctructor } from '../element-in-constructor';
 import { addCounter } from '../../services/reducers/counter'
 import { RootState } from '../../services/store';
+import { TIngredient } from '../../utils/types';
+import { useDispatch } from '../../services/hooks';
 
 
 
@@ -21,19 +23,20 @@ export const BurgerConstructor = () => {
 
     const navigate = useNavigate();
     
-    const [isClick, setIsClick] = useState(false);
+    const [isClick, setIsClick] = useState<boolean>(false);
 
-    const {ingredients, bun} = useSelector(state => state.constructorStore); //достаем данные из стора
-    const userDataStore = useSelector(state => state.userStore.data);
+    
+    const {ingredients, bun} = useSelector<RootState>(state => state.constructorStore) as TConstructorStore; //достаем данные из стора
+    const userDataStore = useSelector<RootState>(state => state.userStore.data);
 
-    const dataAvailable = ingredients.length === 0 ? true : false;
+    const dataAvailable: boolean = ingredients.length === 0 ? true : false;
 
     const ingredientsID = ingredients?.map((item) => item._id);
 
-    const calculateSum = (ingredients, bun) => {
+    const calculateSum = (ingredients: TIngredient[], bun: TIngredient | null) => {
         let sum = 0;
         if(bun) {
-            sum += bun.price * 2;
+            sum += bun?.price * 2;
         }
         if(ingredients.length > 0) {
             ingredients.map((item) => sum += item.price);
@@ -41,11 +44,11 @@ export const BurgerConstructor = () => {
         return sum;
     }
     
-    const finalPrice = useMemo(() => calculateSum(ingredients, bun))
+    const finalPrice: number = useMemo(() => calculateSum(ingredients, bun), [ingredients, bun])
 
     const dispatch = useDispatch();
 
-    const {isLoading} = useSelector(state => state.orderStore);
+    const { isLoading }: any = useSelector<RootState>(state => state.orderStore);
 
 
     const handleClickButton = () => {
@@ -63,7 +66,7 @@ export const BurgerConstructor = () => {
    
      const [{isHover}, dropTargetRef] = useDrop({
         accept: 'ingredient',
-        drop(data, monitor) {
+        drop(data:any, monitor) {
             dispatch(createConstructor(data.data));
             dispatch(addCounter(data.data))
         },
@@ -113,7 +116,7 @@ export const BurgerConstructor = () => {
             <div className={sel(s.cost_container, 'mt-10', 'mr-4', 'ml-4')} >
                 <p className={sel(s.cost_total, 'text text_type_digits-medium', 'mr-2')}>{finalPrice}</p>
                 <div className={sel(s.icon, 'mr-10')}>
-                     <CurrencyIcon type="primary" width='36' height='36'/>  
+                     <CurrencyIcon type="primary"/>  
                 </div>
                 
                 <Button htmlType="button" type="primary" size="large" onClick={handleClickButton} disabled={dataAvailable}>

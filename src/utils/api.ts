@@ -84,7 +84,7 @@ export const getIngredients = ()  => {
 };
 
 //Получим информацию о заказе
-export const postOrderInfo = (dataID: string) => {  //ID всех ингредиентов, которые находятся в конструкторе бургера
+export const postOrderInfo = (dataID: string[]) => {  //ID всех ингредиентов, которые находятся в конструкторе бургера
     return fetch(`${apiUrl}/orders`, {
         method: 'POST',
         headers: {

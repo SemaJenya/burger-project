@@ -1,7 +1,14 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { postOrderInfo } from '../../utils/api';
 import { number } from 'prop-types';
-export const initialState = {
+
+type TOrderState = {
+    data: [];
+    isLoading: boolean;
+    error: SerializedError | null | unknown;
+}
+
+export const initialState: TOrderState  = {
   data: [],
   isLoading: false,
   error: null
@@ -10,7 +17,7 @@ export const initialState = {
 // <any, string>
 
 //асинхронный экшен
-export const fetchOrder = createAsyncThunk(  //возвращает объект с методами pending, fulfield, reject
+export const fetchOrder = createAsyncThunk<any, string[]>(  //возвращает объект с методами pending, fulfield, reject
     'order/fetchOrder', //имя экшена
     //функция формируеи пейлоад и возвращает его для редьюсера (то, что мы запишем в стор). Асинхронная ф-я peyload creater - полезная нагрузка
     async (dataID, {dispatch, getState, rejectWithValue, fulfillWithValue}) => {       //первый аргумент - при вызове ф-и в диспатч она передается аргументом(можно импользовать дальше в функциях)   второй аргумент - 
@@ -18,7 +25,7 @@ export const fetchOrder = createAsyncThunk(  //возвращает объект
             const data = await postOrderInfo(dataID);         
             return fulfillWithValue(data); //возвращает пейлоад (то, что хранится в экшене) и записывает в стор
         }
-        catch (error) {
+        catch (error: any) {
             if(error.status) {
                 return rejectWithValue(error);
             }
@@ -32,6 +39,7 @@ export const fetchOrder = createAsyncThunk(  //возвращает объект
 export const orderSlice = createSlice({
   name: 'order',
   initialState,
+  reducers: {},
   extraReducers: (builder) => {    //для запросов
     builder 
         .addCase(fetchOrder.pending, (state) => {
@@ -43,8 +51,8 @@ export const orderSlice = createSlice({
             state.data = action.payload;
         })
         .addCase(fetchOrder.rejected, (state, action) => {
-            state.isLoading = false;
-            state.error = action.payload;
+            state = {...state, isLoading: false}
+            state = {...state, error: action.payload}
         })
   }
 })
