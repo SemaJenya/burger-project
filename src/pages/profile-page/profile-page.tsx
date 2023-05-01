@@ -3,19 +3,21 @@ import sel from 'classnames';
 import s from './style.module.css'
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink, useNavigate } from 'react-router-dom'
-import { logoutUser } from '../../utils/api';
-import { fetchChangeProfile, fetchLoginUser, fetchLogout } from '../../services/reducers/user-info/user';
-import { useDispatch, useSelector } from 'react-redux';
+import { UserObject, logoutUser } from '../../utils/api';
+import { TUserState, fetchChangeProfile, fetchLoginUser, fetchLogout } from '../../services/reducers/user-info/user';
+import { useSelector } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
+import { RootState } from '../../services/store';
 
 
 export const ProfilePage = () => {
     const inputRef = useRef(null);
     const dispatch = useDispatch();
 
-    const activeLink = ({ isActive }) => isActive 
+    const activeLink = ({ isActive }: any) => isActive 
     ? sel("text text_type_main-medium", s.active__link) : sel("text text_type_main-medium text_color_inactive", s.link);
 
-    const userDataStore = useSelector(state => state.userStore.data);
+    const userDataStore = useSelector<RootState>(state => state.userStore.data) as UserObject;
 
     
     const [userData, setUserData] = useState({
@@ -24,8 +26,8 @@ export const ProfilePage = () => {
         name: userDataStore.name
     });
 
-    const handleChange = e => {
-        const {name, value} = e.target;
+    const handleChange = (e: React.SyntheticEvent) => {
+        const {name, value} = e.target as HTMLInputElement;
         setUserData({
             ...userData,
             [name]: value
