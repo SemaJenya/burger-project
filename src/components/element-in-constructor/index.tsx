@@ -1,18 +1,23 @@
 import s from './style.module.css';
 import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDrag, useDrop } from 'react-dnd';
+import { XYCoord, useDrag, useDrop } from 'react-dnd';
 import { removeConstructor, reorder } from '../../services/reducers/constructor';
 import { useDispatch } from 'react-redux';
-import { useRef } from 'react';
+import { Ref, useRef } from 'react';
 import { reduceCounter } from '../../services/reducers/counter';
+import { TIngredient } from '../../utils/types';
 
+type TElementInConctructor = {
+    data: TIngredient;
+    index: number;
+} 
 
-export const ElementInConctructor = ({data, index}) => {
+export const ElementInConctructor: React.FC<TElementInConctructor> = ({data, index}) => {
     const itemID = data._id;
     const dispatch = useDispatch();
 
-    const ref = useRef(null);
+    const ref: Ref<HTMLDivElement> = useRef(null);
     const [{handlerId}, drop] = useDrop({
         accept: 'listReorder',
         collect(monitor) {
@@ -20,7 +25,7 @@ export const ElementInConctructor = ({data, index}) => {
               handlerId: monitor.getHandlerId(),
             }
         },
-        hover(item, monitor){
+        hover(item: any, monitor){
             if (!ref.current) {
                 return
             }
@@ -36,17 +41,19 @@ export const ElementInConctructor = ({data, index}) => {
                 (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
             // позиция мыши 
             const clientOffset = monitor.getClientOffset()
-            const hoverClientY = clientOffset.y - hoverBoundingRect.top
+            if (clientOffset !== null) {
+                const hoverClientY = clientOffset.y - hoverBoundingRect.top
 
-            if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-                return
-            }
-            // Dragging upwards
-            if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-                return
-            }
-            dispatch(reorder({from: dragIndex, to: hoverIndex}))
-            item.index = hoverIndex;
+                if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+                    return
+                }
+                // Dragging upwards
+                if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+                    return
+                }
+                dispatch(reorder({from: dragIndex, to: hoverIndex}))
+                item.index = hoverIndex;
+            }     
         }
     });
 
@@ -60,7 +67,7 @@ export const ElementInConctructor = ({data, index}) => {
           }),       
     })
 
-    const handleRemoveIngredient = (e) => {
+    const handleRemoveIngredient = () => {
         dispatch(removeConstructor(data.randomId));
         dispatch(reduceCounter(data));
 
@@ -81,7 +88,3 @@ export const ElementInConctructor = ({data, index}) => {
     )
 }
 
-ElementInConctructor.propTypes = {
-    data: PropTypes.object.isRequired,
-    index: PropTypes.number.isRequired,
-}

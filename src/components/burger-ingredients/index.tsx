@@ -17,6 +17,7 @@ type TInitialState = {
 }
 
 
+
 export const BurgerIngredients = () => {
 
     const {data: ingredients, isLoading} = useSelector<RootState>(state => state.ingredientsStore) as TInitialState//достаем данные из стора
