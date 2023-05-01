@@ -16,6 +16,7 @@ export const IngredientDetails = () => {
     const ingredients = useSelector<RootState>(state => state.ingredientsStore.data) as TIngredient[];
     const currentIngredient: TIngredient | undefined = ingredients?.find(item => `${item._id }`=== ingredientID) 
 
+    
     return (
         <div className={sel(s.details__container, 'pl-15', 'pr-15')}>
             <img className={sel(s.image, 'ml-5', 'mr-5', 'mb-4')} src={currentIngredient?.image} alt={currentIngredient?.name} />

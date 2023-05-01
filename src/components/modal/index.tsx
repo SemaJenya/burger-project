@@ -1,22 +1,25 @@
 import PropTypes from 'prop-types';
 import s from './style.module.css';
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import sel from 'classnames';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ModalOverlay } from '../modal-overlay';
 import { createPortal } from 'react-dom';
-import { createIngredientDetails } from '../../services/reducers/ingredientDetails';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 
-const modalDot = document.querySelector('#modals')
+type TModal = {
+    title: string;
+    onClose: () => void;
+    children: ReactElement;
+} 
 
-export const Modal = ({title, onClose, children}) => {
+const modalDot = document.querySelector('#modals') as Element | DocumentFragment
 
-   const navigate = useNavigate()
+export const Modal: React.FC<TModal> = ({title, onClose, children}) => {
+
 
     useEffect(() => {
-        const closeModalEsc = (e) => {
+        const closeModalEsc = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 onClose()            
             }         
@@ -32,7 +35,7 @@ export const Modal = ({title, onClose, children}) => {
                 <div className={sel(s.modal, 'pt-10', 'pl-10', 'pr-10', 'pb-15')}>
                     <div className={s.title__box}>
                         <h2 className={sel(s.title, 'text text_type_main-large')}>{title}</h2>
-                        <button className={s.close} type='button' ><CloseIcon onClick={onClose} /></button>
+                        <button className={s.close} type='button' ><CloseIcon onClick={onClose} type='primary' /></button>
                     </div>                   
                     {children}
                 </div>
@@ -40,11 +43,4 @@ export const Modal = ({title, onClose, children}) => {
             </>, 
             modalDot)
     )
-}
-
-
-Modal.propTypes = {
-    onClose: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
 }
