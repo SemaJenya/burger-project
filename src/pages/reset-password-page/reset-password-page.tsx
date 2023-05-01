@@ -7,7 +7,7 @@ import { postResetPassword } from '../../utils/api';
 
 
 export const ResetPasswordPage = () => {
-    const inputRef = useRef(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const location = useLocation();
 
    
@@ -17,19 +17,18 @@ export const ResetPasswordPage = () => {
     const params = useParams();
 
     const [newPasswordValue, setNewPasswordValue] = useState('');
-    const onChangePassword = e => {
+    const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewPasswordValue(e.target.value);
     }
 
     const [codeValue, setCodeValue] = useState('');
-    const onChangeCode = e => {
+    const onChangeCode = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCodeValue(e.target.value);
     }
 
-    const saveNewPassword = (e) => {
+    const saveNewPassword = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        console.log('сработал сабмин');
-        if(newPasswordValue, codeValue) {
+        if(codeValue && newPasswordValue) {
             postResetPassword(newPasswordValue, codeValue)
             .then(() => {
                 navigate('/')
