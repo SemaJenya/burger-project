@@ -3,10 +3,17 @@ import s from './style.module.css';
 import sel from 'classnames';
 import { BurgerIngredient } from '../burger-ingredient';
 import { ingredientsPropType } from '../../utils/prop-type';
-import React, { forwardRef } from 'react';
+import React, { Ref, forwardRef } from 'react';
+import { TIngredient } from '../../utils/types';
 
+type TIngredientCategory = {
+    title: string;
+    ingredients: TIngredient[];
+    id: string;
+    ref: Ref<HTMLDivElement>;
+} 
 
-export const IngredientCategory = React.forwardRef(
+export const IngredientCategory: React.FC<TIngredientCategory> = React.forwardRef(
     ({title, ingredients, id}, ref) => {
    
     return (
@@ -19,11 +26,3 @@ export const IngredientCategory = React.forwardRef(
     )
 }
 )
-
-
-IngredientCategory.propTypes = {
-    title: PropTypes.string.isRequired,
-    ingredients: PropTypes.arrayOf(ingredientsPropType.isRequired).isRequired,
-    id: PropTypes.string.isRequired,
-
-}

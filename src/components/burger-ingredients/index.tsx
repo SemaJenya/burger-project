@@ -2,25 +2,31 @@ import { useEffect, useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import s from './style.module.css';
 import sel from 'classnames';
-import { Modal } from '../modal';
-import { IngredientDetails } from '../ingredient-details';
 import { IngredientCategory } from '../ingredient-category';
-import { useDispatch, useSelector } from 'react-redux';
-import { createIngredientDetails, removeIngredientDetails } from '../../services/reducers/ingredientDetails';
+import { useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
+import { RootState } from '../../services/store';
+import { SerializedError } from '@reduxjs/toolkit';
+import { TIngredient } from '../../utils/types';
 
+
+type TInitialState = {
+    data: TIngredient[];
+    isLoading: boolean;
+    error: SerializedError | null;
+}
 
 
 export const BurgerIngredients = () => {
 
-    const {data: ingredients, isLoading, error} = useSelector(state => state.ingredientsStore) //достаем данные из стора
+    const {data: ingredients, isLoading} = useSelector<RootState>(state => state.ingredientsStore) as TInitialState//достаем данные из стора
 
     const [current, setCurrent] = useState('bun');
-    const bunsList = ingredients.filter(item => item.type === 'bun');
+    const bunsList = ingredients.filter(item=> item.type === 'bun');
     const mainList = ingredients.filter(item => item.type === 'main');
     const sauceList = ingredients.filter(item => item.type === 'sauce');
 
-    const handleClickTab = (tab) => {
+    const handleClickTab = (tab: string) => {
         setCurrent(tab);
         const title = document.getElementById(tab);
         if (title) title.scrollIntoView({behavior: 'smooth'});
@@ -47,7 +53,7 @@ export const BurgerIngredients = () => {
 
 
 
-    const ingredient = useSelector(state => state.ingredientDetailsStore.ingredient)
+    const ingredient = useSelector<RootState>(state => state.ingredientDetailsStore.ingredient) as TIngredient;
 
 
    
