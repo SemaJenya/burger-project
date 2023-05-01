@@ -1,15 +1,19 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { postOrderInfo } from '../../utils/api';
+import { OrderResponse, postOrderInfo } from '../../utils/api';
 import { number } from 'prop-types';
 
 export type TOrderState = {
-    data: [];
+    data: OrderResponse;
     isLoading: boolean;
     error: SerializedError | null | unknown;
 }
 
 export const initialState: TOrderState  = {
-  data: [],
+  data: {
+    success: null,
+    name: null,
+    order: null
+  },
   isLoading: false,
   error: null
 }

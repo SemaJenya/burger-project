@@ -43,6 +43,16 @@ export interface RequestInitWithAuth extends RequestInit {
     headers?: HeadersInit | {authorization?: string | undefined}
 }
 
+export type OrderNumber = {
+    number: number
+}
+
+export type OrderResponse = {
+    success: boolean | null;
+    name: string| null;
+    order: OrderNumber| null;
+}
+
 
 
 const checkResponse = <T>(res: Response): Promise<T> => {
@@ -94,8 +104,8 @@ export const postOrderInfo = (dataID: string[]) => {  //ID всех ингред
             'ingredients': dataID
         })
     })
-        .then(checkResponse)
-        .then((data:any) => {
+        .then(checkResponse<OrderResponse>)
+        .then((data) => {
             if(data.success) {
                 return data;
             }
