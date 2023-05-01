@@ -4,8 +4,8 @@ import s from './style.module.css';
 import { Link } from 'react-router-dom';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { postRegistration } from '../../utils/api';
-import { useDispatch } from 'react-redux';
 import { fetchLoginUser } from '../../services/reducers/user-info/user';
+import { useDispatch } from '../../services/hooks';
 
 
 export const LoginPage = () => {
@@ -19,15 +19,15 @@ export const LoginPage = () => {
         name: ''
     });
 
-    const handleChange = e => {
-        const {name, value} = e.target;
+    const handleChange = (e: React.SyntheticEvent) => {
+        const {name, value} = e.target as HTMLInputElement;
         setUserData({
             ...userData,
             [name]: value
         });
     };
 
-    const login = (e) => {
+    const login = (e: React.FormEvent) => {
         e.preventDefault();
         dispatch(fetchLoginUser(userData))
     }
