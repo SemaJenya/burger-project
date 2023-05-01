@@ -4,6 +4,8 @@ import sel from 'classnames';
 import { useParams } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
+import { RootState } from '../../services/store';
+import { TIngredient } from '../../utils/types';
 
 
 
@@ -11,8 +13,8 @@ export const IngredientDetails = () => {
     const params = useParams();
     const ingredientID = params.id;
 
-    const ingredients = useSelector(state => state.ingredientsStore.data);
-    const currentIngredient = ingredients?.find(item => `${item._id }`=== ingredientID) || {}
+    const ingredients = useSelector<RootState>(state => state.ingredientsStore.data) as TIngredient[];
+    const currentIngredient: TIngredient | undefined = ingredients?.find(item => `${item._id }`=== ingredientID) 
 
     return (
         <div className={sel(s.details__container, 'pl-15', 'pr-15')}>
