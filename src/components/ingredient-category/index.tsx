@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import s from './style.module.css';
 import sel from 'classnames';
 import { BurgerIngredient } from '../burger-ingredient';
-import { ingredientsPropType } from '../../utils/prop-type';
 import React, { Ref, forwardRef } from 'react';
 import { TIngredient } from '../../utils/types';
 

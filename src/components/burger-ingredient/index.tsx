@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import s from './style.module.css';
 import sel from 'classnames';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ingredientsPropType } from '../../utils/prop-type';
 import { useSelector } from 'react-redux';
 import { createIngredientDetails } from '../../services/reducers/ingredientDetails';
 import { useDrag } from 'react-dnd';
