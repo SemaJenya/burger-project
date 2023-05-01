@@ -2,16 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 import { TIngredient } from '../../utils/types';
 
-type TCounter = {
+
+export type TCounter= {
   type: string;
   count: number;
 }
 
-type TInitialState = {
+export type TCounterState = {
   counter: {[kye: string]: TCounter};
 }
 
-export const initialState: TInitialState = {
+export const initialState: TCounterState = {
   counter: {}
 }
 

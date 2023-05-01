@@ -7,7 +7,7 @@ import { OrderDetails } from '../order-details';
 import { Modal } from '../modal';
 import { useSelector } from 'react-redux';
 import burger from '../../images/burger.jpg'
-import { fetchOrder } from '../../services/reducers/orederDetails';
+import { TOrderState, fetchOrder } from '../../services/reducers/orederDetails';
 import { useDrop } from 'react-dnd';
 import { TConstructorStore, createConstructor } from '../../services/reducers/constructor';
 import { ElementInConctructor } from '../element-in-constructor';
@@ -48,7 +48,7 @@ export const BurgerConstructor = () => {
 
     const dispatch = useDispatch();
 
-    const { isLoading }: any = useSelector<RootState>(state => state.orderStore);
+    const { isLoading } = useSelector<RootState>(state => state.orderStore) as TOrderState;
 
 
     const handleClickButton = () => {

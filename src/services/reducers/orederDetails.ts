@@ -2,7 +2,7 @@ import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit
 import { postOrderInfo } from '../../utils/api';
 import { number } from 'prop-types';
 
-type TOrderState = {
+export type TOrderState = {
     data: [];
     isLoading: boolean;
     error: SerializedError | null | unknown;

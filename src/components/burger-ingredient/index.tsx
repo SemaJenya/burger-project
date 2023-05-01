@@ -5,16 +5,21 @@ import s from './style.module.css';
 import sel from 'classnames';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientsPropType } from '../../utils/prop-type';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { createIngredientDetails } from '../../services/reducers/ingredientDetails';
 import { useDrag } from 'react-dnd';
+import { RootState } from '../../services/store';
+import { useDispatch } from '../../services/hooks';
+import { TIngredient } from '../../utils/types';
+import { TCounterState } from '../../services/reducers/counter';
 
 
 
+export const BurgerIngredient: React.FC<TIngredient> = ({...data}) => {
 
-export const BurgerIngredient = ({...data}) => {
+  
 
-    const counter = useSelector(state => state.counterStore.counter);
+    const counter = useSelector<RootState>(state => state.counterStore.counter) as TCounterState | any;
 
     const dispatch = useDispatch();
     const location = useLocation();
@@ -25,7 +30,7 @@ export const BurgerIngredient = ({...data}) => {
 
 
     //  //все для DnD
-     const [{isDrag}, dragRef] = useDrag({
+     const [{ isDrag }, dragRef] = useDrag({
         type: 'ingredient',
         item: {data},
         collect: monitor => ({
@@ -43,8 +48,4 @@ export const BurgerIngredient = ({...data}) => {
             <h3 className={sel(s.title, 'text text_type_main-default')}>{data.name}</h3>
         </Link>
     )
-}
-
-BurgerIngredient.propTypes = {
-    data: PropTypes.objectOf(ingredientsPropType.isRequired)
 }
