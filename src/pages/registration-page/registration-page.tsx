@@ -3,9 +3,9 @@ import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-de
 import s from './style.module.css';
 import sel from 'classnames';
 import { useRef, useState } from 'react';
-import { postRegistration } from '../../utils/api';
 import { fetchRegistration } from '../../services/reducers/user-info/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
+
 
 
 export const RegistrationPage = () => {
@@ -13,10 +13,11 @@ export const RegistrationPage = () => {
         const dispatch = useDispatch();
 
 
-        const inputRef = useRef(null)
+        const inputRef = useRef<HTMLInputElement>(null)
         const onIconClick = () => {
-          setTimeout(() => inputRef.current.focus(), 0)
-          alert('Icon Click Callback')
+            if(inputRef.current !== null) {
+                inputRef.current.focus()
+            }
         }
 
         const [userData, setUserData] = useState({
@@ -25,15 +26,15 @@ export const RegistrationPage = () => {
             name: ''
         });
     
-        const handleChange = e => {
-            const {name, value} = e.target;
+        const handleChange = (e: React.SyntheticEvent) => {
+            const {name, value} = e.target as HTMLInputElement;
             setUserData({
                 ...userData,
                 [name]: value
             });
         };
 
-        const registration = (e) => {
+        const registration = (e: React.SyntheticEvent) => {
             e.preventDefault();
             dispatch(fetchRegistration(userData))
         }
