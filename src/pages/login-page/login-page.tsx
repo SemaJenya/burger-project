@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 import sel from 'classnames';
 import s from './style.module.css';
 import { Link } from 'react-router-dom';
@@ -18,15 +18,15 @@ export const LoginPage = () => {
         name: ''
     });
 
-    const handleChange = (e: React.SyntheticEvent) => {
-        const {name, value} = e.target as HTMLInputElement;
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
         setUserData({
             ...userData,
             [name]: value
         });
     };
 
-    const login = (e: React.FormEvent) => {
+    const login = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(fetchLoginUser(userData))
     }

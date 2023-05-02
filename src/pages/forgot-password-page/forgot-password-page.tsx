@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import sel from 'classnames';
 import s from './style.module.css';
@@ -25,7 +25,7 @@ export const ForgotPasswordPage = () => {
 
     const disabledButton = isEmailValid(userDataEmail);
 
-    const handleClick = (event: React.FormEvent) => {
+    const handleClick = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if(userDataEmail) {
             postPasswordRecovery(userDataEmail)

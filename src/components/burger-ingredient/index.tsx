@@ -15,7 +15,7 @@ export const BurgerIngredient: React.FC<TIngredient> = ({...data}) => {
 
   
 
-    const counter = useSelect(state => state.counterStore.counter) as TCounterState | any;
+    const counter = useSelect(state => state.counterStore.counter);
 
     const dispatch = useDispatch();
     const location = useLocation();

@@ -26,7 +26,7 @@ export const BurgerConstructor = () => {
     const [isClick, setIsClick] = useState<boolean>(false);
 
     
-    const {ingredients, bun} = useSelect(state => state.constructorStore) as TConstructorStore; //достаем данные из стора
+    const {ingredients, bun} = useSelect(state => state.constructorStore); //достаем данные из стора
     const userDataStore = useSelect(state => state.userStore.data);
 
     const dataAvailable: boolean = ingredients.length === 0 ? true : false;

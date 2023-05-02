@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import sel from 'classnames';
 import s from './style.module.css';
@@ -26,7 +26,7 @@ export const ResetPasswordPage = () => {
         setCodeValue(e.target.value);
     }
 
-    const saveNewPassword = (e: React.SyntheticEvent) => {
+    const saveNewPassword = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if(codeValue && newPasswordValue) {
             postResetPassword(newPasswordValue, codeValue)

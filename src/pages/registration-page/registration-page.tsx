@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import s from './style.module.css';
 import sel from 'classnames';
-import { useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 import { fetchRegistration } from '../../services/reducers/user-info/user';
 import { useDispatch } from '../../services/hooks';
 
@@ -26,15 +26,15 @@ export const RegistrationPage = () => {
             name: ''
         });
     
-        const handleChange = (e: React.SyntheticEvent) => {
-            const {name, value} = e.target as HTMLInputElement;
+        const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+            const {name, value} = e.target;
             setUserData({
                 ...userData,
                 [name]: value
             });
         };
 
-        const registration = (e: React.SyntheticEvent) => {
+        const registration = (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             dispatch(fetchRegistration(userData))
         }

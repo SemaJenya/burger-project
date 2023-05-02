@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import sel from 'classnames';
 import s from './style.module.css'
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -25,8 +25,8 @@ export const ProfilePage = () => {
         name: userDataStore.name
     });
 
-    const handleChange = (e: React.SyntheticEvent) => {
-        const {name, value} = e.target as HTMLInputElement;
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
         setUserData({
             ...userData,
             [name]: value
