@@ -1,12 +1,11 @@
 import s from './style.module.css';
-import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { XYCoord, useDrag, useDrop } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 import { removeConstructor, reorder } from '../../services/reducers/constructor';
-import { useDispatch } from 'react-redux';
 import { Ref, useRef } from 'react';
 import { reduceCounter } from '../../services/reducers/counter';
 import { TIngredient } from '../../utils/types';
+import { useDispatch } from '../../services/hooks';
 
 type TElementInConctructor = {
     data: TIngredient;

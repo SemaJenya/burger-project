@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+
 import sel from 'classnames';
 import s from './style.module.css';
 import { IngredientDetails } from '../../components/ingredient-details';

@@ -3,11 +3,10 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import s from './style.module.css';
 import sel from 'classnames';
 import { IngredientCategory } from '../ingredient-category';
-import { useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
-import { RootState } from '../../services/store';
 import { SerializedError } from '@reduxjs/toolkit';
 import { TIngredient } from '../../utils/types';
+import { useSelect } from '../../services/hooks';
 
 
 type TInitialState = {
@@ -20,7 +19,7 @@ type TInitialState = {
 
 export const BurgerIngredients = () => {
 
-    const {data: ingredients, isLoading} = useSelector<RootState>(state => state.ingredientsStore) as TInitialState//достаем данные из стора
+    const {data: ingredients, isLoading} = useSelect(state => state.ingredientsStore) as TInitialState//достаем данные из стора
 
     const [current, setCurrent] = useState('bun');
     const bunsList = ingredients.filter(item=> item.type === 'bun');
@@ -54,7 +53,7 @@ export const BurgerIngredients = () => {
 
 
 
-    const ingredient = useSelector<RootState>(state => state.ingredientDetailsStore.ingredient) as TIngredient;
+    const ingredient = useSelect(state => state.ingredientDetailsStore.ingredient) as TIngredient | null;
 
 
    

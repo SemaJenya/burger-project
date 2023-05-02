@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+
 import s from './style.module.css';
 
 type TModalOverlay = {
@@ -11,8 +11,4 @@ export const ModalOverlay: React.FC<TModalOverlay> = ({onClick}) => {
 
         </div>
     )
-}
-
-ModalOverlay.propTypes = {
-    onClick: PropTypes.func.isRequired
 }

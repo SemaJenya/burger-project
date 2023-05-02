@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+
 import s from './style.module.css';
 import { ReactElement, useEffect } from 'react';
 import sel from 'classnames';

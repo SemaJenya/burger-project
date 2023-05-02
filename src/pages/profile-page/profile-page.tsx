@@ -1,13 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import sel from 'classnames';
 import s from './style.module.css'
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { NavLink, useNavigate } from 'react-router-dom'
-import { UserObject, logoutUser } from '../../utils/api';
-import { TUserState, fetchChangeProfile, fetchLoginUser, fetchLogout } from '../../services/reducers/user-info/user';
-import { useSelector } from 'react-redux';
-import { useDispatch } from '../../services/hooks';
-import { RootState } from '../../services/store';
+import { NavLink } from 'react-router-dom'
+import { UserObject } from '../../utils/api';
+import { fetchChangeProfile, fetchLogout } from '../../services/reducers/user-info/user';
+import { useDispatch, useSelect } from '../../services/hooks';
+
 
 
 export const ProfilePage = () => {
@@ -17,7 +16,7 @@ export const ProfilePage = () => {
     const activeLink = ({ isActive }: any) => isActive 
     ? sel("text text_type_main-medium", s.active__link) : sel("text text_type_main-medium text_color_inactive", s.link);
 
-    const userDataStore = useSelector<RootState>(state => state.userStore.data) as UserObject;
+    const userDataStore = useSelect(state => state.userStore.data) as UserObject;
 
     
     const [userData, setUserData] = useState({
@@ -88,7 +87,6 @@ export const ProfilePage = () => {
                         name={'name'}
                         error={false}
                         ref={inputRef}
-                        // onIconClick={onChangeName}
                         errorText={'Ошибка'}
                         size={'default'}
                         extraClass="ml-1"/>

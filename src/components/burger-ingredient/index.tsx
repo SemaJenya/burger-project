@@ -1,14 +1,11 @@
-import { useEffect } from 'react'
+
 import { Link, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import s from './style.module.css';
 import sel from 'classnames';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
 import { createIngredientDetails } from '../../services/reducers/ingredientDetails';
 import { useDrag } from 'react-dnd';
-import { RootState } from '../../services/store';
-import { useDispatch } from '../../services/hooks';
+import { useDispatch, useSelect } from '../../services/hooks';
 import { TIngredient } from '../../utils/types';
 import { TCounterState } from '../../services/reducers/counter';
 
@@ -18,7 +15,7 @@ export const BurgerIngredient: React.FC<TIngredient> = ({...data}) => {
 
   
 
-    const counter = useSelector<RootState>(state => state.counterStore.counter) as TCounterState | any;
+    const counter = useSelect(state => state.counterStore.counter) as TCounterState | any;
 
     const dispatch = useDispatch();
     const location = useLocation();

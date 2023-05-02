@@ -1,14 +1,13 @@
 import s from './style.module.css';
 import sel from 'classnames';
 import orderImage from '../../images/order-accpeted/popup/graphics.svg';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../services/store';
 import { OrderNumber } from '../../utils/api';
+import { useSelect } from '../../services/hooks';
 
 
 export const OrderDetails = () => {
 
-    const { number } = useSelector<RootState>(state => state.orderStore.data.order) as OrderNumber;
+    const { number } = useSelect(state => state.orderStore.data.order) as OrderNumber;
     return (
         <div className={s.order__box}>
             <h2 className={sel(s.order__number, 'text text_type_digits-large', 'mb-8')}>{number}</h2>

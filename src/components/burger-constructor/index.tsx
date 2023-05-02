@@ -5,7 +5,6 @@ import s from './style.module.css';
 import sel from 'classnames';
 import { OrderDetails } from '../order-details';
 import { Modal } from '../modal';
-import { useSelector } from 'react-redux';
 import burger from '../../images/burger.jpg'
 import { TOrderState, fetchOrder } from '../../services/reducers/orederDetails';
 import { useDrop } from 'react-dnd';
@@ -15,6 +14,7 @@ import { addCounter } from '../../services/reducers/counter'
 import { RootState } from '../../services/store';
 import { TIngredient } from '../../utils/types';
 import { useDispatch } from '../../services/hooks';
+import { useSelect } from '../../services/hooks'
 
 
 
@@ -26,8 +26,8 @@ export const BurgerConstructor = () => {
     const [isClick, setIsClick] = useState<boolean>(false);
 
     
-    const {ingredients, bun} = useSelector<RootState>(state => state.constructorStore) as TConstructorStore; //достаем данные из стора
-    const userDataStore = useSelector<RootState>(state => state.userStore.data);
+    const {ingredients, bun} = useSelect(state => state.constructorStore) as TConstructorStore; //достаем данные из стора
+    const userDataStore = useSelect(state => state.userStore.data);
 
     const dataAvailable: boolean = ingredients.length === 0 ? true : false;
 
@@ -35,11 +35,15 @@ export const BurgerConstructor = () => {
 
     const calculateSum = (ingredients: TIngredient[], bun: TIngredient | null) => {
         let sum = 0;
-        if(bun) {
+        if(bun && bun.price) {
             sum += bun?.price * 2;
         }
         if(ingredients.length > 0) {
-            ingredients.map((item) => sum += item.price);
+            ingredients.map((item) => {
+                if(item.price) {
+                    sum += item.price
+                }
+            });
         }
         return sum;
     }
@@ -48,7 +52,7 @@ export const BurgerConstructor = () => {
 
     const dispatch = useDispatch();
 
-    const { isLoading } = useSelector<RootState>(state => state.orderStore) as TOrderState;
+    const { isLoading } = useSelect(state => state.orderStore) as TOrderState;
 
 
     const handleClickButton = () => {

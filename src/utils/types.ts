@@ -6,7 +6,7 @@ export type TIngredient = {
     image_large: string;
     image_mobile: string;
     name: string;
-    price: number;
+    price: number | undefined;
     proteins: number;
     type: 'bun'| 'main'| 'sauce';
     _id: string;

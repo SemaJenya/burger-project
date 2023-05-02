@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
-import { useSelector } from 'react-redux';
 import { Navigate, RouteProps, useLocation } from 'react-router-dom';
-import { RootState } from '../../services/store';
+import { useSelect } from '../../services/hooks';
 
 
 type TProtectedRouteProps = {
@@ -13,8 +12,8 @@ export const ProtectedRoute: React.FC<TProtectedRouteProps> = ({children, onlyUn
     const location = useLocation()
     //достать юзер тут
 
-    const user = useSelector<RootState>(state => state.userStore.data);
-    const isAuthChecked = useSelector<RootState>(state => state.userStore.isAuthChecked);
+    const user = useSelect(state => state.userStore.data);
+    const isAuthChecked = useSelect(state => state.userStore.isAuthChecked);
 
     if(!isAuthChecked) {
         return <div>Снова я загружаюсь. Снова говорю пока</div> //надо сделать нормальный компонент для загрузки

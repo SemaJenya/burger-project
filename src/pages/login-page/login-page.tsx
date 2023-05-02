@@ -3,7 +3,6 @@ import sel from 'classnames';
 import s from './style.module.css';
 import { Link } from 'react-router-dom';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { postRegistration } from '../../utils/api';
 import { fetchLoginUser } from '../../services/reducers/user-info/user';
 import { useDispatch } from '../../services/hooks';
 
