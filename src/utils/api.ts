@@ -1,4 +1,5 @@
 import { getCookie, setCookie } from "./cookie";
+import { TIngredient } from "./types";
 
 const apiUrl = 'https://norma.nomoreparties.space/api';
 
@@ -53,6 +54,11 @@ export type OrderResponse = {
     order: OrderNumber| null;
 }
 
+type IngredientsResponse = {
+    success: boolean;
+    data: TIngredient[];
+}
+
 
 
 const checkResponse = <T>(res: Response): Promise<T> => {
@@ -85,8 +91,8 @@ export const fetchRefresh = async <T>(url: RequestInfo, options: RequestInitWith
 // Получим данные ингредиентов    
 export const getIngredients = ()  => {
     return fetch(`${apiUrl}/ingredients`)
-        .then(checkResponse)
-        .then((dataIng:any) => {
+        .then(checkResponse<IngredientsResponse>)
+        .then((dataIng) => {
             if(dataIng.success) {
                 return dataIng.data;
             }

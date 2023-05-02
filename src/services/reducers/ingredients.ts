@@ -2,35 +2,30 @@ import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit
 import { getIngredients } from '../../utils/api';
 import { TIngredient } from '../../utils/types';
 
-// type TInitialState = {
-//     data: any[];
-//     isLoading: boolean;
-//     error: SerializedError | null;
-// }
+type TIngredientState = {
+    data: TIngredient[];
+    isLoading: boolean;
+    error: SerializedError | null | unknown;
+}
 
-// type IngredientsResponse = {
-//     success: boolean;
-//     data: {[key: string]: TIngredient}[];
-// }
-
-export const initialState = {
+export const initialState: TIngredientState = {
   data: [],
   isLoading: false,
   error: null
 }
 //асинхронный экшен
-export const fetchIngredients = createAsyncThunk(  //возвращает объект с методами pending, fulfield, reject
+export const fetchIngredients = createAsyncThunk<TIngredient[], void>(  //возвращает объект с методами pending, fulfield, reject
     'ingredients/fetchIngredients', //имя экшена
     //функция формируеи пейлоад и возвращает его для редьюсера (то, что мы запишем в стор). Асинхронная ф-я peyload creater - полезная нагрузка
     async (_, { rejectWithValue, fulfillWithValue}) => {       //первый аргумент - при вызове ф-и в диспатч она передается аргументом(можно импользовать дальше в функциях)   второй аргумент - 
         try {
             const data = await getIngredients();
             if(!Array.isArray(data)) {
-                throw new Error({error: 'Ошибка. Данные не получены', status: '404'})
+                throw new Error('Ошибка. Данные не получены 404') 
             }
             return fulfillWithValue(data); //возвращает пейлоад (то, что хранится в экшене) и записывает в стор
         }
-        catch (error) {
+        catch (error: any) {
             if(error.status) {
                 return rejectWithValue(error);
             }
@@ -44,6 +39,7 @@ export const fetchIngredients = createAsyncThunk(  //возвращает объ
 export const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
+  reducers: {},
   extraReducers: (builder) => {    //для запросов
     builder 
         .addCase(fetchIngredients.pending, (state) => {
@@ -55,8 +51,8 @@ export const ingredientsSlice = createSlice({
             state.data = action.payload;
         })
         .addCase(fetchIngredients.rejected, (state, action) => {
-            state.isLoading = false;
-            state.error = action.payload;
+            state = {...state, isLoading: false};
+            state = {...state, error: action.payload};
         })
   }
 })
