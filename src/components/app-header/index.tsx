@@ -9,8 +9,9 @@ export const AppHeader = () => {
     const activeLink = ({ isActive }: {[key: string]: boolean}) => isActive ? sel(s.active, 'pl-5', 'pr-5', 'pt-4', 'pb-4') : sel(s.link, 'pl-5', 'pr-5', 'pt-4', 'pb-4')
     const [personalAreaIcon, setPersonalAreaIcon] = useState('secondary');
         
-    const isProfile = useMatch('/profile')
-    const isConstructor = useMatch('/')
+    const isProfile = useMatch('/profile');
+    const isConstructor = useMatch('/');
+    const isFeed = useMatch('/feed');
 
 
     const handleClickPersonalArea = () => {
@@ -27,10 +28,10 @@ export const AppHeader = () => {
                         <BurgerIcon type={isConstructor? "primary": "secondary"}/>
                         <span className={sel('text text_type_main-default ml-2')}>Конструктор</span>
                     </NavLink>
-                    <a className={sel(s.link,  'pl-5', 'pr-5', 'pt-4', 'pb-4')} href='#'>
-                        <ListIcon type="secondary" />
-                        <span className='text text_type_main-default text_color_inactive ml-2'>Лента заказов</span>
-                    </a>
+                    <NavLink to='/feed' className={activeLink} onClick={handleClickPersonalArea}>
+                        <ListIcon type={isFeed? "primary": "secondary"} />
+                        <span className='text text_type_main-default ml-2'>Лента заказов</span>
+                    </NavLink>
                 </div>  
 
                 <Link className={sel(s.nav__box, s.logo)} to='/'>

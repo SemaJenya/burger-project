@@ -1,0 +1,39 @@
+
+.order__container {
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 100%;
+    row-gap: 16px;
+}
+
+.order__box {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(28, 28, 33, 1);
+    border-radius: 45px;
+    width: 584px;
+    padding: 24px;
+    row-gap: 24px;
+}
+
+.order__id {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order__number {
+    margin: 0;
+}
+
+.burger__info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.burger__price {
+    display: flex;
+    align-items: center;
+    column-gap: 9px;
+}

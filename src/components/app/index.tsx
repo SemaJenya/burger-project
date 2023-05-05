@@ -19,6 +19,7 @@ import { Modal } from '../modal';
 import { IngredientDetails } from '../ingredient-details';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { useDispatch } from '../../services/hooks';
+import { OrderFeed } from '../../pages/order-feed/order-feed';
 
 
 
@@ -68,6 +69,8 @@ export const App = () => {
                     <ProtectedRoute onlyUnAuth >
                         <ResetPasswordPage />
                     </ProtectedRoute>
+                }/>
+                <Route path='/feed' element={<OrderFeed />
                 }/>
                 <Route path={`/ingredients/:id`} element={<IngredientsID />} />
                 <Route path='*' element={<div>404</div>} />
