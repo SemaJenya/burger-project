@@ -1,5 +1,5 @@
 .orderID__page {
-    max-width: 1240px ;
+    width: 1240px ;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,6 +13,7 @@
     display: flex;
     flex-direction: column;
     width: 640px;
+    width: 100%;
 }
 
 .order__number {

@@ -21,6 +21,8 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 import { useDispatch } from '../../services/hooks';
 import { OrderFeed } from '../../pages/order-feed/order-feed';
 import { OrderFeedID } from '../../pages/order-feed-id/order-feed-id';
+import { ProfileOrders } from '../../pages/profile-orders/profile-orders';
+import { OrderIdDetails } from '../order-id-details/order-id-details';
 
 
 
@@ -32,6 +34,8 @@ export const App = () => {
     const navigate = useNavigate();
 
     const background = location.state?.background;
+  
+    
 
     useEffect(() => {
         dispatch(fetchIngredients());
@@ -40,8 +44,9 @@ export const App = () => {
     }, [dispatch]);
 
     const closeIngredientModal = () => {
-        navigate(background.pathname || '/', {replace: true});
+        navigate(background.pathname || '/' || '/feed', {replace: true});
     }
+
 
 
 
@@ -81,12 +86,24 @@ export const App = () => {
                         <ProfilePage />
                     </ProtectedRoute>
                 }/>
+                <Route path='/profile/orders' element={
+                    <ProtectedRoute >
+                        <ProfileOrders />
+                    </ProtectedRoute>
+                }/>
             </Routes>  
 
-            {background &&
+            {(background?.pathname === '/') &&
             <Routes>
                 <Route path={`/ingredients/:id`} element={background && <Modal title='Детали ингредиента' onClose={closeIngredientModal}><IngredientDetails /></Modal>}/>
-            </Routes> }
+            </Routes>
+             }
+
+             {(background?.pathname === '/feed') &&
+            <Routes>
+                <Route path={`/feed/:id`} element={background && <Modal title='# 1234456' onClose={closeIngredientModal}><OrderIdDetails /></Modal>}/>
+            </Routes>
+             }
     
         </DndProvider>    
     </div>

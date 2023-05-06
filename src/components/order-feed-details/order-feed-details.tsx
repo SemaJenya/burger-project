@@ -5,14 +5,15 @@ import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burge
 import { useSelect } from '../../services/hooks';
 import { relative } from 'path';
 import { OrderBurgerComposition } from '../order-burger-composition/order-burger-composition';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { TIngredient } from '../../utils/types';
 import { useMemo } from 'react';
 
 
 
 export const OrderFeedDetails = () => {
-
+    
+    const location = useLocation();
     const MAX_VIEW_INGREDIENT = 6;
     const today = new Date()
     const fiveDaysAgo = new Date(
@@ -23,9 +24,6 @@ export const OrderFeedDetails = () => {
         today.getMinutes() - 1,
         0,
     )
-
-    
-
     const orderNumber = '494975';
     const orderName = 'Название заказа Супер булка';
 
@@ -52,7 +50,7 @@ export const OrderFeedDetails = () => {
 
     return (
         <div className={sel(s.order__container, 'custom-scroll')}>
-            <Link to={{pathname: `${orderNumber}`}} className={s.order__box}>
+            <Link to={{pathname: `${orderNumber}`}} className={s.order__box} state={{background: location}}>
                 <div className={sel(s.order__id)}>
                     <p className={sel(s.order__number, 'text text_type_digits-default')}>{orderNumber}</p>
                     <FormattedDate date={new Date(fiveDaysAgo)} className={sel(s.order__date, 'text text_type_main-default', 'text_color_inactive')} />
@@ -65,7 +63,14 @@ export const OrderFeedDetails = () => {
                              let zindex = MAX_VIEW_INGREDIENT - index;
                              let right = 20 * index;
                             if(data) {
-                                return(<OrderBurgerComposition data={data} index={index} allIngredients={allIngredients} MAX_VIEW_INGREDIENT={MAX_VIEW_INGREDIENT} zindex={zindex} right={right}/>)
+                                return(<OrderBurgerComposition 
+                                    data={data} 
+                                    index={index} 
+                                    allIngredients={allIngredients} 
+                                    MAX_VIEW_INGREDIENT={MAX_VIEW_INGREDIENT} 
+                                    zindex={zindex} 
+                                    right={right}
+                                    key={data.randomId} />)
                             }                            
                         })}
                     </div>
