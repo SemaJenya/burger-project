@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom'
 import { UserObject } from '../../utils/api';
 import { fetchChangeProfile, fetchLogout } from '../../services/reducers/user-info/user';
 import { useDispatch, useSelect } from '../../services/hooks';
+import { ProfileNavigate } from '../../components/profile-navigate/profile-navigate';
 
 
 
@@ -13,8 +14,7 @@ export const ProfilePage = () => {
     const inputRef = useRef(null);
     const dispatch = useDispatch();
 
-    const activeLink = ({ isActive }: any) => isActive 
-    ? sel("text text_type_main-medium", s.active__link) : sel("text text_type_main-medium text_color_inactive", s.link);
+
 
     const userDataStore = useSelect(state => state.userStore.data) as UserObject;
 
@@ -47,32 +47,12 @@ export const ProfilePage = () => {
         });
     }
 
-    const handleLogout = () => {
-        dispatch(fetchLogout())
-    }
-
     return (
-        <div className={s.page}>
+        <section className={s.page}>
             <div className={s.content__conteiner}> 
                 <div className={s.profile__navigation}>
                     <nav id='profile-nav'>
-                        <ul className={s.navigation__box}>
-                            <li id='profilenav' className={sel(s.navigation__point)}>
-                                <NavLink to='/profile'  className={activeLink}>
-                                    Профиль
-                                </NavLink>
-                            </li>
-                            <li className={sel(s.navigation__point)}>
-                                <NavLink to='/profile/orders'  className={activeLink}>
-                                    История заказов
-                                </NavLink>
-                            </li>
-                            <li className={s.navigation__point}>
-                                <NavLink to='/login' className={activeLink} onClick={handleLogout} >
-                                    Выход
-                                </NavLink>
-                            </li>
-                        </ul>
+                        <ProfileNavigate />
                     </nav>
                     <p className={sel(s.subtitle, 'text text_type_main-default text_color_inactive')}>В этом разделе вы можете изменить свои персональные данные</p>
                 </div>
@@ -114,6 +94,6 @@ export const ProfilePage = () => {
                                      
                 </form>   
             </div>     
-       </div>
+       </section>
     )
 }
