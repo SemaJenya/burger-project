@@ -20,6 +20,7 @@ import { IngredientDetails } from '../ingredient-details';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { useDispatch } from '../../services/hooks';
 import { OrderFeed } from '../../pages/order-feed/order-feed';
+import { OrderFeedID } from '../../pages/order-feed-id/order-feed-id';
 
 
 
@@ -70,8 +71,9 @@ export const App = () => {
                         <ResetPasswordPage />
                     </ProtectedRoute>
                 }/>
-                <Route path='/feed' element={<OrderFeed />
-                }/>
+                <Route path='/feed' element={<OrderFeed />} />
+                <Route path='/feed/:id' element={<OrderFeedID />} />
+
                 <Route path={`/ingredients/:id`} element={<IngredientsID />} />
                 <Route path='*' element={<div>404</div>} />
                 <Route path='/profile' element={
