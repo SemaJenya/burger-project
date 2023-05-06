@@ -1,57 +1,12 @@
 
-.order__container {
-    width: 600px;
-    display: flex;
-    flex-wrap: wrap;
-    overflow-y: scroll;
-    height: 100%;
-    row-gap: 16px;
-}
-
-.order__box {
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(28, 28, 33, 1);
-    border-radius: 45px;
-    width: 584px;
-    padding: 24px;
-    row-gap: 24px;
-    height: 180px;
-}
-
-.burger__content {
-    display: flex;   
-}
-
-.order__id {
-    display: flex;
-    justify-content: space-between;
-}
-
-.order__number {
-    margin: 0;
-}
-
-.burger__info {
-    display: flex;
-    justify-content: space-between;
-}
-
-.burger__price {
-    display: flex;
-    align-items: center;
-    column-gap: 9px;
-}
-
-.burger__content {
-    position: relative;
-}
 
 .ingredient {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     background-color: rgba(28, 28, 33, 1);
+    border: 2px solid rgba(76, 76, 255, 1);
+    overflow: hidden;
 }
 
 .image {
@@ -59,5 +14,18 @@
     height: 58px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid rgba(76, 76, 255, 1);
 }
+
+.span__plus {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(28, 28, 33, 0.6);  
+}
+

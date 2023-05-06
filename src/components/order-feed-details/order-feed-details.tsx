@@ -6,6 +6,8 @@ import { useSelect } from '../../services/hooks';
 import { relative } from 'path';
 import { OrderBurgerComposition } from '../order-burger-composition/order-burger-composition';
 import { Link } from 'react-router-dom';
+import { TIngredient } from '../../utils/types';
+import { useMemo } from 'react';
 
 
 
@@ -22,12 +24,31 @@ export const OrderFeedDetails = () => {
         0,
     )
 
+    
+
     const orderNumber = '494975';
     const orderName = 'Название заказа Супер булка';
 
     const { ingredients, bun } = useSelect(state => state.constructorStore);
     const allIngredients=[bun, ...ingredients];
     const ingredientsToShow = allIngredients.slice(0, MAX_VIEW_INGREDIENT);
+
+
+    const calculateSum = (ingredients: TIngredient[], bun: TIngredient | null) => {   // потом сумма будет браться с сервера
+        let sum = 0;
+        if(bun && bun.price) {
+            sum += bun?.price * 2;
+        }
+        if(ingredients.length > 0) {
+            ingredients.map((item) => {
+                if(item.price) {
+                    sum += item.price
+                }
+            });
+        }
+        return sum;
+    }
+    const finalPrice: number = useMemo(() => calculateSum(ingredients, bun), [ingredients, bun])
 
     return (
         <div className={sel(s.order__container, 'custom-scroll')}>
@@ -41,23 +62,16 @@ export const OrderFeedDetails = () => {
 
                     <div className={sel(s.burger__content)}>
                         {ingredientsToShow?.map((data, index) => {
-                            let zindex = MAX_VIEW_INGREDIENT - index;
-                            let right = 20 * index;
+                             let zindex = MAX_VIEW_INGREDIENT - index;
+                             let right = 20 * index;
                             if(data) {
-                            return (
-                                <div className={s.ingredient} style={{ position: 'relative', top: 0, right: `${right}px`, zIndex: zindex }} key={`${data.randomId}`}>
-                                    {data && <img className={s.image} src={data.image} />}
-
-                                    { MAX_VIEW_INGREDIENT === index  + 1  && (allIngredients.length - MAX_VIEW_INGREDIENT) > 0 ? (
-                                        <span className={sel(s.span__plus, 'text text_type_main-small')}>+{(allIngredients.length - MAX_VIEW_INGREDIENT) > 0?  (allIngredients.length - MAX_VIEW_INGREDIENT) :null}</span>
-                                    ):null}
-                                </div>
-                            )
-                        }})}
+                                return(<OrderBurgerComposition data={data} index={index} allIngredients={allIngredients} MAX_VIEW_INGREDIENT={MAX_VIEW_INGREDIENT} zindex={zindex} right={right}/>)
+                            }                            
+                        })}
                     </div>
 
-                    <div>
-                        <p className={sel(s.burger__price, 'text text_type_digits-default')}>12345
+                    <div className={s.cost}>
+                        <p className={sel(s.burger__price, 'text text_type_digits-default')}>{finalPrice}
                             <CurrencyIcon type="primary" />
                         </p>
                     </div>
