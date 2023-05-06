@@ -4,7 +4,7 @@ import { ProfileNavigate } from '../../components/profile-navigate/profile-navig
 import s from './style.module.css';
 import sel from 'classnames';
 
-
+// тут нужно выгружать все заказы с сервера, но только наши
 export const ProfileOrders = () => {
     return (
         <section className={s.page}>
@@ -15,8 +15,8 @@ export const ProfileOrders = () => {
                     </nav>
                     <p className={sel(s.subtitle, 'text text_type_main-default text_color_inactive')}>В этом разделе вы можете просмотреть свою историю заказов</p>
                 </div>
-                <div className={s.orders}>
-                    <OrderFeedDetails />
+                <div className={s.orders}> 
+                    <OrderFeedDetails />  
                 </div>
             </div>        
         </section>

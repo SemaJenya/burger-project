@@ -91,6 +91,11 @@ export const App = () => {
                         <ProfileOrders />
                     </ProtectedRoute>
                 }/>
+                <Route path='/profile/orders/:id' element={
+                    <ProtectedRoute >
+                        <OrderFeedID />
+                    </ProtectedRoute>
+                }/>
             </Routes>  
 
             {(background?.pathname === '/') &&
@@ -102,6 +107,11 @@ export const App = () => {
              {(background?.pathname === '/feed') &&
             <Routes>
                 <Route path={`/feed/:id`} element={background && <Modal title='# 1234456' onClose={closeIngredientModal}><OrderIdDetails /></Modal>}/>
+            </Routes>
+             }
+              {(background?.pathname === '/profile/orders') &&
+            <Routes>
+                <Route path={`/profile/orders/:id`} element={background && <Modal title='# 1234456' onClose={closeIngredientModal}><OrderIdDetails /></Modal>}/>
             </Routes>
              }
     

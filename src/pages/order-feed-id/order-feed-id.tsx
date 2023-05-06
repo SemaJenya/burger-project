@@ -14,19 +14,6 @@ import { OrderIdDetails } from '../../components/order-id-details/order-id-detai
 export const OrderFeedID = () => {
 
     const { ingredients, bun } = useSelect(state => state.constructorStore);
-    const allIngredients = [bun, ...ingredients];
-
-    const { counter} = useSelect(state => state.counterStore);
-
-    const today = new Date()
-    const fiveDaysAgo = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate() - 5,
-        today.getHours(),
-        today.getMinutes() - 1,
-        0,
-    )
 
     const calculateSum = (ingredients: TIngredient[], bun: TIngredient | null) => {   // потом сумма будет браться с сервера
         let sum = 0;
