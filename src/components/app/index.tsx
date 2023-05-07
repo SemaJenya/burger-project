@@ -18,12 +18,13 @@ import { checkUserAuth } from '../../services/reducers/user-info/user';
 import { Modal } from '../modal';
 import { IngredientDetails } from '../ingredient-details';
 import { ProtectedRoute } from '../protected-route/protected-route';
-import { useDispatch } from '../../services/hooks';
+import { useDispatch, useSelect } from '../../services/hooks';
 import { OrderFeed } from '../../pages/order-feed/order-feed';
 import { OrderFeedID } from '../../pages/order-feed-id/order-feed-id';
 import { ProfileOrders } from '../../pages/profile-orders/profile-orders';
 import { OrderIdDetails } from '../order-id-details/order-id-details';
 import { OrderFeedIDUser } from '../../pages/order-feed-id-user/order-feed-id';
+import { wsConnect } from '../../services/reducers/order-feed-live/actions';
 
 
 
@@ -36,10 +37,14 @@ export const App = () => {
 
     const background = location.state?.background;
   
+    const { orders, status } = useSelect(state => state.liveOrdersStore);
+    console.log(orders, status);
     
 
     useEffect(() => {
         dispatch(fetchIngredients());
+
+        dispatch(wsConnect())
     
         dispatch(checkUserAuth());
     }, [dispatch]);

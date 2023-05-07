@@ -13,10 +13,7 @@ export const ingredientDetailsSlice = createSlice({
   reducers: {
     createIngredientDetails: (state, action) => {   //это экшен
       state.ingredient = action.payload;
-    },
-    // removeIngredientDetails: (state, action) => {    //тут надо как-то очищать стор при закрытии модального окна, чтобы стор не засорялся
-    //   console.log(action.payload);
-    // }
+    }
   }
 })
 

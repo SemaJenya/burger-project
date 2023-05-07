@@ -5,6 +5,8 @@ import ingredientDetails from './reducers/ingredientDetails';
 import ingredients from './reducers/ingredients';
 import order from './reducers/orederDetails';
 import registration from './reducers/user-info/user';
+import liveOrdersReducer from './reducers/order-feed-live/reducers';
+
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,7 @@ export const store = configureStore({
     orderStore: order,
     counterStore: counter, 
     userStore: registration,
+    liveOrdersStore: liveOrdersReducer,
   },
 });
 
