@@ -36,16 +36,10 @@ export const App = () => {
     const navigate = useNavigate();
 
     const background = location.state?.background;
-  
-    const { orders, status } = useSelect(state => state.liveOrdersStore);
-    console.log(orders, status);
     
 
     useEffect(() => {
-        dispatch(fetchIngredients());
-
-        dispatch(wsConnect('wss://norma.nomoreparties.space/orders/all'))
-    
+        dispatch(fetchIngredients()); 
         dispatch(checkUserAuth());
     }, [dispatch]);
 

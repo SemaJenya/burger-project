@@ -3,15 +3,21 @@ import sel from 'classnames';
 import s from './style.module.css';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelect } from '../../services/hooks';
-import { relative } from 'path';
 import { OrderBurgerComposition } from '../order-burger-composition/order-burger-composition';
 import { Link, useLocation } from 'react-router-dom';
 import { TIngredient } from '../../utils/types';
 import { useMemo } from 'react';
+import { TOrder, TOrdersWS } from '../../services/reducers/order-feed-live/reducers';
 
+type TOrderFeedDetails = {
+    order: TOrder;
+} 
 
+export const OrderFeedDetails: React.FC<TOrderFeedDetails> = ({order}) => {
 
-export const OrderFeedDetails = () => {
+    console.log('*************');
+
+    
     
     const location = useLocation();
     const MAX_VIEW_INGREDIENT = 6;
@@ -24,8 +30,8 @@ export const OrderFeedDetails = () => {
         today.getMinutes() - 1,
         0,
     )
-    const orderNumber = '494975';
-    const orderName = 'Название заказа Супер булка';
+    const orderNumber = order.number;
+    const orderName = order.name;
 
     const { ingredients, bun } = useSelect(state => state.constructorStore);
     const allIngredients=[bun, ...ingredients];
@@ -49,7 +55,7 @@ export const OrderFeedDetails = () => {
     const finalPrice: number = useMemo(() => calculateSum(ingredients, bun), [ingredients, bun])
 
     return (
-        <div className={sel(s.order__container, 'custom-scroll')}>
+
             <Link to={{pathname: `${orderNumber}`}} className={s.order__box} state={{background: location}}>
                 <div className={sel(s.order__id)}>
                     <p className={sel(s.order__number, 'text text_type_digits-default')}>{orderNumber}</p>
@@ -82,7 +88,5 @@ export const OrderFeedDetails = () => {
                     </div>
                 </div>
             </Link>
-        </div>
-
     )
 }

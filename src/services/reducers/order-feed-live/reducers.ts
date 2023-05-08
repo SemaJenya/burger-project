@@ -1,40 +1,53 @@
 import { createReducer } from "@reduxjs/toolkit"
 import { wsClose, wsConnecting, wsError, wsMessage, wsOpen } from "./actions"
 
+export type TOrder = {
+    createdAt: string;
+    ingredients: Array<string>;
+    name: string;
+    number: number;
+    status: string;
+    updatedAt: string;
+    _id: string;
+}
+
+export type TOrdersWS = {
+    orders: TOrder[];
+    success: boolean;
+    total: number;
+    totalToday: number;
+}
+
 type TOrdersReduser = {
     status: string;
     connectionError: string | unknown;
-    orders: [] | unknown;
-    total: number | null;
-    totalToday: number | null;
+    orders: TOrdersWS | null | undefined
 }
 
 const initialState: TOrdersReduser = {
     status: 'offline',
     connectionError: '',
-    orders: [],
-    total: null,
-    totalToday: null
+    orders: null,
 }
 
 const liveOrdersReducer = createReducer(initialState, (builder) => {
     builder
-        .addCase(wsConnecting, (state) => {
+        .addCase(wsConnecting, (state) => {            
             state.status = 'connecting';
         })
-        .addCase(wsOpen, (state) => {
+        .addCase(wsOpen, (state) => {            
             state.status = 'online';
             state.connectionError = ''
         })
-        .addCase(wsClose, (state) => {
+        .addCase(wsClose, (state) => {            
             state.status = 'offline';
         })
         .addCase(wsError, (state, action) => {
             state.status = 'offline';
-            state = {...state, connectionError: action.payload}
+            state.connectionError = action.payload
         })
         .addCase(wsMessage, (state, action) => {
-            state = {...state, orders: action.payload}
+            state.orders = action.payload
         })
 })
 
