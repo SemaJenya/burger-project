@@ -4,13 +4,17 @@ import { wsClose, wsConnecting, wsError, wsMessage, wsOpen } from "./actions"
 type TOrdersReduser = {
     status: string;
     connectionError: string | unknown;
-    orders: [] | unknown
+    orders: [] | unknown;
+    total: number | null;
+    totalToday: number | null;
 }
 
 const initialState: TOrdersReduser = {
     status: 'offline',
     connectionError: '',
-    orders: []
+    orders: [],
+    total: null,
+    totalToday: null
 }
 
 const liveOrdersReducer = createReducer(initialState, (builder) => {

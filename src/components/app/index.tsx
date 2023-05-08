@@ -44,7 +44,7 @@ export const App = () => {
     useEffect(() => {
         dispatch(fetchIngredients());
 
-        dispatch(wsConnect())
+        dispatch(wsConnect('wss://norma.nomoreparties.space/orders/all'))
     
         dispatch(checkUserAuth());
     }, [dispatch]);

@@ -6,7 +6,21 @@ import ingredients from './reducers/ingredients';
 import order from './reducers/orederDetails';
 import registration from './reducers/user-info/user';
 import liveOrdersReducer from './reducers/order-feed-live/reducers';
+import { socketMiddleware } from './middleware/socket-middlewar';
+import { wsConnect, wsDisconnect, wsConnecting, wsOpen, wsClose, wsError, wsMessage, wsSend } from '../services/reducers/order-feed-live/actions'
 
+const wsActions = {
+  wsConnect,
+  wsDisconnect,
+  wsConnecting,
+  wsOpen,
+  wsClose,
+  wsError,
+  wsMessage,
+  wsSend
+}
+
+const liveOrdersMiddleware = socketMiddleware(wsActions)
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +32,9 @@ export const store = configureStore({
     userStore: registration,
     liveOrdersStore: liveOrdersReducer,
   },
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(liveOrdersMiddleware)
+  }
 });
 
 export default store;
