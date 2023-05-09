@@ -13,7 +13,7 @@
 }
 
 .ready__orders {
-    max-width: 280px;
+    max-width: 400px;
     width: 100%;
 }
 
@@ -21,6 +21,8 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    height: 420px;
+    flex-wrap: wrap;
 }
 
 .order__number {
