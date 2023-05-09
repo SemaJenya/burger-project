@@ -1,4 +1,4 @@
-
+import { v4 as uuidv4 } from 'uuid';
 import sel from 'classnames';
 import s from './style.module.css';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -7,41 +7,76 @@ import { OrdersBoard } from '../../components/orders-board/orders-board';
 import { useSelect } from '../../services/hooks';
 import { useMemo } from 'react';
 import { TIngredient } from '../../utils/types';
+import { TOrder } from '../../services/reducers/order-feed-live/reducers';
+import { useParams } from 'react-router-dom';
+
+type TOrderIdDetails = {
+    currentOrder?: TOrder;
+}
+
+export const OrderIdDetails: React.FC<TOrderIdDetails> = () => {
 
 
+    const params = useParams();
+    const orderNumber = params.id;
 
-export const OrderIdDetails = () => {
+    const { orders } = useSelect(state => state.liveOrdersStore);
+    const currentOrder: TOrder | undefined = orders?.orders?.find(item => `${item.number }`=== orderNumber) 
 
-    const { ingredients, bun } = useSelect(state => state.constructorStore);
-    const allIngredients = [bun, ...ingredients];
+    const { data } = useSelect(state => state.ingredientsStore)
 
-    const { counter} = useSelect(state => state.counterStore);
 
-    const today = new Date()
-    const fiveDaysAgo = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate() - 5,
-        today.getHours(),
-        today.getMinutes() - 1,
-        0,
-    )
+    let ingredientsInOrder: TIngredient[] = new Array(); //ингредиенты все в заказе массив объектов для подсчета стоимости и вычисления их количества
+    data.forEach(ingredient => {
+        currentOrder?.ingredients.forEach(orderIngredient => {
+            if (ingredient._id === orderIngredient) {
+                const arrlength = ingredientsInOrder.push({ ...ingredient, randomId: uuidv4() })
+            }
+        })
+    })
+    
 
-    const calculateSum = (ingredients: TIngredient[], bun: TIngredient | null) => {   // потом сумма будет браться с сервера
+
+    function unique(arr: string[] | undefined) {  //находим уникальние ингредиенты для отображение в заказе
+        let result: string[] | undefined = [];
+        if(arr) {
+            for (let i = 0; i < arr.length; i++) {
+                if (!result.includes(arr[i])) {
+                  result.push(arr[i]);
+                }
+              }
+            
+              return result;
+            }
+        }   
+    const uniqueIngredient = unique(currentOrder?.ingredients);
+  
+    let uniqueIngredientsInOrder: TIngredient[] = new Array(); 
+    data.forEach(ingredient => {
+        uniqueIngredient?.forEach(orderIngredient => {
+            if (ingredient._id === orderIngredient) {
+                const arrlength = uniqueIngredientsInOrder.push({ ...ingredient, randomId: uuidv4() })
+            }
+        })
+    })
+
+    const calculateSum = (ingredientsInOrder: TIngredient[]) => {
         let sum = 0;
-        if(bun && bun.price) {
-            sum += bun?.price * 2;
-        }
-        if(ingredients.length > 0) {
-            ingredients.map((item) => {
-                if(item.price) {
+        if (ingredientsInOrder.length > 0) {
+            ingredientsInOrder.map((item) => {
+                if (item.price) {
                     sum += item.price
                 }
             });
         }
         return sum;
     }
-    const finalPrice: number = useMemo(() => calculateSum(ingredients, bun), [ingredients, bun])
+
+
+    const finalPrice: number = useMemo(() => calculateSum(ingredientsInOrder), [ingredientsInOrder])
+
+    console.log(finalPrice);
+    
     
 
     return (
@@ -50,7 +85,11 @@ export const OrderIdDetails = () => {
                 <p className={sel(s.order__status, 'text text_type_main-small', 'mb-15')}>Status ready</p>
                 <p className={sel(s.order__content, 'text text_type_main-medium', 'mb-6')}>Cостав:</p>
                 <ul className={sel(s.content, 'custom-scroll')}>
-                    {allIngredients?.map(data => {
+                    {uniqueIngredientsInOrder?.map(data => {
+
+                        
+                        const count = ingredientsInOrder.filter(item => item._id === data._id).length;
+
                         if (data) {
                             return (
                                 <li className={s.ingedient__info} key={data.randomId}>
@@ -60,7 +99,7 @@ export const OrderIdDetails = () => {
                                     <p className={sel(s.ingredient__name, 'text text_type_main-default')}>{data.name}</p>
                                     <div className={s.quantity__coast}>
                                         <p className={sel(s.quantity, 'text text_type_digits-default')}>
-                                            {`${counter[data._id].count} x ${data.price}`}
+                                            {`${count} x ${data.price}`}
                                         </p>
                                         <CurrencyIcon type="primary"/> 
                                     </div>
@@ -69,7 +108,7 @@ export const OrderIdDetails = () => {
                     })}
                 </ul>
                 <div className={s.date__cost}>
-                    <FormattedDate date={new Date(fiveDaysAgo)} className={sel(s.order__date, 'text text_type_main-default', 'text_color_inactive')} />
+                    {currentOrder && <FormattedDate date={new Date(currentOrder.createdAt)} className={sel(s.order__date, 'text text_type_main-default', 'text_color_inactive')} />}
                     
                     <p className={sel(s.order__coast, 'text text_type_digits-default')}>{finalPrice} <CurrencyIcon type="primary"/> </p>
                 </div>

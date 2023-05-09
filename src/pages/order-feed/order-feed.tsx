@@ -4,11 +4,10 @@ import s from './style.module.css';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderFeedDetails } from '../../components/order-feed-details/order-feed-details';
 import { OrdersBoard } from '../../components/orders-board/orders-board';
-import { FC, ReactNode, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelect } from '../../services/hooks';
 import { wsConnect } from '../../services/reducers/order-feed-live/actions';
-import { func } from 'prop-types';
-import { TOrder, TOrdersWS } from '../../services/reducers/order-feed-live/reducers';
+
 
 
 

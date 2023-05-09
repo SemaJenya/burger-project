@@ -7,7 +7,7 @@ import { OrderBurgerComposition } from '../order-burger-composition/order-burger
 import { Link, useLocation } from 'react-router-dom';
 import { TIngredient } from '../../utils/types';
 import { useMemo } from 'react';
-import { TOrder, TOrdersWS } from '../../services/reducers/order-feed-live/reducers';
+import { TOrder } from '../../services/reducers/order-feed-live/reducers';
 
 type TOrderFeedDetails = {
     order: TOrder;
@@ -27,33 +27,21 @@ export const OrderFeedDetails: React.FC<TOrderFeedDetails> = ({ order }) => {
         })
     })
 
-
     const location = useLocation();
     const MAX_VIEW_INGREDIENT = 6;
-    // const today = new Date()
-    // const fiveDaysAgo = new Date(
-    //     today.getFullYear(),
-    //     today.getMonth(),
-    //     today.getDate() - 5,
-    //     today.getHours(),
-    //     today.getMinutes() - 1,
-    //     0,
-    // )
+
     const orderNumber = order.number;
     const orderName = order.name;
 
     const ingredientsToShow = ingredientsInOrder.slice(0, MAX_VIEW_INGREDIENT);
 
 
-    const calculateSum = (ingredients: TIngredient[]) => {
+    const calculateSum = (ingredientsInOrder: TIngredient[]) => {
         let sum = 0;
-        if (ingredients.length > 0) {
-            ingredients.map((item) => {
-                if (item.type !== 'bun' && item.price) {
+        if (ingredientsInOrder.length > 0) {
+            ingredientsInOrder.map((item) => {
+                if (item.price) {
                     sum += item.price
-                }
-                if (item.type === 'bun' && item.price) {
-                    sum += item?.price * 2;
                 }
             });
         }
@@ -74,7 +62,7 @@ export const OrderFeedDetails: React.FC<TOrderFeedDetails> = ({ order }) => {
             <div className={sel(s.burger__info)}>
 
                 <div className={sel(s.burger__content)} key={`${order._id}`}>
-                    {ingredientsToShow?.map((data, index) => {
+                    {ingredientsToShow?.map((data: TIngredient, index) => {
                         let zindex = MAX_VIEW_INGREDIENT - index;
                         let right = 20 * index;
                         if (data) {
