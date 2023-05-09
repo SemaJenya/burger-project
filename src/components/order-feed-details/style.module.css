@@ -13,7 +13,7 @@
     flex-direction: column;
     background-color: rgba(28, 28, 33, 1);
     border-radius: 45px;
-    width: 584px;
+    width: 570px;
     padding: 24px;
     row-gap: 24px;
     height: 180px;
@@ -37,6 +37,14 @@
 .burger__info {
     display: flex;
     justify-content: space-between;
+}
+
+.order__name {
+    width: 520px;
+    height: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .burger__price {
