@@ -5,10 +5,11 @@ import sel from 'classnames';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ModalOverlay } from '../modal-overlay';
 import { createPortal } from 'react-dom';
+import { useParams } from 'react-router-dom';
 
 
 type TModal = {
-    title: string;
+    title?: string;
     onClose: () => void;
     children: ReactElement;
 } 
@@ -17,6 +18,10 @@ const modalDot = document.querySelector('#modals') as Element | DocumentFragment
 
 export const Modal: React.FC<TModal> = ({title, onClose, children}) => {
 
+    const params = useParams();
+    const orderNumber = params.id;
+
+    console.log(orderNumber);
 
     useEffect(() => {
         const closeModalEsc = (e: KeyboardEvent) => {
@@ -34,7 +39,7 @@ export const Modal: React.FC<TModal> = ({title, onClose, children}) => {
             <>
                 <div className={sel(s.modal, 'pt-10', 'pl-10', 'pr-10', 'pb-15')}>
                     <div className={s.title__box}>
-                        <h2 className={sel(s.title, 'text text_type_main-large')}>{title}</h2>
+                        <h2 className={sel(s.title, 'text text_type_main-large')}>{title ? title : orderNumber}</h2>
                         <button className={s.close} type='button' ><CloseIcon onClick={onClose} type='primary' /></button>
                     </div>                   
                     {children}

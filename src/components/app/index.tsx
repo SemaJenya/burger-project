@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import { Routes, Route, useLocation, useNavigate, BrowserRouter} from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 
 import { AppHeader } from '../app-header'
 import s from './style.module.css'
@@ -18,13 +18,12 @@ import { checkUserAuth } from '../../services/reducers/user-info/user';
 import { Modal } from '../modal';
 import { IngredientDetails } from '../ingredient-details';
 import { ProtectedRoute } from '../protected-route/protected-route';
-import { useDispatch, useSelect } from '../../services/hooks';
+import { useDispatch } from '../../services/hooks';
 import { OrderFeed } from '../../pages/order-feed/order-feed';
 import { OrderFeedID } from '../../pages/order-feed-id/order-feed-id';
 import { ProfileOrders } from '../../pages/profile-orders/profile-orders';
 import { OrderIdDetails } from '../order-id-details/order-id-details';
 import { OrderFeedIDUser } from '../../pages/order-feed-id-user/order-feed-id';
-import { wsConnect } from '../../services/reducers/order-feed-live/actions';
 
 
 
@@ -46,8 +45,7 @@ export const App = () => {
     const closeIngredientModal = () => {
         navigate(background.pathname || '/' || '/feed', {replace: true});
     }
-
-
+    
 
 
     return(
@@ -106,7 +104,7 @@ export const App = () => {
 
              {(background?.pathname === '/feed') &&
             <Routes>
-                <Route path={`/feed/:id`} element={background && <Modal title='# 1234456' onClose={closeIngredientModal}><OrderIdDetails /></Modal>}/>
+                <Route path={`/feed/:id`} element={background && <Modal onClose={closeIngredientModal}><OrderIdDetails /></Modal>}/>
             </Routes>
              }
               {(background?.pathname === '/profile/orders') &&

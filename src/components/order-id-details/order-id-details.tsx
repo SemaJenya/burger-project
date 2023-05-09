@@ -36,7 +36,6 @@ export const OrderIdDetails: React.FC<TOrderIdDetails> = () => {
     })
     
 
-
     function unique(arr: string[] | undefined) {  //находим уникальние ингредиенты для отображение в заказе
         let result: string[] | undefined = [];
         if(arr) {
@@ -72,17 +71,14 @@ export const OrderIdDetails: React.FC<TOrderIdDetails> = () => {
         return sum;
     }
 
-
     const finalPrice: number = useMemo(() => calculateSum(ingredientsInOrder), [ingredientsInOrder])
-
-    console.log(finalPrice);
     
     
 
     return (
             <>
-                <p className={sel(s.order__name, 'text text_type_main-medium', 'mb-3')}>Order Name Buger</p>
-                <p className={sel(s.order__status, 'text text_type_main-small', 'mb-15')}>Status ready</p>
+                <p className={sel(s.order__name, 'text text_type_main-medium', 'mb-3')}>{currentOrder?.name}</p>
+                <p className={sel(s.order__status, 'text text_type_main-small', 'mb-15')}>{currentOrder?.status === 'done' ? 'Выполнен' : 'Готовится'}</p>
                 <p className={sel(s.order__content, 'text text_type_main-medium', 'mb-6')}>Cостав:</p>
                 <ul className={sel(s.content, 'custom-scroll')}>
                     {uniqueIngredientsInOrder?.map(data => {
