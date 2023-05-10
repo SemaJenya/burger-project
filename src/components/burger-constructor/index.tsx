@@ -21,6 +21,7 @@ import { useSelect } from '../../services/hooks'
 
 export const BurgerConstructor = () => {
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     
     const [isClick, setIsClick] = useState<boolean>(false);
@@ -32,6 +33,12 @@ export const BurgerConstructor = () => {
     const dataAvailable: boolean = ingredients.length === 0 ? true : false;
 
     const ingredientsID = ingredients?.map((item) => item._id);
+
+    const bunID: string = bun ? bun._id : '';
+
+    const ingredientsAndBunID = [bunID, ...ingredientsID, bunID];
+    console.log(ingredientsAndBunID);
+    
 
     const calculateSum = (ingredients: TIngredient[], bun: TIngredient | null) => {
         let sum = 0;
@@ -50,21 +57,19 @@ export const BurgerConstructor = () => {
     
     const finalPrice: number = useMemo(() => calculateSum(ingredients, bun), [ingredients, bun])
 
-    const dispatch = useDispatch();
-
     const { isLoading } = useSelect(state => state.orderStore) as TOrderState;
 
 
     const handleClickButton = () => {
         if(userDataStore) {
             setIsClick(!isClick);
-            dispatch(fetchOrder(ingredientsID));
+            dispatch(fetchOrder(ingredientsAndBunID));           
         }
         else {
             navigate('/login');
         }
-            
     };
+
 
 
    

@@ -27,7 +27,6 @@ export const socketMiddleware = (wsActions) => {   //урл будем пере�
         };
 
         socket.onerror = event => {
-          console.log('error');
           dispatch(wsError(event.code?.toString()));
         };
 
@@ -42,14 +41,12 @@ export const socketMiddleware = (wsActions) => {   //урл будем пере�
           if (event.code !== 1000) {
             console.log('error close not 1000');
             dispatch(wsError(event.code?.toString()))
-            console.log('error close 1000');
           }
 
           if (isConnected && event.code !== 1000) {
             console.log('повторное соединение');
             countConnecting++;
             if (countConnecting < MAX_RECONNECTING) {
-              console.log('повторное соединение');
               reconnectTimer = window.setTimeout(() => {
                 dispatch(wsConnect(`${wsUrl}`))
               }, 3000)
@@ -58,10 +55,11 @@ export const socketMiddleware = (wsActions) => {   //урл будем пере�
 
         };
 
-        // if (type === wsSend) {
-        //   const message = { ...payload};
-        //   socket.send(JSON.stringify(message));
-        // }
+        if (wsSend.match(action)) {
+          // const message = '343434343';
+          console.log(action.payload);
+          // socket.send(JSON.stringify(message));
+        }
       }
       
       

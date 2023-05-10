@@ -40,8 +40,7 @@ export const ProfileOrders = () => {
                     <p className={sel(s.subtitle, 'text text_type_main-default text_color_inactive')}>В этом разделе вы можете просмотреть свою историю заказов</p>
                 </div>
                 <div className={s.orders}> 
-                    {/* {}
-                     <OrderFeedDetails order={orders}/> */}
+                    {allOrders?.map(order => <OrderFeedDetails order={order}/>)}     
                 </div>
             </div>        
         </section>

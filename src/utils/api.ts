@@ -105,7 +105,8 @@ export const postOrderInfo = (dataID: string[]) => {  //ID всех ингред
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-        },
+            authorization : getCookie("accessToken"),
+        } as HeadersInit | {authorization?: string | undefined},
         body: JSON.stringify({
             'ingredients': dataID
         })
@@ -118,6 +119,8 @@ export const postOrderInfo = (dataID: string[]) => {  //ID всех ингред
         })
         
 }
+
+
  // Страница восстановления пароля. Вводим логин и получаем код из почты
 export const postPasswordRecovery = (email: string)  => {
     return fetch(`${apiUrl}/password-reset`, {
