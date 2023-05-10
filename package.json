@@ -72,7 +72,7 @@
   "scripts": {
  
    
-  "predeploy": "npm run build -- --base-href='https://semajenya.github.io/burger-project' ",
+  "predeploy": "npm run build",
  
    
   "deploy": "gh-pages -d build",
