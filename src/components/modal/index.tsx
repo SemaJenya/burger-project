@@ -21,8 +21,6 @@ export const Modal: React.FC<TModal> = ({title, onClose, children}) => {
     const params = useParams();
     const orderNumber = params.id;
 
-    console.log(orderNumber);
-
     useEffect(() => {
         const closeModalEsc = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {

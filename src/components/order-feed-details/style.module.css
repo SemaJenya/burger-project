@@ -16,7 +16,7 @@
     width: 570px;
     padding: 24px;
     row-gap: 24px;
-    height: 180px;
+
     text-decoration: none;
     color: white;
 }
@@ -41,7 +41,6 @@
 
 .order__name {
     width: 520px;
-    height: 100px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -60,4 +59,9 @@
 .cost {
     display: flex;
     align-items: center;
+}
+
+.order__status {
+    margin-top: -17px;
+    color: rgba(0, 204, 204, 1);
 }

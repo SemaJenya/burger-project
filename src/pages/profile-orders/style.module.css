@@ -1,8 +1,10 @@
 .page {
+    width: 1240px ;
     display: flex;
+    margin: 0 auto;
     height: 100%;
+    object-fit: cover;
     justify-content: center;
-    align-items: center;  
 }
 
 .content__conteiner {
@@ -15,6 +17,7 @@
     display: flex;
     flex-direction: column;
     width: 320px;
+    justify-content: center;
 }
 
 .navigation__box {
@@ -64,10 +67,9 @@
     display: flex;
     flex-wrap: wrap;
     overflow-y: scroll;
-    height: 500px;
+    height: 80%;
     row-gap: 16px;
-
-    border: 1px solid salmon;
+    margin-top: 40px;
 }
 
 

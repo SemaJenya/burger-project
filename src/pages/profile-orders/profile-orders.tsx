@@ -8,6 +8,7 @@ import sel from 'classnames';
 import { wsClose, wsConnect } from '../../services/reducers/order-feed-live/actions';
 import { getCookie } from '../../utils/cookie';
 import { access } from 'fs';
+import { reverse } from 'dns';
 
 // тут нужно выгружать все заказы с сервера, но только наши
 export const ProfileOrders = () => {
@@ -36,7 +37,7 @@ export const ProfileOrders = () => {
                     <p className={sel(s.subtitle, 'text text_type_main-default text_color_inactive')}>В этом разделе вы можете просмотреть свою историю заказов</p>
                 </div>
                 <div className={sel(s.orders, 'custom-scroll')}> 
-                    {allOrders?.map(order => <OrderFeedDetails order={order} key={order.number}/>)}     
+                    {allOrders?.map(order => <OrderFeedDetails order={order} key={order.number}/>).reverse()}     
                 </div>
             </div>        
         </section>

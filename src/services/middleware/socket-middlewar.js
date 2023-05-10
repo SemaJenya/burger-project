@@ -17,7 +17,6 @@ export const socketMiddleware = (wsActions) => {   //урл будем пере�
       if (wsConnect.match(action)) {
         wsUrl = action.payload;
         socket = new WebSocket(`${wsUrl}`);
-        console.log(socket)
         isConnected = true;
         dispatch(wsConnecting())
       }

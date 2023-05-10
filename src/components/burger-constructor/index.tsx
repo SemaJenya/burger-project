@@ -37,9 +37,7 @@ export const BurgerConstructor = () => {
     const bunID: string = bun ? bun._id : '';
 
     const ingredientsAndBunID = [bunID, ...ingredientsID, bunID];
-    console.log(ingredientsAndBunID);
     
-
     const calculateSum = (ingredients: TIngredient[], bun: TIngredient | null) => {
         let sum = 0;
         if(bun && bun.price) {

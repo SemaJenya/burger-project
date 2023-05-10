@@ -28,10 +28,12 @@ export const OrderFeedDetails: React.FC<TOrderFeedDetails> = ({ order }) => {
     })
 
     const location = useLocation();
+    
     const MAX_VIEW_INGREDIENT = 6;
 
     const orderNumber = order.number;
     const orderName = order.name;
+    
 
     const ingredientsToShow = ingredientsInOrder.slice(0, MAX_VIEW_INGREDIENT);
 
@@ -48,6 +50,17 @@ export const OrderFeedDetails: React.FC<TOrderFeedDetails> = ({ order }) => {
         return sum;
     }
 
+    const status = () => {
+        if(order.status === 'done') {
+            return 'Выполнен'
+        }
+        if(order.status === 'created') {
+            return 'Создан'
+        }
+        if(order.status === 'pending') {
+            return 'Готовится'
+        }
+    }
 
     const finalPrice: number = useMemo(() => calculateSum(ingredientsInOrder), [ingredientsInOrder])
 
@@ -59,6 +72,8 @@ export const OrderFeedDetails: React.FC<TOrderFeedDetails> = ({ order }) => {
                 <FormattedDate date={new Date(order.createdAt)} className={sel(s.order__date, 'text text_type_main-default', 'text_color_inactive')} />
             </div>
             <h3 className={sel(s.order__name, 'text text_type_main-medium')}>{orderName}</h3>
+            {location.pathname === '/profile/orders' ? <p id='orderStatus' style={!(order.status === 'done') ? {color: 'white'} : {color: 'rgba(0, 204, 204, 1)'}} className={sel(s.order__status, 'text text_type_main-small')}>{status()}</p> : ''}
+
             <div className={sel(s.burger__info)}>
 
                 <div className={sel(s.burger__content)} key={`${order._id}`}>

@@ -22,7 +22,7 @@ export const ProfileNavigate = () => {
     return (
         <ul className={s.navigation__box}>
             <li id='profilenav' className={sel(s.navigation__point)}>
-                <NavLink to='/profile' className={activeLink}>
+                <NavLink end to='/profile' className={activeLink}>
                     Профиль
                 </NavLink>
             </li>

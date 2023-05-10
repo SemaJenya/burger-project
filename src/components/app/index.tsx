@@ -23,7 +23,7 @@ import { OrderFeed } from '../../pages/order-feed/order-feed';
 import { OrderFeedID } from '../../pages/order-feed-id/order-feed-id';
 import { ProfileOrders } from '../../pages/profile-orders/profile-orders';
 import { OrderIdDetails } from '../order-id-details/order-id-details';
-import { OrderFeedIDUser } from '../../pages/order-feed-id-user/order-feed-id';
+import { OrderFeedIDUser } from '../../pages/order-feed-id-user/order-feed-id-user';
 
 
 
@@ -109,7 +109,7 @@ export const App = () => {
              }
               {(background?.pathname === '/profile/orders') &&
             <Routes>
-                <Route path={`/profile/orders/:id`} element={background && <Modal title='# 1234456' onClose={closeIngredientModal}><OrderFeedIDUser /></Modal>}/>
+                <Route path={`/profile/orders/:id`} element={background && <Modal onClose={closeIngredientModal}><OrderFeedIDUser /></Modal>}/>
             </Routes>
              }
     

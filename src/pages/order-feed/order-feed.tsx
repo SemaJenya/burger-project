@@ -21,8 +21,7 @@ export const OrderFeed = () => {
 
     
     const orders = useSelect(state => state.liveOrdersStore.orders);
-    const arr = orders?.orders;
-    
+    const arr = orders?.orders; 
 
     return (
         <section className={s.feed__page}>

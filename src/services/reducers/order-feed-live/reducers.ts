@@ -6,7 +6,7 @@ export type TOrder = {
     ingredients: Array<string>;
     name: string;
     number: number;
-    status: string;
+    status: 'done' | 'created' | 'pending';
     updatedAt: string;
     _id: string;
 }
