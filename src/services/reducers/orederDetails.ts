@@ -19,7 +19,6 @@ export const initialState: TOrderState  = {
   error: null
 }
 
-// <any, string>
 
 //асинхронный экшен
 export const fetchOrder = createAsyncThunk<any, string[]>(  //возвращает объект с методами pending, fulfield, reject

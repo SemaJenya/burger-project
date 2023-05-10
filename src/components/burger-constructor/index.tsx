@@ -70,6 +70,12 @@ export const BurgerConstructor = () => {
         }
     };
 
+    const handleClose = () => {
+        if(userDataStore) {
+            setIsClick(!isClick);       
+        }
+    };
+
 
 
    
@@ -132,7 +138,7 @@ export const BurgerConstructor = () => {
                     Оформить заказ
                 </Button>
             </div>
-            {isClick && !isLoading && <Modal onClose={handleClickButton} title=''>
+            {isClick && !isLoading && <Modal onClose={handleClose} title=''>
                 <OrderDetails />
             </Modal>}
         </section>

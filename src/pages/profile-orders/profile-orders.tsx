@@ -5,7 +5,7 @@ import { ProfileNavigate } from '../../components/profile-navigate/profile-navig
 import { useDispatch, useSelect } from '../../services/hooks';
 import s from './style.module.css';
 import sel from 'classnames';
-import { wsConnect } from '../../services/reducers/order-feed-live/actions';
+import { wsClose, wsConnect } from '../../services/reducers/order-feed-live/actions';
 import { getCookie } from '../../utils/cookie';
 import { access } from 'fs';
 
@@ -17,16 +17,12 @@ export const ProfileOrders = () => {
 
     const tokenArr = getCookie('accessToken')?.split(' ');
     const token = tokenArr ? tokenArr[1] : undefined;
-    console.log(token);
 
-    useEffect(() => {
-        dispatch(wsConnect(`wss://norma.nomoreparties.space/orders/?token=${token}`));
+    useEffect(() => {        
+        dispatch(wsConnect(`wss://norma.nomoreparties.space/orders?token=${token}`));
     }, [dispatch]);
 
 
-    
-    
-    
     const orders = useSelect(state => state.liveOrdersStore.orders);
     const allOrders = orders?.orders;
 
@@ -39,8 +35,8 @@ export const ProfileOrders = () => {
                     </nav>
                     <p className={sel(s.subtitle, 'text text_type_main-default text_color_inactive')}>В этом разделе вы можете просмотреть свою историю заказов</p>
                 </div>
-                <div className={s.orders}> 
-                    {allOrders?.map(order => <OrderFeedDetails order={order}/>)}     
+                <div className={sel(s.orders, 'custom-scroll')}> 
+                    {allOrders?.map(order => <OrderFeedDetails order={order} key={order.number}/>)}     
                 </div>
             </div>        
         </section>

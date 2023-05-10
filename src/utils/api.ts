@@ -44,14 +44,29 @@ export interface RequestInitWithAuth extends RequestInit {
     headers?: HeadersInit | {authorization?: string | undefined}
 }
 
+export type TOwner = {
+    createdAt: string;
+    email: string;
+    name: string;
+    updatedAt: string;
+}
+
 export type OrderNumber = {
-    number: number
+    number: number;
+    createdAt: string;
+    ingredients: string[];
+    name: string;
+    owner?: TOwner;
+    price: number;
+    status: string;
+    updatedAt: string;
+    _id: string
 }
 
 export type OrderResponse = {
     success: boolean | null;
-    name: string| null;
-    order: OrderNumber| null;
+    name: string | null;
+    order: OrderNumber | null;
 }
 
 type IngredientsResponse = {
@@ -105,7 +120,7 @@ export const postOrderInfo = (dataID: string[]) => {  //ID всех ингред
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-            authorization : getCookie("accessToken"),
+            authorization : getCookie('accessToken'),
         } as HeadersInit | {authorization?: string | undefined},
         body: JSON.stringify({
             'ingredients': dataID
@@ -113,7 +128,7 @@ export const postOrderInfo = (dataID: string[]) => {  //ID всех ингред
     })
         .then(checkResponse<OrderResponse>)
         .then((data) => {
-            if(data.success) {
+            if(data?.success) {
                 return data;
             }
         })

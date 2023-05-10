@@ -59,4 +59,15 @@
     gap: 20px;
 }
 
+.orders {
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 500px;
+    row-gap: 16px;
+
+    border: 1px solid salmon;
+}
+
 
