@@ -21,7 +21,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLDivEleme
 root.render(
   // <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter >
+      <BrowserRouter basename='/burger-project'>
         <App />
       </BrowserRouter>
      
