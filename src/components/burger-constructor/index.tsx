@@ -26,11 +26,15 @@ export const BurgerConstructor = () => {
     
     const [isClick, setIsClick] = useState<boolean>(false);
 
+    const order = useSelect(state => state.liveOrdersStore);
+    const orderStatus = order.status;
+    
+
     
     const {ingredients, bun} = useSelect(state => state.constructorStore); //достаем данные из стора
     const userDataStore = useSelect(state => state.userStore.data);
 
-    const dataAvailable: boolean = ingredients.length === 0 ? true : false;
+    const dataAvailable: boolean = (ingredients.length === 0) ? true : false;
 
     const ingredientsID = ingredients?.map((item) => item._id);
 
