@@ -6,18 +6,17 @@ import ingredients from './reducers/ingredients';
 import order from './reducers/orederDetails';
 import registration from './reducers/user-info/user';
 import liveOrdersReducer from './reducers/order-feed-live/reducers';
-import { socketMiddleware } from './middleware/socket-middlewar';
+import { TWsActions, socketMiddleware } from './middleware/socket-middlewar';
 import { wsConnect, wsDisconnect, wsConnecting, wsOpen, wsClose, wsError, wsMessage, wsSend } from '../services/reducers/order-feed-live/actions'
 
-const wsActions = {
+const wsActions: TWsActions = {
   wsConnect,
   wsDisconnect,
   wsConnecting,
   wsOpen,
   wsClose,
   wsError,
-  wsMessage,
-  wsSend
+  wsMessage
 }
 
 const liveOrdersMiddleware = socketMiddleware(wsActions)

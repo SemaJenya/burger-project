@@ -1,12 +1,26 @@
+import { Middleware, MiddlewareAPI } from "redux";
+import { AppDispatch, RootState } from "../store";
+import { ActionCreatorWithOptionalPayload, ActionCreatorWithPayload, ActionCreatorWithoutPayload } from "@reduxjs/toolkit";
+import { TOrdersWS } from "../reducers/order-feed-live/reducers";
 
 type TAction = {
-    payload: string
+    payload: string;
+    type: string;
 }
 
+export type TWsActions = {
+  wsConnect: ActionCreatorWithPayload<string>;
+  wsDisconnect: ActionCreatorWithoutPayload;
+  wsConnecting: ActionCreatorWithoutPayload;
+  wsOpen: ActionCreatorWithoutPayload;
+  wsClose: ActionCreatorWithoutPayload;
+  wsError: ActionCreatorWithPayload<string | undefined>;
+  wsMessage: ActionCreatorWithPayload<TOrdersWS>;
+}
 
 // ф-я созания мидлвара
-export const socketMiddleware = (wsActions: any) => {   //урл будем передавать в экшене для того, чтобы переиспользовать мидлвар
-  return (store: any) => {   //сам мидлвар в качестве параметра принимает стор и имеет к нему доступ
+export const socketMiddleware = (wsActions: TWsActions): Middleware => {   //урл будем передавать в экшене для того, чтобы переиспользовать мидлвар
+  return (store: MiddlewareAPI<AppDispatch, RootState>) => {   //сам мидлвар в качестве параметра принимает стор и имеет к нему доступ
     let socket: any = null;
     let wsUrl = '';
     let reconnectTimer = 0;
@@ -16,7 +30,7 @@ export const socketMiddleware = (wsActions: any) => {   //урл будем пе
 
     return (next: any) => (action: TAction)=> {    //это экшен
       const { dispatch } = store;  //в сторе есть методы диспатч и гет стейт и мы можем их оттуда доставать
-      const { wsConnect, wsDisconnect, wsConnecting, wsOpen, wsClose, wsError, wsMessage, wsSend } = wsActions;
+      const { wsConnect, wsDisconnect, wsConnecting, wsOpen, wsClose, wsError, wsMessage } = wsActions;
 
 
       if (wsConnect.match(action)) {
