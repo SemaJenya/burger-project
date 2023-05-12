@@ -18,12 +18,13 @@ import { checkUserAuth } from '../../services/reducers/user-info/user';
 import { Modal } from '../modal';
 import { IngredientDetails } from '../ingredient-details';
 import { ProtectedRoute } from '../protected-route/protected-route';
-import { useDispatch } from '../../services/hooks';
+import { useDispatch, useSelect } from '../../services/hooks';
 import { OrderFeed } from '../../pages/order-feed/order-feed';
 import { OrderFeedID } from '../../pages/order-feed-id/order-feed-id';
 import { ProfileOrders } from '../../pages/profile-orders/profile-orders';
 import { OrderIdDetails } from '../order-id-details/order-id-details';
 import { OrderFeedIDUser } from '../../pages/order-feed-id-user/order-feed-id-user';
+import { getCookie } from '../../utils/cookie';
 
 
 
@@ -45,8 +46,10 @@ export const App = () => {
     const closeIngredientModal = () => {
         navigate(background.pathname || '/' || '/feed', {replace: true});
     }
-    
 
+    const user = useSelect(state => state.userStore.data);
+    const isAuthChecked = useSelect(state => state.userStore.isAuthChecked);
+    const cookie = getCookie('accessToken');
 
     return(
     <div className={s.app}>
@@ -79,11 +82,14 @@ export const App = () => {
 
                 <Route path={`/ingredients/:id`} element={<IngredientsID />} />
                 <Route path='*' element={<div>404</div>} />
+
                 <Route path='/profile' element={
                     <ProtectedRoute >
                         <ProfilePage />
                     </ProtectedRoute>
                 }/>
+              
+
                 <Route path='/profile/orders' element={
                     <ProtectedRoute >
                         <ProfileOrders />

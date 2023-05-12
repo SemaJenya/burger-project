@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import sel from 'classnames';
 import s from './style.module.css'
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -12,18 +12,16 @@ import { ProfileNavigate } from '../../components/profile-navigate/profile-navig
 
 export const ProfilePage = () => {
     const inputRef = useRef(null);
-    const dispatch = useDispatch();
-
-
-
+    const dispatch = useDispatch();     
+    
     const userDataStore = useSelect(state => state.userStore.data) as UserObject;
 
-    
     const [userData, setUserData] = useState({
         email: userDataStore.email,
         password: '',
         name: userDataStore.name
     });
+  
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
@@ -47,7 +45,7 @@ export const ProfilePage = () => {
         });
     }
 
-    return (
+    return userDataStore?.email === null ? (<div>загружаюсь</div>) : (
         <section className={s.page}>
             <div className={s.content__conteiner}> 
                 <div className={s.profile__navigation}>

@@ -78,9 +78,7 @@ export const BurgerConstructor = () => {
         }
     };
 
-
-
-   
+  
      const [{isHover}, dropTargetRef] = useDrop({
         accept: 'ingredient',
         drop(data:any, monitor) {
@@ -100,15 +98,15 @@ export const BurgerConstructor = () => {
         <section className={s.constructor__container}>
              <div className={sel(s.constructor__list, 'mt-25', 'mr-4', 'ml-4')}>
                 <div className={s.fixed__part}>
-                    <ConstructorElement
+                  {bun?.price && <ConstructorElement
                         {...bun}
                         type="top"
                         isLocked={true}
                         text={bun? `${bun.name} верх` : 'Выберете булку'}
-                        price={bun?.price}
+                        price={bun.price}
                         thumbnail={bun ? bun.image : burger}
                         key='top'
-                    />
+                    />}
                 </div>
 
                 <div className={sel(s.constructor__inside, 'custom-scroll')} ref={dropTargetRef} style={{borderColor}}>
@@ -119,7 +117,7 @@ export const BurgerConstructor = () => {
 
 
                 <div className={s.fixed__part}>
-                    <ConstructorElement
+                  {bun?.price && <ConstructorElement
                         {...bun}
                         type="bottom"
                         isLocked={true}
@@ -127,7 +125,7 @@ export const BurgerConstructor = () => {
                         price={bun?.price}
                         thumbnail={bun ? bun.image : burger}
                         key='buttom'
-                    />
+                    />}
                 </div>                   
             </div>
             <div className={sel(s.cost_container, 'mt-10', 'mr-4', 'ml-4')} >
