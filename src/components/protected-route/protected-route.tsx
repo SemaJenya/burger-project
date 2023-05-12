@@ -23,13 +23,13 @@ export const ProtectedRoute: React.FC<TProtectedRouteProps> = ({ children, onlyU
         return <div>Снова я загружаюсь. Снова говорю пока</div> //надо сделать нормальный компонент для загрузки
     };
 
-    if (!onlyUnAuth && !cookie && !user) {
+    if (!onlyUnAuth && !cookie) {
         return (
             <Navigate to={{ pathname: '/login' }} replace state={{ from: location }} />
         )
     };
 
-    if (user && onlyUnAuth && cookie) {
+    if (cookie && onlyUnAuth) {
         const { from } = location.state || { from: { pathname: '/profile' } };
         const { background } = location.state?.from?.state || { background: null };
         return (

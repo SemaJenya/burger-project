@@ -76,13 +76,15 @@ export const ElementInConctructor: React.FC<TElementInConctructor> = ({data, ind
     drag(drop(ref))
     return (
         <div className={s.inside__item} key={data.randomId} ref={ref} style={{opacity}}>
-        <DragIcon type="primary" key={`${data.randomId} icon`} />                       
+        <DragIcon type="primary" key={`${data.randomId} icon`} />         
+        {data.price &&              
         <ConstructorElement
           text={data.name}
           price={data.price}
           thumbnail={data.image}
           key={data.randomId}
           handleClose={handleRemoveIngredient}/> 
+        }
     </div>
     )
 }

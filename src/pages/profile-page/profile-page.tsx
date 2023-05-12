@@ -15,6 +15,7 @@ export const ProfilePage = () => {
     const dispatch = useDispatch();     
     
     const userDataStore = useSelect(state => state.userStore.data) as UserObject;
+    
 
     const [userData, setUserData] = useState({
         email: userDataStore.email,
@@ -44,8 +45,8 @@ export const ProfilePage = () => {
             name: userDataStore.name
         });
     }
-
-    return userDataStore?.email === null ? (<div>загружаюсь</div>) : (
+   
+    return userDataStore === null ? (<div>загружаюсь</div>) : (
         <section className={s.page}>
             <div className={s.content__conteiner}> 
                 <div className={s.profile__navigation}>
