@@ -2,9 +2,8 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import sel from 'classnames';
 import s from './style.module.css'
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { NavLink } from 'react-router-dom'
 import { UserObject } from '../../utils/api';
-import { fetchChangeProfile, fetchLogout } from '../../services/reducers/user-info/user';
+import { fetchChangeProfile } from '../../services/reducers/user-info/user';
 import { useDispatch, useSelect } from '../../services/hooks';
 import { ProfileNavigate } from '../../components/profile-navigate/profile-navigate';
 
@@ -12,17 +11,27 @@ import { ProfileNavigate } from '../../components/profile-navigate/profile-navig
 
 export const ProfilePage = () => {
     const inputRef = useRef(null);
-    const dispatch = useDispatch();     
-    
-    const userDataStore = useSelect(state => state.userStore.data) as UserObject;
-    
+    const dispatch = useDispatch(); 
+ 
+
+    const { data } = useSelect(state => state.userStore);
+    const userDataStore = data as UserObject;
+
 
     const [userData, setUserData] = useState({
-        email: userDataStore.email,
+        email: userDataStore?.email,
         password: '',
-        name: userDataStore.name
+        name: userDataStore?.name
     });
   
+    useEffect(() => {
+        setUserData(() => ({
+            email: userDataStore?.email,
+            password: '',
+            name: userDataStore?.name
+        }));
+    }, [userDataStore])
+
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
@@ -32,7 +41,7 @@ export const ProfilePage = () => {
         });
     };
 
-    const disabledButton = userData.email !== userDataStore.email || userData.name !== userDataStore.name || userData.password ? false : true;
+    const disabledButton = userData.email !== userDataStore?.email || userData.name !== userDataStore?.name || userData.password ? false : true;
 
     const updateUserInfo = () => {
             dispatch(fetchChangeProfile(userData))     
@@ -40,9 +49,9 @@ export const ProfilePage = () => {
 
     const resetUserInfo = () => {
         setUserData({
-            email: userDataStore.email,
+            email: userDataStore?.email,
             password: '',
-            name: userDataStore.name
+            name: userDataStore?.name
         });
     }
    
@@ -56,7 +65,7 @@ export const ProfilePage = () => {
                     <p className={sel(s.subtitle, 'text text_type_main-default text_color_inactive')}>В этом разделе вы можете изменить свои персональные данные</p>
                 </div>
                 <form className={s.container}>
-            
+                    {userData?.name && 
                     <Input
                         type={'text'}
                         placeholder={'Имя'}
@@ -68,8 +77,9 @@ export const ProfilePage = () => {
                         ref={inputRef}
                         errorText={'Ошибка'}
                         size={'default'}
-                        extraClass="ml-1"/>
-
+                        extraClass="ml-1"/> 
+                    }
+                    {userData?.name &&
                     <EmailInput
                         onChange={handleChange}
                         value={userData?.email}
@@ -77,7 +87,7 @@ export const ProfilePage = () => {
                         placeholder="Логин"
                         isIcon={true}
                         extraClass="mb-2"
-                    />
+                    />}
 
                     <PasswordInput
                         onChange={handleChange}

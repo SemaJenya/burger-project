@@ -98,12 +98,21 @@ export const BurgerConstructor = () => {
         <section className={s.constructor__container}>
              <div className={sel(s.constructor__list, 'mt-25', 'mr-4', 'ml-4')}>
                 <div className={s.fixed__part}>
-                  {bun?.price && <ConstructorElement
+                   {bun?.price ? <ConstructorElement
                         {...bun}
                         type="top"
                         isLocked={true}
                         text={bun? `${bun.name} верх` : 'Выберете булку'}
-                        price={bun.price}
+                        price={bun ? bun?.price : 0}
+                        thumbnail={bun ? bun.image : burger}
+                        key='top'
+                    /> : 
+                    <ConstructorElement
+                        {...bun}
+                        type="top"
+                        isLocked={true}
+                        text={bun? `${bun.name} верх` : 'Выберете булку'}
+                        price={0}
                         thumbnail={bun ? bun.image : burger}
                         key='top'
                     />}
@@ -115,14 +124,22 @@ export const BurgerConstructor = () => {
                     )}               
                 </div>
 
-
                 <div className={s.fixed__part}>
-                  {bun?.price && <ConstructorElement
+                  {bun?.price ? <ConstructorElement
                         {...bun}
                         type="bottom"
                         isLocked={true}
                         text={bun? `${bun.name} низ` : 'Выберете булку'}
                         price={bun?.price}
+                        thumbnail={bun ? bun.image : burger}
+                        key='buttom'
+                    /> :
+                    <ConstructorElement
+                        {...bun}
+                        type="bottom"
+                        isLocked={true}
+                        text={bun? `${bun.name} низ` : 'Выберете булку'}
+                        price={0}
                         thumbnail={bun ? bun.image : burger}
                         key='buttom'
                     />}
