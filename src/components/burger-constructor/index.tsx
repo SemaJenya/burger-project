@@ -8,7 +8,7 @@ import { Modal } from '../modal';
 import burger from '../../images/burger.jpg'
 import { TOrderState, fetchOrder } from '../../services/reducers/orederDetails';
 import { useDrop } from 'react-dnd';
-import { TConstructorStore, createConstructor } from '../../services/reducers/constructor';
+import { TConstructorStore, createConstructor } from '../../services/reducers/constructor/constructor'
 import { ElementInConctructor } from '../element-in-constructor';
 import { addCounter } from '../../services/reducers/counter'
 import { RootState } from '../../services/store';
@@ -32,6 +32,8 @@ export const BurgerConstructor = () => {
 
     
     const {ingredients, bun} = useSelect(state => state.constructorStore); //достаем данные из стора
+    console.log(ingredients, bun);
+    
     const userDataStore = useSelect(state => state.userStore.data);
 
     const dataAvailable: boolean = (ingredients.length === 0) ? true : false;

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import constructor from './reducers/constructor';
+import constructor from './reducers/constructor/constructor';
 import counter, { counterSlice } from './reducers/counter';
 import ingredientDetails from './reducers/ingredientDetails';
 import ingredients from './reducers/ingredients';

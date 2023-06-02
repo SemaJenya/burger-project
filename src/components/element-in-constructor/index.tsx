@@ -1,7 +1,7 @@
 import s from './style.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
-import { removeConstructor, reorder } from '../../services/reducers/constructor';
+import { removeConstructor, reorder } from '../../services/reducers/constructor/constructor';
 import { Ref, useRef } from 'react';
 import { reduceCounter } from '../../services/reducers/counter';
 import { TIngredient } from '../../utils/types';
