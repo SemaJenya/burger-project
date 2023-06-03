@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import s from './style.module.css';
 import sel from 'classnames';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { createIngredientDetails } from '../../services/reducers/ingredientDetails';
+import { createIngredientDetails } from '../../services/reducers/ingredientDetails/ingredientDetails';
 import { useDrag } from 'react-dnd';
 import { useDispatch, useSelect } from '../../services/hooks';
 import { TIngredient } from '../../utils/types';
