@@ -8,15 +8,16 @@ import { Modal } from '../modal';
 import burger from '../../images/burger.jpg'
 import { TOrderState, fetchOrder } from '../../services/reducers/orederDetails';
 import { useDrop } from 'react-dnd';
-import { TConstructorStore, createConstructor } from '../../services/reducers/constructor/constructor'
+import { createConstructor } from '../../services/reducers/constructor/constructor'
 import { ElementInConctructor } from '../element-in-constructor';
-import { addCounter } from '../../services/reducers/counter'
+import { addCounter } from '../../services/reducers/counter/counter'
 import { RootState } from '../../services/store';
 import { TIngredient } from '../../utils/types';
 import { useDispatch } from '../../services/hooks';
 import { useSelect } from '../../services/hooks'
 
 
+// createConstructor 
 
 
 export const BurgerConstructor = () => {
@@ -33,6 +34,7 @@ export const BurgerConstructor = () => {
     
     const {ingredients, bun} = useSelect(state => state.constructorStore); //достаем данные из стора
     console.log(ingredients, bun);
+    
     
     const userDataStore = useSelect(state => state.userStore.data);
 

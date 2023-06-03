@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import { TIngredient } from '../../utils/types';
+import { TIngredient } from '../../../utils/types';
 
 
 export type TCounter= {
@@ -25,7 +25,7 @@ export const counterSlice = createSlice({
     addCounter: (state, action) => {   //это экшен
       const item_id: string = action.payload._id;
       const existed_ids: string[] = Object.keys(state.counter);
-      console.log(existed_ids);
+      // console.log(existed_ids, 'it is id');
       
       // handle buns 
       if(action.payload.type === 'bun' &&  !existed_ids.includes(item_id)) {
@@ -33,6 +33,8 @@ export const counterSlice = createSlice({
         existed_ids.forEach(element => {
           if (state.counter[element].type === 'bun'){
             bun_id = element
+            console.log(element);
+            
             return
           }
         });

@@ -7,7 +7,7 @@ import { createIngredientDetails } from '../../services/reducers/ingredientDetai
 import { useDrag } from 'react-dnd';
 import { useDispatch, useSelect } from '../../services/hooks';
 import { TIngredient } from '../../utils/types';
-import { TCounterState } from '../../services/reducers/counter';
+import { TCounterState } from '../../services/reducers/counter/counter';
 
 
 

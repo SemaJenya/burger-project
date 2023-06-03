@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
-import { createConstructor, reorder, removeConstructor, initialState, TConstructorStore } from './constructor';
+import {  reorder, removeConstructor, initialState, createConstructor , TConstructorStore } from './constructor';
 import constructorReducer from './constructor'; // import reducer
 import { useSelect } from '../../hooks';
+
 
 
 describe('constructor reducer', () => {
@@ -26,11 +27,10 @@ describe('constructor reducer', () => {
         }
 
         const state = constructorReducer(initialState, { type: createConstructor.type, payload: testBun })    
-        let bun = state['bun']
+        let bun = state.bun
         expect(bun).not.toBeNull();
-
-        if (state.bun) {
-            expect(Object.keys(state.bun).length).toBe(Object.keys(testBun).length + 1)
+        if (bun) {
+            expect(bun).toBe(testBun)
         }
 
     })
@@ -50,7 +50,7 @@ describe('constructor reducer', () => {
             image_large: "https://code.s3.yandex.net/react/code/meat-03-large.png",
             __v: 0
         };
-        const state = constructorReducer(initialState, { type: createConstructor.type, payload: testIngredient });
+        const state = constructorReducer(initialState, { type: createConstructor .type, payload: testIngredient });
         const ingredient = state.ingredients;
         expect(ingredient.length).toBe(1)
     })

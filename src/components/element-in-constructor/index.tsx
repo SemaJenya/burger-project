@@ -3,7 +3,7 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import { useDrag, useDrop } from 'react-dnd';
 import { removeConstructor, reorder } from '../../services/reducers/constructor/constructor';
 import { Ref, useRef } from 'react';
-import { reduceCounter } from '../../services/reducers/counter';
+import { reduceCounter } from '../../services/reducers/counter/counter';
 import { TIngredient } from '../../utils/types';
 import { useDispatch } from '../../services/hooks';
 

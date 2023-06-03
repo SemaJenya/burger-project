@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 import { TIngredient } from '../../../utils/types';
-import  addElement  from './actions'
+
 
 export type TConstructorStore = {
   bun: TIngredient | null;
@@ -19,13 +19,19 @@ export const constructorSlice = createSlice({
   name: 'constructor',
   initialState,
   reducers: {
-    createConstructor: (state, action) => {   //это экшен
-        if(action.payload.type === 'bun') {
-            state.bun = {...action.payload, randomId: uuidv4()};
+    createConstructor : {
+      reducer: (state, action: PayloadAction<TIngredient>) => {   //это экшен
+        if (action.payload.type === 'bun') {
+          state.bun = action.payload;
         }
         else {
-            state.ingredients.push({...action.payload, randomId: uuidv4()});     
+          state.ingredients.push(action.payload);
         }
+      },
+      prepare: (ingredient: TIngredient) => {
+          return {payload: { ...ingredient, randomId: uuidv4() }};
+        
+      }
     },
     removeConstructor: (state, action) => {
       state.ingredients = state.ingredients.filter((ingredient: TIngredient) => ingredient.randomId != action.payload)
@@ -36,6 +42,6 @@ export const constructorSlice = createSlice({
   }
 })
 
-export const {createConstructor, reorder, removeConstructor} = constructorSlice.actions;
+export const { reorder, removeConstructor, createConstructor  } = constructorSlice.actions;
 
 export default constructorSlice.reducer;
