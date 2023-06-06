@@ -6,7 +6,7 @@ import { Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 
 import { AppHeader } from '../app-header'
 import s from './style.module.css'
-import { fetchIngredients } from '../../services/reducers/ingredients'
+import { fetchIngredients } from '../../services/reducers/ingredients/ingredients'
 import { MainPage } from '../../pages/main-page/main-page';
 import { RegistrationPage } from '../../pages/registration-page/registration-page';
 import { LoginPage } from '../../pages/login-page/login-page';

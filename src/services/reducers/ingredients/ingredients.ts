@@ -1,6 +1,6 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getIngredients } from '../../utils/api';
-import { TIngredient } from '../../utils/types';
+import { getIngredients } from '../../../utils/api';
+import { TIngredient } from '../../../utils/types';
 
 type TIngredientState = {
     data: TIngredient[];
@@ -51,8 +51,8 @@ export const ingredientsSlice = createSlice({
             state.data = action.payload;
         })
         .addCase(fetchIngredients.rejected, (state, action) => {
-            state = {...state, isLoading: false};
-            state = {...state, error: action.payload};
+            state.isLoading = false;
+            state.error = action.payload;
         })
   }
 })
