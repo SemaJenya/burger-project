@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { wsClose, wsConnecting, wsError, wsMessage, wsOpen, wsSend } from "./actions"
+import { wsClose, wsConnecting, wsError, wsMessage, wsOpen } from "./actions"
 
 export type TOrder = {
     createdAt: string;
@@ -24,7 +24,7 @@ type TOrdersReduser = {
     orders: TOrdersWS | null | undefined
 }
 
-const initialState: TOrdersReduser = {
+export const initialState: TOrdersReduser = {
     status: 'offline',
     connectionError: '',
     orders: null,
@@ -47,9 +47,6 @@ const liveOrdersReducer = createReducer(initialState, (builder) => {
             state.connectionError = action.payload
         })
         .addCase(wsMessage, (state, action) => {
-            state.orders = action.payload
-        })
-        .addCase(wsSend, (state, action) => {
             state.orders = action.payload
         })
 })

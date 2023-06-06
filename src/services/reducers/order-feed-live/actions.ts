@@ -9,4 +9,4 @@ export const wsOpen = createAction('ORDER_FEED_WS_OPEN');
 export const wsClose = createAction('ORDER_FEED_WS_CLOSE');
 export const wsMessage = createAction<TOrdersWS>('ORDER_FEED_WS_MESSAGE');
 export const wsError = createAction<string | undefined>('ORDER_FEED_WS_ERROR');
-export const wsSend = createAction('ORDER_FEED_WS_SEND');
+

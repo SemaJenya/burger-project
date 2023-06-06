@@ -7,7 +7,7 @@ import order from './reducers/orederDetails';
 import registration from './reducers/user-info/user';
 import liveOrdersReducer from './reducers/order-feed-live/reducers';
 import { TWsActions, socketMiddleware } from './middleware/socket-middlewar';
-import { wsConnect, wsDisconnect, wsConnecting, wsOpen, wsClose, wsError, wsMessage, wsSend } from '../services/reducers/order-feed-live/actions'
+import { wsConnect, wsDisconnect, wsConnecting, wsOpen, wsClose, wsError, wsMessage } from '../services/reducers/order-feed-live/actions'
 
 const wsActions: TWsActions = {
   wsConnect,

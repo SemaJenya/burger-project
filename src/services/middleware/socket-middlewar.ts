@@ -1,11 +1,11 @@
 import { Middleware, MiddlewareAPI } from "redux";
 import { AppDispatch, RootState } from "../store";
-import { ActionCreatorWithOptionalPayload, ActionCreatorWithPayload, ActionCreatorWithoutPayload } from "@reduxjs/toolkit";
+import { ActionCreatorWithPayload, ActionCreatorWithoutPayload } from "@reduxjs/toolkit";
 import { TOrdersWS } from "../reducers/order-feed-live/reducers";
 
 type TAction = {
-    payload: string;
-    type: string;
+  payload: string;
+  type: string;
 }
 
 export type TWsActions = {
@@ -28,7 +28,7 @@ export const socketMiddleware = (wsActions: TWsActions): Middleware => {   //у�
     let countConnecting = 0;
     const MAX_RECONNECTING = 5;
 
-    return (next: any) => (action: TAction)=> {    //это экшен
+    return (next: any) => (action: TAction) => {    //это экшен
       const { dispatch } = store;  //в сторе есть методы диспатч и гет стейт и мы можем их оттуда доставать
       const { wsConnect, wsDisconnect, wsConnecting, wsOpen, wsClose, wsError, wsMessage } = wsActions;
 
@@ -54,7 +54,7 @@ export const socketMiddleware = (wsActions: TWsActions): Middleware => {   //у�
           const parsedData = JSON.parse(data);
           dispatch(wsMessage(parsedData));
         };
-        
+
         socket.onclose = (event: any) => {
           console.log('Im is on close');
           if (event.code !== 1000) {
@@ -80,9 +80,6 @@ export const socketMiddleware = (wsActions: TWsActions): Middleware => {   //у�
         //   // socket.send(JSON.stringify(message));
         // }
       }
-      
-      
-
 
       if (wsDisconnect.match(action)) {
         console.log('closing');
