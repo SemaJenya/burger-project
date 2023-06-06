@@ -1,5 +1,5 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { OrderResponse, postOrderInfo } from '../../utils/api';
+import { OrderResponse, postOrderInfo } from '../../../utils/api';
 
 
 export type TOrderState = {
@@ -55,8 +55,8 @@ export const orderSlice = createSlice({
             state.data = action.payload;
         })
         .addCase(fetchOrder.rejected, (state, action) => {
-            state = {...state, isLoading: false}
-            state = {...state, error: action.payload}
+            state.isLoading = false;
+            state.error = action.payload;
         })
   }
 })

@@ -6,7 +6,7 @@ import sel from 'classnames';
 import { OrderDetails } from '../order-details';
 import { Modal } from '../modal';
 import burger from '../../images/burger.jpg'
-import { TOrderState, fetchOrder } from '../../services/reducers/orederDetails';
+import { TOrderState, fetchOrder } from '../../services/reducers/orederDetails/orederDetails';
 import { useDrop } from 'react-dnd';
 import { createConstructor } from '../../services/reducers/constructor/constructor'
 import { ElementInConctructor } from '../element-in-constructor';
@@ -33,8 +33,7 @@ export const BurgerConstructor = () => {
 
     
     const {ingredients, bun} = useSelect(state => state.constructorStore); //достаем данные из стора
-    console.log(ingredients, bun);
-    
+
     
     const userDataStore = useSelect(state => state.userStore.data);
 

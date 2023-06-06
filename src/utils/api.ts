@@ -128,7 +128,7 @@ export const postOrderInfo = (dataID: string[]) => {  //ID всех ингред
     })
         .then(checkResponse<OrderResponse>)
         .then((data) => {
-            if(data?.success) {
+            if(data?.success) { 
                 return data;
             }
         })
