@@ -154,16 +154,16 @@ export const registrationSlice = createSlice({
             state.data = action.payload;
         })
         .addCase(fetchRegistration.rejected, (state, action) => {
-            state = {...state, registerUserRequest: false};
-            state = {...state, registerUserError: action.payload};
+            state.registerUserRequest = false;
+            state.registerUserError = action.payload;
         })
         .addCase(fetchLoginUser.rejected, (state, action) => {
-            state = {...state, loginUserRequest: false};
-            state = {...state, loginUserError: action.payload};
+            state.loginUserRequest = false;
+            state.loginUserError = action.payload;
         })
         .addCase(checkUserAuth.rejected, (state, action) => {
-            state = {...state, getUserRequest: false};
-            state = {...state, getUserError: action.payload};
+            state.getUserRequest = false;
+            state.getUserError = action.payload;
         })
   }
 })
