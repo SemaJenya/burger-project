@@ -36,6 +36,8 @@ describe('constructor test', function () {
   })
 
 
+
+
   it('should handle drag and drop ingredient', () => {
     cy.contains('Соус Spicy-X').trigger('dragstart');
     cy.get('[class^=style_constructor__inside__]').trigger('drop');
@@ -84,7 +86,7 @@ describe('constructor test', function () {
     cy.wait(15000);
     cy.get('div [class^=style_modal__]').contains('идентификатор заказа');
     cy.contains('Ваш заказ начали готовить');
-    
+
     cy.get('div [class^=style_modal__]').find('button').click();
 
   })
