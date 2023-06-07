@@ -5,7 +5,7 @@ import { useDispatch } from '../../services/hooks';
 import { useEffect } from 'react';
 import { OrderIdDetails } from '../../components/order-id-details/order-id-details';
 import { useParams } from 'react-router-dom';
-import { wsConnect } from '../../services/reducers/order-feed-live/actions';
+import { wsConnect, wsDisconnect } from '../../services/reducers/order-feed-live/actions';
 
 
 
@@ -15,6 +15,10 @@ export const OrderFeedID = () => {
 
     useEffect(() => {
         dispatch(wsConnect('wss://norma.nomoreparties.space/orders/all'));
+
+        return () => {
+            dispatch(wsDisconnect());
+        }
     }, [dispatch]);
 
     const params = useParams();

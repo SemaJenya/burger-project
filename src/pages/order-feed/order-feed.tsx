@@ -6,7 +6,7 @@ import { OrderFeedDetails } from '../../components/order-feed-details/order-feed
 import { OrdersBoard } from '../../components/orders-board/orders-board';
 import { useEffect } from 'react';
 import { useDispatch, useSelect } from '../../services/hooks';
-import { wsConnect } from '../../services/reducers/order-feed-live/actions';
+import { wsClose, wsConnect, wsDisconnect } from '../../services/reducers/order-feed-live/actions';
 
 
 
@@ -17,6 +17,10 @@ export const OrderFeed = () => {
 
     useEffect(() => {
         dispatch(wsConnect('wss://norma.nomoreparties.space/orders/all'));
+        
+        return () => {
+            dispatch(wsDisconnect());
+        }
     }, [dispatch]);
 
     

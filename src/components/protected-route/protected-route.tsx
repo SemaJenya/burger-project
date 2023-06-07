@@ -16,7 +16,6 @@ export const ProtectedRoute: React.FC<TProtectedRouteProps> = ({ children, onlyU
 
     const user = useSelect(state => state.userStore.data);
     const isAuthChecked = useSelect(state => state.userStore.isAuthChecked);
-    console.log(onlyUnAuth);
     
 
     if (!isAuthChecked) {

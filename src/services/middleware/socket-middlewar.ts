@@ -81,7 +81,7 @@ export const socketMiddleware = (wsActions: TWsActions): Middleware => {   //у�
         // }
       }
 
-      if (wsDisconnect.match(action)) {
+      if (wsDisconnect.match(action) && socket) {
         console.log('closing');
         clearTimeout(reconnectTimer); //очищаем таймер, если попали в 3 сек
         isConnected = false;
