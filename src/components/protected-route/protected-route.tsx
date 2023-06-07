@@ -30,7 +30,7 @@ export const ProtectedRoute: React.FC<TProtectedRouteProps> = ({ children, onlyU
     };
 
     if (cookie && onlyUnAuth) {
-        const { from } = location.state || { from: { pathname: '/profile' } };
+        const { from } = location.state || { from: { pathname: '/' } };
         const { background } = location.state?.from?.state || { background: null };
         return (
             <Navigate replace to={from} state={{ background }} />
