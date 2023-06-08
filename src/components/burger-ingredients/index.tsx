@@ -21,6 +21,8 @@ export const BurgerIngredients = () => {
 
     const {data: ingredients, isLoading} = useSelect(state => state.ingredientsStore)//достаем данные из стора
 
+    
+
     const [current, setCurrent] = useState('bun');
     const bunsList = ingredients.filter(item=> item.type === 'bun');
     const mainList = ingredients.filter(item => item.type === 'main');

@@ -7,6 +7,7 @@ const dataUser = {
 describe('constructor test', function () {
 
   beforeEach(() => {
+    cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json'})
     cy.viewport(1920, 1080);
     cy.visit("/");
     cy.on("uncaught:exception", () => {
