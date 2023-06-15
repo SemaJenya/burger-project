@@ -21,14 +21,14 @@ export type TWsActions = {
 // ф-я созания мидлвара
 export const socketMiddleware = (wsActions: TWsActions): Middleware => {   //урл будем передавать в экшене для того, чтобы переиспользовать мидлвар
   return (store: MiddlewareAPI<AppDispatch, RootState>) => {   //сам мидлвар в качестве параметра принимает стор и имеет к нему доступ
-    let socket: any = null;
+    let socket: WebSocket | null = null;
     let wsUrl = '';
     let reconnectTimer = 0;
     let isConnected = false;
     let countConnecting = 0;
     const MAX_RECONNECTING = 5;
 
-    return (next: any) => (action: TAction) => {    //это экшен
+    return (next) => (action: TAction) => {    //это экшен
       const { dispatch } = store;  //в сторе есть методы диспатч и гет стейт и мы можем их оттуда доставать
       const { wsConnect, wsDisconnect, wsConnecting, wsOpen, wsClose, wsError, wsMessage } = wsActions;
 
@@ -41,21 +41,23 @@ export const socketMiddleware = (wsActions: TWsActions): Middleware => {   //у�
       }
 
       if (socket) {
-        socket.onopen = (event: any): void => {
+        socket.onopen = (event): void => {
           dispatch(wsOpen());
         };
 
-        socket.onerror = (event: any) => {
-          dispatch(wsError(event.code?.toString()));
+        socket.onerror = (event) => {
+          dispatch(wsError('error'));
+          console.log('socket.onerror', event);
+          
         };
 
-        socket.onmessage = (event: any) => {
+        socket.onmessage = (event) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
           dispatch(wsMessage(parsedData));
         };
 
-        socket.onclose = (event: any) => {
+        socket.onclose = (event) => {
           console.log('Im is on close');
           if (event.code !== 1000) {
             console.log('error close not 1000');
