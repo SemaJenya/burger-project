@@ -1,7 +1,7 @@
 
+import { testBun, testBunTwo, testMain } from '../../../utils/tests';
 import { addCounter, reduceCounter, initialState } from './counter';
 import counterReducer from './counter'; // import reducer
-
 
 
 describe('constructor reducer', () => {
@@ -10,23 +10,8 @@ describe('constructor reducer', () => {
     })
 
     it('should increase the counter when adding a bun', () => {
-        const testBunOne = {
-            _id: "1",
-            name: "Краторная булка N-200i",
-            type: "bun",
-            proteins: 80,
-            fat: 24,
-            carbohydrates: 53,
-            calories: 420,
-            price: 1255,
-            image: "https://code.s3.yandex.net/react/code/bun-02.png",
-            image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-            image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
-            __v: 0,
-        }
-
-        const state = counterReducer(initialState, { type: addCounter.type, payload: testBunOne })  
-        expect(state.counter[testBunOne._id].count).toBe(2)
+        const state = counterReducer(initialState, { type: addCounter.type, payload: testBun })  
+        expect(state.counter[testBun._id].count).toBe(2)
 
     })
 
@@ -57,46 +42,15 @@ describe('constructor reducer', () => {
             }
         }
 
-        const testBunTwo = {
-            _id: "2",
-            name: "Другая булка",
-            type: "bun",
-            proteins: 80,
-            fat: 24,
-            carbohydrates: 53,
-            calories: 420,
-            price: 1255,
-            image: "https://code.s3.yandex.net/react/code/bun-02.png",
-            image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-            image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
-            __v: 0,
-        }
-
         const state = counterReducer(newInitialState, { type: addCounter.type, payload: testBunTwo })  
-        expect(state).toEqual(finalInitialState)
-        
+        expect(state).toEqual(finalInitialState)  
     })
 
     it('should increase the counter when adding a ingredient', () => {
-        const testIngredient = {
-            _id: "11",
-            name: "Ingredient one",
-            type: "main",
-            proteins: 80,
-            fat: 24,
-            carbohydrates: 53,
-            calories: 420,
-            price: 1255,
-            image: "https://code.s3.yandex.net/react/code/bun-02.png",
-            image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-            image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
-            __v: 0,
-        }
-
-        const stateOne = counterReducer(initialState, { type: addCounter.type, payload: testIngredient })  
-        const stateTwo = counterReducer(stateOne, { type: addCounter.type, payload: testIngredient })  
-        const stateThree = counterReducer(stateTwo, { type: addCounter.type, payload: testIngredient })  
-        expect(stateThree.counter[testIngredient._id].count).toBe(3)
+        const stateOne = counterReducer(initialState, { type: addCounter.type, payload: testMain })  
+        const stateTwo = counterReducer(stateOne, { type: addCounter.type, payload: testMain })  
+        const stateThree = counterReducer(stateTwo, { type: addCounter.type, payload: testMain })  
+        expect(stateThree.counter[testMain._id].count).toBe(3)
     })
 
     it('should decrease the counter after removal one ingredient', () => {
@@ -112,23 +66,9 @@ describe('constructor reducer', () => {
                 }
             }
         }
-        const testIngredient = {
-            _id: "11",
-            name: "Ingredient one",
-            type: "main",
-            proteins: 80,
-            fat: 24,
-            carbohydrates: 53,
-            calories: 420,
-            price: 1255,
-            image: "https://code.s3.yandex.net/react/code/bun-02.png",
-            image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-            image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
-            __v: 0,
-        }
 
-        const stateOne = counterReducer(newInitialState, { type: reduceCounter.type, payload: testIngredient })  
-        expect(stateOne.counter[testIngredient._id].count).toBe(4)
+        const stateOne = counterReducer(newInitialState, { type: reduceCounter.type, payload: testMain })  
+        expect(stateOne.counter[testMain._id].count).toBe(4)
     })
 
     it('should remove counter and ingredient from constructor', () => {
@@ -153,22 +93,8 @@ describe('constructor reducer', () => {
                 }
             }
         }
-        const testIngredient = {
-            _id: "11",
-            name: "Ingredient one",
-            type: "main",
-            proteins: 80,
-            fat: 24,
-            carbohydrates: 53,
-            calories: 420,
-            price: 1255,
-            image: "https://code.s3.yandex.net/react/code/bun-02.png",
-            image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-            image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
-            __v: 0,
-        }
-
-        const state = counterReducer(newInitialState, { type: reduceCounter.type, payload: testIngredient })  
+       
+        const state = counterReducer(newInitialState, { type: reduceCounter.type, payload: testMain })  
         expect(state).toEqual(finalState)
         
     })
