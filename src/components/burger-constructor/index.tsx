@@ -5,13 +5,12 @@ import s from './style.module.css';
 import sel from 'classnames';
 import { OrderDetails } from '../order-details';
 import { Modal } from '../modal';
-import burger from '../../images/burger.jpg'
+import burger from '../../images/33Ho.gif';
 import { TOrderState, fetchOrder } from '../../services/reducers/orederDetails/orederDetails';
 import { useDrop } from 'react-dnd';
 import { createConstructor } from '../../services/reducers/constructor/constructor'
 import { ElementInConctructor } from '../element-in-constructor';
 import { addCounter } from '../../services/reducers/counter/counter'
-import { RootState } from '../../services/store';
 import { TIngredient } from '../../utils/types';
 import { useDispatch } from '../../services/hooks';
 import { useSelect } from '../../services/hooks';
@@ -117,7 +116,7 @@ export const BurgerConstructor = () => {
                             isLocked={true}
                             text={bun ? `${bun.name} верх` : 'Выберете булку'}
                             price={0}
-                            thumbnail={bun ? bun.image : burger}
+                            thumbnail={bun ? bun.image : burger }
                             key='top'
                         />}
                 </div>
