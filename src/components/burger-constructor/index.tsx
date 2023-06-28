@@ -14,7 +14,8 @@ import { addCounter } from '../../services/reducers/counter/counter'
 import { RootState } from '../../services/store';
 import { TIngredient } from '../../utils/types';
 import { useDispatch } from '../../services/hooks';
-import { useSelect } from '../../services/hooks'
+import { useSelect } from '../../services/hooks';
+import { Loader } from '../loader';
 
 
 // createConstructor 
@@ -159,9 +160,11 @@ export const BurgerConstructor = () => {
                     Оформить заказ
                 </Button>
             </div>
-            {isClick && !isLoading && <Modal onClose={handleClose} title=''>
+            {isClick && !isLoading && <Modal onClose={handleClose} title=''> 
                 <OrderDetails />
-            </Modal>}
+            </Modal>} 
+            {isClick && isLoading && <Loader onClose={handleClose} /> } 
         </section>
     )
 }
+//в последнем диве надо сделать загрузчик лоудер

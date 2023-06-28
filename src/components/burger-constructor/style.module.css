@@ -50,3 +50,9 @@
 .icon {
     width: 36px;
 }
+
+.preloader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
