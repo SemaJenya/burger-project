@@ -116,7 +116,7 @@ export const BurgerConstructor = () => {
                             isLocked={true}
                             text={bun ? `${bun.name} верх` : 'Выберете булку'}
                             price={0}
-                            thumbnail={bun ? bun.image : burger }
+                            thumbnail='https://i.gifer.com/33Ho.gif'
                             key='top'
                         />}
                 </div>
