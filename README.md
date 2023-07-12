@@ -15,7 +15,7 @@
 * Функциональные компоненты
 * Сookie
 
-![Начальная страница сайта](https://github.com/SemaJenya/burger-project/raw/repository_cleaning/src/image/main-page.png)
+![Начальная страница сайта](https://github.com/SemaJenya/burger-project/tree/repository_cleaning/src/image/main-page.png)
 
 
 
