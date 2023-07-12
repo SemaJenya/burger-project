@@ -2,8 +2,6 @@ import { v4 as uuidv4 } from 'uuid';
 import sel from 'classnames';
 import s from './style.module.css';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
-import { OrderFeedDetails } from '../../components/order-feed-details/order-feed-details';
-import { OrdersBoard } from '../../components/orders-board/orders-board';
 import { useSelect } from '../../services/hooks';
 import { useMemo } from 'react';
 import { TIngredient } from '../../utils/types';
@@ -16,9 +14,7 @@ type TOrderIdDetails = {
 
 export const OrderIdDetails: React.FC<TOrderIdDetails> = () => {
 
-
     const params = useParams();
-    
     const orderNumber = params.id;
 
     const { orders } = useSelect(state => state.liveOrdersStore);
@@ -27,7 +23,7 @@ export const OrderIdDetails: React.FC<TOrderIdDetails> = () => {
     const { data } = useSelect(state => state.ingredientsStore)
 
 
-    let ingredientsInOrder: TIngredient[] = new Array(); //ингредиенты все в заказе массив объектов для подсчета стоимости и вычисления их количества
+    let ingredientsInOrder: TIngredient[] = new Array(); //ингредиенты все в заказе. Массив объектов для подсчета стоимости и вычисления их количества
     data.forEach(ingredient => {
         currentOrder?.ingredients.forEach(orderIngredient => {
             if (ingredient._id === orderIngredient) {
@@ -45,10 +41,10 @@ export const OrderIdDetails: React.FC<TOrderIdDetails> = () => {
                     result.push(arr[i]);
                 }
             }
-
             return result;
         }
     }
+    
     const uniqueIngredient = unique(currentOrder?.ingredients);
 
     let uniqueIngredientsInOrder: TIngredient[] = new Array();

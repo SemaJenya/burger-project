@@ -253,7 +253,7 @@ export const getUser = () => {
 }
 
 
-// изменяем данные о юзере в провиле
+// изменяем данные о юзере в профиле
 export const updateUserData = (userData: UserRegister): Promise<GetUserResponse>=> {
     return fetch(`${apiUrl}/auth/user`, {
         method: 'PATCH',

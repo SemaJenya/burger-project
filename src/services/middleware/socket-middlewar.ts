@@ -76,11 +76,6 @@ export const socketMiddleware = (wsActions: TWsActions): Middleware => {   //—É—
 
         };
 
-        // if (wsSend.match(action)) {
-        //   // const message = '343434343';
-        //   console.log(action.payload);
-        //   // socket.send(JSON.stringify(message));
-        // }
       }
 
       if (wsDisconnect.match(action) && socket) {

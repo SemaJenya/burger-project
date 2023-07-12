@@ -7,13 +7,9 @@ import { createIngredientDetails } from '../../services/reducers/ingredientDetai
 import { useDrag } from 'react-dnd';
 import { useDispatch, useSelect } from '../../services/hooks';
 import { TIngredient } from '../../utils/types';
-import { TCounterState } from '../../services/reducers/counter/counter';
-
 
 
 export const BurgerIngredient: React.FC<TIngredient> = ({...data}) => {
-
-  
 
     const counter = useSelect(state => state.counterStore.counter);
 
@@ -25,7 +21,7 @@ export const BurgerIngredient: React.FC<TIngredient> = ({...data}) => {
     }
 
 
-    //  //все для DnD
+    //DnD
      const [{ isDrag }, dragRef] = useDrag({
         type: 'ingredient',
         item: {data},

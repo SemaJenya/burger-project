@@ -17,9 +17,6 @@ import { useSelect } from '../../services/hooks';
 import { Loader } from '../loader';
 
 
-// createConstructor 
-
-
 export const BurgerConstructor = () => {
 
     const dispatch = useDispatch();
@@ -30,10 +27,7 @@ export const BurgerConstructor = () => {
     const order = useSelect(state => state.liveOrdersStore);
     const orderStatus = order.status;
 
-
-
     const { ingredients, bun } = useSelect(state => state.constructorStore); //достаем данные из стора
-
 
     const userDataStore = useSelect(state => state.userStore.data);
 
@@ -166,4 +160,3 @@ export const BurgerConstructor = () => {
         </section>
     )
 }
-//в последнем диве надо сделать загрузчик лоудер

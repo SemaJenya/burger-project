@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import sel from 'classnames';
 import s from './style.module.css';
-import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { postPasswordRecovery } from '../../utils/api';
 
 

@@ -21,13 +21,12 @@ export const initialState: TOrderState  = {
 
 
 //асинхронный экшен
-export const fetchOrder = createAsyncThunk<any, string[]>(  //возвращает объект с методами pending, fulfield, reject
-    'order/fetchOrder', //имя экшена
-    //функция формируеи пейлоад и возвращает его для редьюсера (то, что мы запишем в стор). Асинхронная ф-я peyload creater - полезная нагрузка
-    async (dataID, {rejectWithValue, fulfillWithValue}) => {       //первый аргумент - при вызове ф-и в диспатч она передается аргументом(можно импользовать дальше в функциях)   второй аргумент - 
+export const fetchOrder = createAsyncThunk<any, string[]>(  
+    'order/fetchOrder',
+    async (dataID, {rejectWithValue, fulfillWithValue}) => {  
         try {
             const data = await postOrderInfo(dataID);         
-            return fulfillWithValue(data); //возвращает пейлоад (то, что хранится в экшене) и записывает в стор
+            return fulfillWithValue(data); 
         }
         catch (error: any) {
             if(error.status) {
@@ -37,14 +36,12 @@ export const fetchOrder = createAsyncThunk<any, string[]>(  //возвращае
         }    
     }
 )
-//значения return сверху прилетают в экшен функции снизу
 
-//срез, описывает экшен и редьюсер
 export const orderSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {    //для запросов
+  extraReducers: (builder) => { 
     builder 
         .addCase(fetchOrder.pending, (state) => {
             state.isLoading = true;

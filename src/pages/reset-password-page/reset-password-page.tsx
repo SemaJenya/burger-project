@@ -7,14 +7,10 @@ import { postResetPassword } from '../../utils/api';
 
 
 export const ResetPasswordPage = () => {
-    const inputRef = useRef<HTMLInputElement>(null);
-    const location = useLocation();
 
-   
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const navigate = useNavigate();
-
-    const params = useParams();
 
     const [newPasswordValue, setNewPasswordValue] = useState('');
     const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {

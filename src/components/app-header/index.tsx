@@ -1,4 +1,4 @@
-import { Link, NavLink, useMatch, useParams } from 'react-router-dom';
+import { Link, NavLink, useMatch } from 'react-router-dom';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import s from './style.module.css'
 import sel from 'classnames'

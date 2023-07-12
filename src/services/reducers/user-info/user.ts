@@ -1,5 +1,5 @@
 import { SerializedError, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { GetUserResponse, UserLogin, UserLogout, UserObject, UserRegister, getUser, logoutUser, postLogin, postRegistration, updateUserData } from '../../../utils/api';
+import { UserLogin, UserLogout, UserObject, UserRegister, getUser, logoutUser, postLogin, postRegistration, updateUserData } from '../../../utils/api';
 import { deleteCookie, setCookie } from '../../../utils/cookie';
 import { ThunkApi } from '../../store';
 
@@ -23,7 +23,7 @@ export interface TUserState {
 }
 
 export const initialState: TUserState = {
-    isAuthChecked: false, //попытка проверки пользователя. Может быть удачной или нет. True - если была попытка. Отвечает за прелоудер
+    isAuthChecked: false,                                                       //попытка проверки пользователя. Может быть удачной или нет. True - если была попытка. Отвечает за прелоудер
     
     data: null,
 
@@ -40,8 +40,8 @@ export const initialState: TUserState = {
     getUserRequest: false
 }
 //асинхронный экшен
-export const fetchRegistration = createAsyncThunk<UserObject, UserRegister>(  //возвращает объект с методами pending, fulfield, reject
-    'registration/fetchRegistration', //имя экшена
+export const fetchRegistration = createAsyncThunk<UserObject, UserRegister>(    //возвращает объект с методами pending, fulfield, reject
+    'registration/fetchRegistration',                                           //имя экшена
     async (userData, { rejectWithValue }) => {      
             const data = await postRegistration(userData);
             if(!data?.success) {
@@ -53,8 +53,8 @@ export const fetchRegistration = createAsyncThunk<UserObject, UserRegister>(  //
         }    
 )
 
-export const fetchLoginUser = createAsyncThunk<UserObject, UserLogin>(  //возвращает объект с методами pending, fulfield, reject
-    'loginUser/fetchLoginUser', //имя экшена
+export const fetchLoginUser = createAsyncThunk<UserObject, UserLogin>(  
+    'loginUser/fetchLoginUser', 
     async (userData, { rejectWithValue }) => {      
             const data = await postLogin(userData);
             if(!data?.success) {
@@ -67,8 +67,8 @@ export const fetchLoginUser = createAsyncThunk<UserObject, UserLogin>(  //воз
 )
 
 
-export const checkUserAuth = createAsyncThunk<UserObject, void, ThunkApi>(  //возвращает объект с методами pending, fulfield, reject
-    'userAuth/checkUserAuth', //имя экшена
+export const checkUserAuth = createAsyncThunk<UserObject, void, ThunkApi>( 
+    'userAuth/checkUserAuth', 
     async (_, { rejectWithValue, dispatch }) => {    
         try {
             const data = await getUser();
@@ -86,8 +86,8 @@ export const checkUserAuth = createAsyncThunk<UserObject, void, ThunkApi>(  //в
     }    
 )
 
-export const fetchLogout = createAsyncThunk<UserLogout, void>(  //возвращает объект с методами pending, fulfield, reject
-    'userLogout/checkUserAuth', //имя экшена
+export const fetchLogout = createAsyncThunk<UserLogout, void>(  
+    'userLogout/checkUserAuth', 
     async (_, { rejectWithValue }) => {    
         const data = await logoutUser();
         if(!data?.success) {
@@ -100,7 +100,7 @@ export const fetchLogout = createAsyncThunk<UserLogout, void>(  //возвращ
 )
 
 export const fetchChangeProfile = createAsyncThunk<UserObject, UserRegister> (
-    'userChange/fetchChangeProfile', //имя экшена
+    'userChange/fetchChangeProfile', 
     async (userData, { rejectWithValue }) => {    
         const data = await updateUserData(userData);     
         if(!data?.success) {
@@ -121,7 +121,7 @@ export const registrationSlice = createSlice({
             state.isAuthChecked = true;
         },
   },
-  extraReducers: (builder) => {    //для запросов
+  extraReducers: (builder) => {    
     builder 
         .addCase(fetchRegistration.pending, (state) => {
             state.registerUserRequest = true;

@@ -8,8 +8,6 @@ import { useSelect } from '../../services/hooks';
 export const OrdersBoard = () => {
 
     const { orders } = useSelect(state => state.liveOrdersStore)
-
-
     const allOrders = orders?.orders;
 
     const totalOrders = orders?.total;

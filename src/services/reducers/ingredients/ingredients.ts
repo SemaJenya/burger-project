@@ -15,15 +15,15 @@ export const initialState: TIngredientState = {
 }
 //асинхронный экшен
 export const fetchIngredients = createAsyncThunk<TIngredient[], void>(  //возвращает объект с методами pending, fulfield, reject
-    'ingredients/fetchIngredients', //имя экшена
-    //функция формируеи пейлоад и возвращает его для редьюсера (то, что мы запишем в стор). Асинхронная ф-я peyload creater - полезная нагрузка
-    async (_, { rejectWithValue, fulfillWithValue}) => {       //первый аргумент - при вызове ф-и в диспатч она передается аргументом(можно импользовать дальше в функциях)   второй аргумент - 
+    'ingredients/fetchIngredients',                                     //имя экшена
+                                                                        //функция формируеи пейлоад и возвращает его для редьюсера (то, что мы запишем в стор).
+    async (_, { rejectWithValue, fulfillWithValue}) => {                //первый аргумент - при вызове ф-и в диспатч она передается аргументом(можно импользовать дальше в функциях)
         try {
             const data = await getIngredients();
             if(!Array.isArray(data)) {
                 throw new Error('Ошибка. Данные не получены 404') 
             }
-            return fulfillWithValue(data); //возвращает пейлоад (то, что хранится в экшене) и записывает в стор
+            return fulfillWithValue(data);                              //возвращает пейлоад и записывает в стор
         }
         catch (error: any) {
             if(error.status) {
@@ -34,7 +34,6 @@ export const fetchIngredients = createAsyncThunk<TIngredient[], void>(  //воз
     }
 )
 //значения return сверху прилетают в экшен функции снизу
-
 //срез, описывает экшен и редьюсер
 export const ingredientsSlice = createSlice({
   name: 'ingredients',

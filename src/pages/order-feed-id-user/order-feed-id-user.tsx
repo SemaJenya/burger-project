@@ -4,14 +4,10 @@ import { OrderIdDetails } from '../../components/order-id-details/order-id-detai
 import { useDispatch } from '../../services/hooks';
 import { wsConnect } from '../../services/reducers/order-feed-live/actions';
 import { getCookie } from '../../utils/cookie';
-import sel from 'classnames';
 import s from './style.module.css';
 
 
-
-
 export const OrderFeedIDUser = () => {
-
 
     const dispatch = useDispatch()
 

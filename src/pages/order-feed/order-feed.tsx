@@ -1,12 +1,11 @@
 
 import sel from 'classnames';
 import s from './style.module.css';
-import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderFeedDetails } from '../../components/order-feed-details/order-feed-details';
 import { OrdersBoard } from '../../components/orders-board/orders-board';
 import { useEffect } from 'react';
 import { useDispatch, useSelect } from '../../services/hooks';
-import { wsClose, wsConnect, wsDisconnect } from '../../services/reducers/order-feed-live/actions';
+import { wsConnect, wsDisconnect } from '../../services/reducers/order-feed-live/actions';
 
 
 

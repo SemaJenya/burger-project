@@ -4,7 +4,7 @@ export const initialState = {
   ingredient: null
 }
 
-//значения return сверху прилетают в экшен функции снизу
+
 
 //срез, описывает экшен и редьюсер
 export const ingredientDetailsSlice = createSlice({

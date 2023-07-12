@@ -4,24 +4,14 @@ import s from './style.module.css';
 import sel from 'classnames';
 import { IngredientCategory } from '../ingredient-category';
 import { useInView } from 'react-intersection-observer';
-import { SerializedError } from '@reduxjs/toolkit';
 import { TIngredient } from '../../utils/types';
 import { useSelect } from '../../services/hooks';
-
-
-type TInitialState = {
-    data: TIngredient[];
-    isLoading: boolean;
-    error: SerializedError | null;
-}
 
 
 
 export const BurgerIngredients = () => {
 
     const {data: ingredients, isLoading} = useSelect(state => state.ingredientsStore)//достаем данные из стора
-
-    
 
     const [current, setCurrent] = useState('bun');
     const bunsList = ingredients.filter(item=> item.type === 'bun');
@@ -35,9 +25,7 @@ export const BurgerIngredients = () => {
     }
     
     const [ refSauce, inViewSauce ] = useInView();
-
     const [ refMain, inViewMain ] = useInView();
-
     const [ refBun, inViewBun ] = useInView();
 
     useEffect(() => {
@@ -53,13 +41,7 @@ export const BurgerIngredients = () => {
         }
     }, [inViewSauce, inViewMain, inViewBun ])
 
-
-
     const ingredient = useSelect(state => state.ingredientDetailsStore.ingredient) as TIngredient | null;
-
-
-   
-
 
     return ( isLoading ? <div>Loading...</div> :
         (<section className={sel(s.ingredients__conteiner, 'mr-10')}>
@@ -92,10 +74,6 @@ export const BurgerIngredients = () => {
                     id='main'
                     ref={refMain}/>
             </div>
-{/* 
-            {ingredient && <Modal title='Детали ингредиента' onClose={closeIngredientModal}>
-                <IngredientDetails />
-            </Modal>} */}
         </section>)      
     )
     

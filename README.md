@@ -1,24 +1,24 @@
 # Проект Космической бургерной
 
-### В данном проекте использовались следующие методы:
+### В данном проекте использовались:
 
-* Flex
 * Figma
+* TypeScript
 * React
-* Модули
-* функциональные компоненты
-* PropTypes
-* хуки
-* Drag n Drop
 * Redux
 * React router dom
-* куки
-* TypeScript
 * WebSocet
+* Drag n Drop
 * Jest
 * Cypress
-* Cоздание удаленного сервера
-* Продакшен проекта
+* Модули
+* Функциональные компоненты
+* Сookie
+
+![Начальная страница сайта](https://github.com/SemaJenya/burger-project/raw/main/src/image/main-page.png)
+
+
+
 
 
 

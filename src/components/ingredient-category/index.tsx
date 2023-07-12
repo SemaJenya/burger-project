@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
+
 import s from './style.module.css';
 import sel from 'classnames';
 import { BurgerIngredient } from '../burger-ingredient';
-import React, { Ref, forwardRef } from 'react';
+import React, { Ref } from 'react';
 import { TIngredient } from '../../utils/types';
 
 type TIngredientCategory = {
