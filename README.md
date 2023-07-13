@@ -15,7 +15,7 @@
 * Функциональные компоненты
 * Сookie
 
-![Начальная страница сайта](https://i.gifer.com/33Ho.gif)
+![Начальная страница сайта](https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
 
 
 
