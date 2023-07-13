@@ -15,7 +15,7 @@
 * Функциональные компоненты
 * Сookie
 
-![Начальная страница сайта](https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+![Начальная страница сайта](https://github.com/SemaJenya/burger-project/tree/repository_cleaning/src/image/main-page.png)
 
 
 
