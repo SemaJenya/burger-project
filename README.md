@@ -1,4 +1,5 @@
 # Проект Космической бургерной
+======
 
 ### В данном проекте использовались:
 
@@ -34,5 +35,5 @@
 
 **GitHub Pages**
 
-[https://semajenya.github.io/burger-project/]
-[https://sardelka.nomoredomains.rocks]
+[GitHub Pages](https://semajenya.github.io/burger-project/)
+[Страница сайта](https://sardelka.nomoredomains.rocks)
