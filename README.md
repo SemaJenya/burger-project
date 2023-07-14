@@ -35,5 +35,5 @@
 
 **GitHub Pages**
 
-[GitHub Pages](https://semajenya.github.io/burger-project/)
+[GitHub Pages](https://semajenya.github.io/burger-project/)  
 [Страница сайта](https://sardelka.nomoredomains.rocks)
